@@ -1,4 +1,5 @@
-class MerbfulAuth::Main < MerbfulAuth::Application
+module MerbfulAuth ; end
+class MerbfulAuth::Main < Application
   
   def index
     render

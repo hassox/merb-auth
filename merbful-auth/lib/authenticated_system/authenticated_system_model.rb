@@ -16,7 +16,7 @@ module AuthenticatedSystem
       # before filter 
       def encrypt_password
         return if password.blank?
-        self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
+        self.salt = Digest::SHA2.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
         self.crypted_password = encrypt(password)
       end
       
@@ -67,7 +67,7 @@ module AuthenticatedSystem
       
       protected
             def make_activation_code
-        self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+        self.activation_code = Digest::SHA2.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
       end
       
       def password_required?
@@ -79,7 +79,7 @@ module AuthenticatedSystem
     module ClassMethods
       # Encrypts some data with the salt.
       def encrypt(password, salt)
-        Digest::SHA1.hexdigest("--#{salt}--#{password}--")
+        Digest::SHA2.hexdigest("--#{salt}--#{password}--")
       end
       
       # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.

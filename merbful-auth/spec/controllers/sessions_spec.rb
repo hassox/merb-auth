@@ -1,7 +1,7 @@
-require File.join(File.dirname(__FILE__), '..', 'spec_helper.rb')
+require File.join(File.dirname(__FILE__), "..", "spec_helper.rb")
 require File.join( File.dirname(__FILE__), "..", "user_spec_helper")
 require File.join( File.dirname(__FILE__), "..", "authenticated_system_spec_helper")
-require 'cgi'
+require "cgi"
 
 describe "Sessions Controller", "index action" do
   include UserSpecHelper

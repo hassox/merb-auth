@@ -1,5 +1,5 @@
 if defined?(Merb::Plugins)
-
+  
   require 'merb-slices'
   Merb::Plugins.add_rakefiles "merbful-auth/merbtasks"
 

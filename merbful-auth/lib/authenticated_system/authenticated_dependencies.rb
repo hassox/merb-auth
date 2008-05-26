@@ -1,5 +1,5 @@
-require 'merb_helpers'
-require 'merb-mailer'
+require "merb_helpers"
+require "merb-mailer"
 
 base = File.dirname(__FILE__)
 
