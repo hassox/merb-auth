@@ -1,0 +1,29 @@
+Merbful Authentication 
+============================================================================
+
+Provides authentication for merb applications via slices. 
+To use simply name the base slice for controller and view functionality in init.rb: 
+
+
+Usage:
+============================================================================
+
+dependency "merbful-auth" # controllers and views
+
+Next name a dependency for the ORM of your choice from among:
+
+dependency "merbful-auth-dm" # DataMapper Models
+dependency "merbful-auth-sequel" # Sequel Models
+dependency "merbful-auth-ar" # ActiveRecord Models
+
+
+Requirements:
+============================================================================
+
+merb-core >= 0.9.4
+merb_datamapper || merb_activerecord || merb_sequel
+
+License:
+============================================================================
+
+Merbful Authentication is released under the MIT license.

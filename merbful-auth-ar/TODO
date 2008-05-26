@@ -1,0 +1,14 @@
+TODO:
+
+- Fix MerbfulAuthAr.description and MerbfulAuthAr.version
+- Fix LICENSE with your name
+- Fix Rakefile with your name and contact info
+- Add your code to lib/merbful-auth-ar.rb
+- Add your Merb rake tasks to lib/merbful-auth-ar/merbtasks.rb
+
+Remove anything that you don't need:
+
+- app/controllers/main.rb MerbfulAuthAr::Main controller
+- app/views/layout/merbful_auth_ar.html.erb
+- spec/controllers/main_spec.rb controller specs
+- public/* any public files
