@@ -28,11 +28,10 @@ if defined?(Merb::Plugins)
     # Stub classes loaded hook - runs before LoadClasses BootLoader
     # right after a slice's classes have been loaded internally.
     def self.loaded
-      config = Merb::Slices::config[:merbful_authentication]
-      class_name = config[:user_class_name] || "User"
+      class_name = self.config[:user_class_name] || "User"
       MA.load_adapter!
       Object.full_const_set(class_name, MA::Model.clone)
-      MA.model = Object.full_const_get(class_name)
+      MA[:user] = Object.full_const_get(class_name)
       MA.remove_default_model_klass! 
     end
     

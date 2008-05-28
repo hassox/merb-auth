@@ -70,7 +70,7 @@ describe MerbfulAuthentication do
             
     end
     
-    it "should load the ORM scope as the type if there is no specified adapter type" do
+    it "should load the adapter scope as the type if there is no specified adapter type" do
       Merb.should_receive(:orm_generator_scope).and_return("datamapper")
       MA.load_adapter!
     end
@@ -92,12 +92,13 @@ describe MerbfulAuthentication do
       defined?(MA::Model).should be_nil
     end
   
-    it "should fetch the current adapter model class" do
+    it "should expose the adapter model class via the configuration" do
       stub_orm_scope
       MA.loaded
-      MA.model.should == User
+      MA[:user].should == User
     end
   end
+
 end
 
 describe "MerbfulAuthentication (module)" do

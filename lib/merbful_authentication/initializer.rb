@@ -1,9 +1,11 @@
 module MerbfulAuthentication
   
+  # Clears the currently registered adapter list.  
   def self.clear_adapter_list!
     @_adapters = nil
   end
   
+  # Registers
   def self.register_adapter(name, path, opts = {})
     adapters[name.to_sym] = opts.merge!(:path => path)
   end
@@ -21,14 +23,6 @@ module MerbfulAuthentication
     Dir[adapters[adapter.to_sym][:path] / "**" / "*.rb"].each do |f|
       load f
     end
-  end
-  
-  def self.model
-    @_model    
-  end
-  
-  def self.model=(klass)
-    @_model = klass
   end
   
   private 
