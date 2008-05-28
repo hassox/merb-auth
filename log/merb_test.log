@@ -1,0 +1,646 @@
+Wed, 28 May 2008 11:45:55 GMT  ~  info  ~  Logfile created
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001803, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.002158, :before_filters_time=>5.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001666, :before_filters_time=>5.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001498, :before_filters_time=>4.0e-06, :after_filters_time=>6.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001746, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001475, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001512, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001486, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001885, :before_filters_time=>8.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.007593, :before_filters_time=>6.0e-06, :after_filters_time=>1.2e-05}
+ ~ {:action_time=>0.001996, :before_filters_time=>8.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001534, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001841, :before_filters_time=>7.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001611, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001512, :before_filters_time=>6.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.00149, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001767, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001471, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001545, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001468, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001868, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001458, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001505, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001464, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001759, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001491, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001623, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001459, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001749, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001485, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001507, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001465, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001803, :before_filters_time=>7.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001483, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001529, :before_filters_time=>4.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001485, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001823, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001499, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.00154, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001477, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001754, :before_filters_time=>7.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001457, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001502, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001478, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001789, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001508, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001515, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001468, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001793, :before_filters_time=>1.4e-05, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001482, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001533, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001504, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001754, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001492, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001523, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001475, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001744, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001391, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001457, :before_filters_time=>5.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001413, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001763, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001407, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001468, :before_filters_time=>5.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001404, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.00175, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001396, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.00146, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001395, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.00177, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001484, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001485, :before_filters_time=>6.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001524, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001737, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001478, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001449, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001403, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001744, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.0014, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001432, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001412, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001756, :before_filters_time=>1.4e-05, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001437, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.00153, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001394, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001876, :before_filters_time=>7.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001548, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001615, :before_filters_time=>5.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.00141, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001774, :before_filters_time=>7.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001376, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001409, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001362, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001718, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001435, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001541, :before_filters_time=>9.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001646, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001754, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001526, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001583, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001497, :before_filters_time=>6.0e-06, :after_filters_time=>6.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001758, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001508, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001523, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.00151, :before_filters_time=>5.0e-06, :after_filters_time=>6.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001766, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001497, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001576, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001509, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.003516, :before_filters_time=>8.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001419, :before_filters_time=>6.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001449, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001394, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001809, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001394, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001442, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001366, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001777, :before_filters_time=>7.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001408, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001464, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001519, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001773, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001387, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001443, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001421, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001747, :before_filters_time=>7.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.00139, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001448, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001387, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001744, :before_filters_time=>7.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001439, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001445, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001398, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ loaded slice 'MerbfulAuthentication' ...
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001745, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001402, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001428, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001371, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (undefined method `full_constant_get' for Object:Class)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001766, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001389, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001434, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001395, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (wrong number of arguments (0 for 1))
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001719, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001387, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001417, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001435, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (uninitialized constant Merb::Slices::Config)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001729, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001388, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001414, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001391, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (undefined method `/' for nil:NilClass)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001731, :before_filters_time=>7.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001428, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.00146, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001399, :before_filters_time=>5.0e-06, :after_filters_time=>1.0e-05}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (undefined method `/' for nil:NilClass)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001722, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001392, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001428, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001486, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (undefined method `/' for nil:NilClass)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001711, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.00138, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001418, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001382, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (undefined method `/' for nil:NilClass)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001767, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001521, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001435, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.00139, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (undefined method `/' for nil:NilClass)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001752, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001401, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001505, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001388, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001738, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.00145, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001544, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001406, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001777, :before_filters_time=>7.0e-06, :after_filters_time=>8.0e-06}
+ ~ {:action_time=>0.001428, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001433, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001414, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001739, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001393, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001413, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001446, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001744, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001386, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001411, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001363, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001752, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001421, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001432, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001359, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.00186, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001428, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001411, :before_filters_time=>4.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001503, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.00172, :before_filters_time=>8.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001384, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001399, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001381, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001764, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001406, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001436, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001391, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001726, :before_filters_time=>7.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001542, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001466, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001447, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001757, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.00141, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001404, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.0014, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001751, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001399, :before_filters_time=>6.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001447, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001366, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001758, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001439, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001431, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001481, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001724, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001487, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001645, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001492, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001813, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001562, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001418, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001393, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001775, :before_filters_time=>7.0e-06, :after_filters_time=>2.9e-05}
+ ~ {:action_time=>0.001412, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001484, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001377, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001721, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001426, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001407, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001365, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001733, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001431, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001401, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001432, :before_filters_time=>5.0e-06, :after_filters_time=>6.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001924, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001568, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001407, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001558, :before_filters_time=>4.0e-06, :after_filters_time=>7.0e-05}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001723, :before_filters_time=>7.0e-06, :after_filters_time=>6.0e-06}
+ ~ {:action_time=>0.001472, :before_filters_time=>4.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.00142, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001373, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001751, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001569, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001435, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ {:action_time=>0.001358, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
+ ~ registered slice 'MerbfulAuthentication' located at /Users/dneighman/Documents/Projects/personal_projects/merb/tmp/ma_dev/merbful_authentication
+ ~ failed loading MerbfulAuthentication (MerbfulAuthentication: Adapter Not Registered - merb_default)
+ ~ initializing slice 'MerbfulAuthentication' ...
+ ~ activating slice 'MerbfulAuthentication' ...
+ ~ Not Using Sessions
+ ~ mounting slice MerbfulAuthentication at /merbful_authentication
+ ~ {:action_time=>0.001712, :before_filters_time=>7.0e-06, :after_filters_time=>7.0e-06}
+ ~ {:action_time=>0.001415, :before_filters_time=>5.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001649, :before_filters_time=>6.0e-06, :after_filters_time=>5.0e-06}
+ ~ {:action_time=>0.001413, :before_filters_time=>5.0e-06, :after_filters_time=>4.0e-06}
