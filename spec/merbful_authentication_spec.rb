@@ -9,11 +9,11 @@ require 'data_mapper'
 describe MerbfulAuthentication do
   
   before(:all) do
-    # MA = MerbfulAuthentication
     @adapter_path = File.dirname(__FILE__) / ".." / "lib" / "merbful_authentication" / "adapters"
     @ar_path = @adapter_path / "activerecord"
     @config = Merb::Slices::config[:merbful_authentication]
     @config[:user_class_name] = "User"
+    DataMapper.setup(:default, 'sqlite3:///:memory:')
   end
   
   before(:each) do
@@ -23,7 +23,10 @@ describe MerbfulAuthentication do
   
   after(:each) do
     MA.clear_adapter_list!
-    MA.remove_default_model_klass!
+    MA[:user] = nil
+    Object.class_eval do
+      remove_const("User") if defined?(User)
+    end
   end
   
   def stub_orm_scope(scope = "datamapper")
@@ -57,10 +60,20 @@ describe MerbfulAuthentication do
     end
   
     it "should load the adapter" do
-      defined?(MA::Model).should be_nil
+      class User;end
+      MA[:user] = User
       MA.load_adapter!(:datamapper)
-      defined?(MA::Model).should_not be_nil
-      MA::Model.should include(::DataMapper::Resource)
+      MA[:user].should include(::DataMapper::Resource)
+      MA[:user].should == User
+    end
+    
+    it "should raise an error if MA[:user] is not set" do
+      stub_orm_scope
+      MA.stub!(:load_adapter!).and_return(true)
+      lambda do
+        MA.loaded
+      end.should raise_error(RuntimeError, "MerbfulAuthentication: User class not set by adapter")
+      
     end
     
     it "should raise an error if an adapter is loaded that has not been registered" do
@@ -71,13 +84,14 @@ describe MerbfulAuthentication do
     end
     
     it "should load the adapter scope as the type if there is no specified adapter type" do
+      class User; end
+      MA[:user] = User
       Merb.should_receive(:orm_generator_scope).and_return("datamapper")
       MA.load_adapter!
     end
   
     it "should make the adapter into the class that is selected in the configuration" do
       stub_orm_scope
-      defined?(MA::Model).should be_nil
       defined?(User).should be_nil
       MA.loaded
       defined?(User).should_not be_nil
@@ -85,17 +99,17 @@ describe MerbfulAuthentication do
       User.should include(::DataMapper::Resource)
     end
   
-    it "should remove the MerbfulAuthentication::Adapter::Model constant after it renames the class" do
-      stub_orm_scope
-      defined?(MA::Model).should be_nil
-      MA.loaded
-      defined?(MA::Model).should be_nil
-    end
-  
     it "should expose the adapter model class via the configuration" do
       stub_orm_scope
       MA.loaded
       MA[:user].should == User
+    end
+    
+    it "should allow DM to create it's table correctly" do
+      stub_orm_scope 
+      MA.loaded
+      results = DataMapper.auto_migrate!
+      results.should include(MA[:user])
     end
   end
 

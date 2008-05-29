@@ -1,7 +1,19 @@
 if defined?(Merb::Plugins)
 
   require 'merb-slices'
+  require 'digest/sha1'  
+  
   require File.join(File.dirname(__FILE__), "merbful_authentication", "initializer")
+  
+  adapter_path = File.join( File.dirname(__FILE__), "merbful_authentication", "adapters")
+  MA = MerbfulAuthentication
+  MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
+  MA.register_adapter :activerecord, "#{adapter_path}/activerecord"
+
+  require File.join(adapter_path,  "common")
+  
+
+  
   
   Merb::Plugins.add_rakefiles "merbful_authentication/merbtasks"
 
@@ -26,13 +38,13 @@ if defined?(Merb::Plugins)
     self.author = "Merb Core"
     
     # Stub classes loaded hook - runs before LoadClasses BootLoader
-    # right after a slice's classes have been loaded internally.
+    # right after a slice's classes have been loaded internally
+    #
+    # Loads the model class into MerbfulAuthentication[:user] for use elsewhere.
     def self.loaded
-      class_name = self.config[:user_class_name] || "User"
+      self[:user_class_name] ||= "User"
       MA.load_adapter!
-      Object.full_const_set(class_name, MA::Model.clone)
-      MA[:user] = Object.full_const_get(class_name)
-      MA.remove_default_model_klass! 
+      raise "MerbfulAuthentication: User class not set by adapter" unless MA[:user].is_a?(Class)
     end
     
     # Initialization hook - runs before AfterAppLoads BootLoader
@@ -71,5 +83,5 @@ if defined?(Merb::Plugins)
   #
   # Or just call setup_default_structure! to setup a basic Merb MVC structure.
   MerbfulAuthentication.setup_default_structure!
-  MA = MerbfulAuthentication
+
 end

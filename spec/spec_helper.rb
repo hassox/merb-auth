@@ -15,6 +15,17 @@ Merb.start_environment(
   :merb_root => Merb.root
 )
 
+path = File.dirname(__FILE__)
+# Load up all the shared specs
+Dir[path / "shared_specs" / "**" / "*_spec.rb"].each do |f|
+  require f
+end
+
+# Load up all the spec helpers
+Dir[path / "spec_helpers" / "**" / "*.rb"].each do |f|
+  require f
+end
+
 module Merb
   module Test
     module SliceHelper
@@ -38,4 +49,8 @@ Spec::Runner.configure do |config|
   config.include(Merb::Test::RouteHelper)
   config.include(Merb::Test::ControllerHelper)
   config.include(Merb::Test::SliceHelper)
+  config.include(ValidModelHashes)
 end
+
+
+
