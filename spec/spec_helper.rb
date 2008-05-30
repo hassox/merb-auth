@@ -15,6 +15,14 @@ Merb.start_environment(
   :merb_root => Merb.root
 )
 
+Merb::Config.use do |c|
+  c[:session_store] = "memory"
+end
+
+class Merb::Mailer
+  self.delivery_method = :test_send
+end
+
 path = File.dirname(__FILE__)
 # Load up all the shared specs
 Dir[path / "shared_specs" / "**" / "*_spec.rb"].each do |f|

@@ -1,15 +1,15 @@
 class MerbfulAuthentication::UserMailer < Merb::MailController
   
-  def signup_notification
+  def signup
     @ivar = params[MA[:single_resource]]
     instance_variable_set("@#{MA[:single_resource]}", @ivar )
-    render_mail :text => :signup_notification
+    render_mail :text => :signup
   end
   
-  def activation_notification
+  def activation
     @ivar = params[MA[:single_resource]]
     instance_variable_set("@#{MA[:single_resource]}", @ivar )
-    render_mail :text => :activation_notification
+    render_mail :text => :activation
   end
   
   def forgot_password
@@ -18,7 +18,12 @@ class MerbfulAuthentication::UserMailer < Merb::MailController
     render_mail :text => :forgot_password
   end
   
-  private
+  private  
+  def _template_location(action, type = nil, controller = controller_name)
+    "/merbful_authentication/user_mailer/#{action}.#{type}"
+  end
+  
+  
   def method_missing(*args)
     if @base_controller
       @base_controller.send(:method_missing, *args) 

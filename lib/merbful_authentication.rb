@@ -65,6 +65,59 @@ if defined?(Merb::Plugins)
     #  router behaviour is a valid namespace, so you can attach
     #  routes at any level of your router setup.
     def self.setup_router(scope)
+      plural_model_path = MA[:route_path_model] || MA[:plural_resource] 
+      plural_model_path ||= (MA[:user_class_name] = "User").to_s.snake_case.singularize.pluralize
+      plural_model_path = plural_model_path.match(%r{^/?(.*?)/?$})[1]
+      single_model_name = plural_model_path.singularize
+      
+      plural_session_path = MA[:route_path_session] || "sessions"
+      plural_session_path = plural_session_path.match(%r{^/?(.*?)/?$})[1]
+      single_session_name = plural_session_path.singularize
+      
+      activation_name = (MA[:single_resource].to_s << "_activation").to_sym
+      
+      scope.match("/login").to(:controller => "MA::Sessions", :action => "create").name(:login)
+      scope.match("/logout").to(:controller => "MA::Sessions", :action => "destroy").name(:logout)
+      
+      MA[:routes] = {}
+      MA[:routes][:new]       = :"new_#{single_model_name}"
+      MA[:routes][:show]      = :"#{single_model_name}"
+      MA[:routes][:edit]      = :"edit_#{single_model_name}"
+      MA[:routes][:delete]    = :"delete_#{single_model_name}"
+      MA[:routes][:index]     = :"#{plural_model_path}"
+      MA[:routes][:activate]  = :"#{single_model_name}_activation"
+
+      
+      # Setup the model path
+      scope.to(:controller => "MA::Users") do |c|
+        c.match("/#{single_model_name}") do |u|
+          # setup the named routes          
+          u.match("/new",             :method => :get ).to( :action => "new"     ).name(:"new_#{single_model_name}")
+          u.match("/:id",             :method => :get ).to( :action => "show"    ).name(:"#{single_model_name}")
+          u.match("/:id/edit",        :method => :get ).to( :action => "edit"    ).name(:"edit_#{single_model_name}")
+          u.match("/:id/delete",      :method => :get ).to( :action => "delete"  ).name(:"delete_#{single_model_name}")
+          u.match("/",                :method => :get ).to( :action => "index"   ).name(:"#{plural_model_path}")
+          u.match("/activate/:activation_code"        ).to( :action => "activate").name(:"#{single_model_name}_activation")
+          
+          # Make the anonymous routes
+          u.match(%r{^(/|/index)?(\.:format)?$},  :method => :get).to(    :action => "index")
+          u.match(%r{^/new$},                     :method => :get).to(    :action => "new")
+          u.match(%r{^/:id(\.:format)?$},         :method => :get).to(    :action => "show")
+          u.match(%r{^/:id/edit$},                :method => :get).to(    :action => "edit")
+          u.match(%r{^/:id/delete$},              :method => :get).to(    :action => "delete")
+          u.match(%r{^/:id(\.:format)?$},         :method => :post).to(    :action => "create")      
+          u.match(%r{^/:id(\.:format)?$},         :method => :put).to(    :action => "update")
+          u.match(%r{^/:id(\.:format)?$},         :method => :delete).to( :action => "destroy")
+        end
+      end
+      
+      scope.to(:contollre => "MA::Sessions") do |c|
+        c.match("/#{plural_session_path}") do |s|
+          # setup the named routes          
+          s.match("/login" ).to(:action => "create").name(:login)
+          s.match("/logout").to(:action => "destroy").name(:logout)
+        end
+      end
     end
     
   end

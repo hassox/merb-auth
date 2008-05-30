@@ -264,7 +264,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     it "should send an email to ask for activation" do
       MA[:use_activation] = true
       MA::UserMailer.should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|   
-        action.should == :signup_notification
+        action.should == :signup
         mail_args.keys.should include(:from)
         mail_args.keys.should include(:to)
         mail_args.keys.should include(:subject)
@@ -285,7 +285,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     it "should send out a welcome email to confirm that the account is activated" do
       @user.save
       MA::UserMailer.should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|
-        action.should == :activation_notification
+        action.should == :activation
         mail_args.keys.should include(:from)
         mail_args.keys.should include(:to)
         mail_args.keys.should include(:subject)
@@ -298,7 +298,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     it "should send a please activate email" do
       user = MA[:user].new(valid_user_hash)
       MA::UserMailer.should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|
-        action.should == :signup_notification
+        action.should == :signup
         [:from, :to, :subject].each{ |f| mail_args.keys.should include(f)}
         mail_args[:to].should == user.email
         mailer_params[:user].should == user

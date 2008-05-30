@@ -100,13 +100,13 @@ module MerbfulAuthentication
         
         def send_activation_notification
           if MA[:use_activation]
-            deliver_email(:activation_notification, :subject => (MA[:activation_subject] || "Please Activate Your Account" ))
+            deliver_email(:activation, :subject => (MA[:activation_subject] || "Please Activate Your Account" ))
           end
         end
 
         def send_signup_notification
           if MA[:use_activation]
-            deliver_email(:signup_notification, :subject => (MA[:welcome_subject] || "Welcome") )
+            deliver_email(:signup, :subject => (MA[:welcome_subject] || "Welcome") )
           end
         end
 
