@@ -1,5 +1,5 @@
 module MerbfulAuthentication
-  module Adapters
+  module Adapter
     module Common
       
       def self.included(base)

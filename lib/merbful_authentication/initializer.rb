@@ -29,8 +29,12 @@ module MerbfulAuthentication
     # Check that the adapter is registered
     raise "MerbfulAuthentication: Adapter Not Registered - #{adapter}" unless adapters.keys.include?(adapter.to_sym)
     
-    load adapters[adapter.to_sym][:path] / "init.rb"
-    MA[:user].send(:include, MerbfulAuthentication::Adapters::Common)
-    
+    if Merb.env?(:test)
+      load adapters[adapter.to_sym][:path] / "init.rb"
+    else
+      require adapters[adapter.to_sym][:path] / "init"
+    end
+    # MA[:user].send(:include, MerbfulAuthentication::Adapters::Common)
   end
+  
 end

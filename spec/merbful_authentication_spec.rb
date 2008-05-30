@@ -27,6 +27,9 @@ describe MerbfulAuthentication do
     Object.class_eval do
       remove_const("User") if defined?(User)
     end
+    MA::Adapter.module_eval do
+      remove_const("DataMapper") if defined?(MA::Adapter::DataMapper)
+    end if defined?(MA::Adapter)
   end
   
   def stub_orm_scope(scope = "datamapper")
@@ -60,57 +63,48 @@ describe MerbfulAuthentication do
     end
   
     it "should load the adapter" do
-      class User;end
-      MA[:user] = User
+      defined?(MA::Adapter::DataMapper).should be_nil
       MA.load_adapter!(:datamapper)
-      MA[:user].should include(::DataMapper::Resource)
-      MA[:user].should == User
-    end
-    
-    it "should raise an error if MA[:user] is not set" do
-      stub_orm_scope
-      MA.stub!(:load_adapter!).and_return(true)
-      lambda do
-        MA.loaded
-      end.should raise_error(RuntimeError, "MerbfulAuthentication: User class not set by adapter")
-      
+      defined?(MA::Adapter::DataMapper).should_not be_nil
     end
     
     it "should raise an error if an adapter is loaded that has not been registered" do
       lambda do
         MA.load_adapter!(:no_adapter)
       end.should raise_error(RuntimeError, "MerbfulAuthentication: Adapter Not Registered - no_adapter")
-            
     end
     
     it "should load the adapter scope as the type if there is no specified adapter type" do
-      class User; end
-      MA[:user] = User
       Merb.should_receive(:orm_generator_scope).and_return("datamapper")
       MA.load_adapter!
     end
-  
-    it "should make the adapter into the class that is selected in the configuration" do
+
+    it "should load the correct adapter in the loaded hook" do
       stub_orm_scope
-      defined?(User).should be_nil
+      defined?(MA::Adapter::DataMapper).should be_nil
       MA.loaded
-      defined?(User).should_not be_nil
-      User.name.should == "User"
-      User.should include(::DataMapper::Resource)
+      defined?(MA::Adapter::DataMapper).should_not be_nil    
     end
   
     it "should expose the adapter model class via the configuration" do
       stub_orm_scope
-      MA.loaded
+      MA.load_adapter!
+      class User
+        include MA::Adapter::DataMapper
+      end
       MA[:user].should == User
     end
     
     it "should allow DM to create it's table correctly" do
       stub_orm_scope 
-      MA.loaded
+      MA.load_adapter!
+      class User
+        include MA::Adapter::DataMapper
+      end
       results = DataMapper.auto_migrate!
       results.should include(MA[:user])
     end
+    
   end
 
 end

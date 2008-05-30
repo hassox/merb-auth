@@ -42,9 +42,7 @@ if defined?(Merb::Plugins)
     #
     # Loads the model class into MerbfulAuthentication[:user] for use elsewhere.
     def self.loaded
-      self[:user_class_name] ||= "User"
       MA.load_adapter!
-      raise "MerbfulAuthentication: User class not set by adapter" unless MA[:user].is_a?(Class)
     end
     
     # Initialization hook - runs before AfterAppLoads BootLoader

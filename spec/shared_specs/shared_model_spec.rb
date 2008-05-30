@@ -11,7 +11,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
   end
   
   it "should include MerbfulAuthentication::Adapter::Common mixin" do
-    MA[:user].should include(MA::Adapters::Common)  
+    MA[:user].should include(MA::Adapter::Common)  
   end
   
   describe "Fields" do

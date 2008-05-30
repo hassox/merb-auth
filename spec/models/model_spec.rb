@@ -12,6 +12,10 @@ describe "MA User Model" do
     MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
     MA.register_adapter :activerecord, "#{adapter_path}/activerecord"    
     MA.loaded
+    
+    class User
+      include MA::Adapter::DataMapper
+    end
   end
   
   it_should_behave_like "A MerbfulAuthentication User Model"
