@@ -5,7 +5,7 @@ require 'merb-core/version'
 require 'merb-core/test/tasks/spectasks'
 require 'merb-core/tasks/merb_rake_helper'
 
-NAME = "merbful_authentication_slice"
+NAME = "merbful_authentication"
 AUTHOR = "Merb Core"
 EMAIL = "has.sox@gmail.com"
 HOMEPAGE = "http://merbivore.com/"
