@@ -30,12 +30,10 @@ module MerbfulAuthentication
         end
         
         def activate
-          @activated = true
-          self.activated_at = Time.now.utc
-          self.activation_code = nil
+          set_activated_data!
           save
           # send mail for activation
-          send_activation_notification
+          send_activation_notification  if MA[:use_activation]
         end
         
         # Returns true if the user has just been activated.
@@ -67,7 +65,11 @@ module MerbfulAuthentication
         end
         
         def make_activation_code
-          self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+          if MA[:use_activation]
+            self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+          else
+            set_activated_data!
+          end
         end
         
         def remember_token?
@@ -96,6 +98,33 @@ module MerbfulAuthentication
           self.save
         end
         
+        def send_activation_notification
+          if MA[:use_activation]
+            deliver_email(:activation_notification, :subject => (MA[:activation_subject] || "Please Activate Your Account" ))
+          end
+        end
+
+        def send_signup_notification
+          if MA[:use_activation]
+            deliver_email(:signup_notification, :subject => (MA[:welcome_subject] || "Welcome") )
+          end
+        end
+
+        def send_forgot_password
+          deliver_email(:forgot_password, :subject => (MA[:password_request_subject] || "Request to change your password"))
+        end
+
+        def deliver_email(action, params)
+          from = MA[:from_email]
+          MA::UserMailer.dispatch_and_deliver(action, params.merge(:from => from, :to => self.email), MA[:single_resource] => self)
+        end
+        
+        private
+        def set_activated_data!
+          @activated = true
+          self.activated_at = DateTime.now
+          self.activation_code = nil
+        end       
         
       end
       

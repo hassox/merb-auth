@@ -260,6 +260,27 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       @user = nil
       MA[:user].find_with_conditions(:email => @hash[:email]).should_not be_recently_activated
     end
+    
+    it "should send an email to ask for activation" do
+      MA[:use_activation] = true
+      MA::UserMailer.should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|   
+        action.should == :signup_notification
+        mail_args.keys.should include(:from)
+        mail_args.keys.should include(:to)
+        mail_args.keys.should include(:subject)
+        mail_args[:subject].should_not be_blank
+        mail_args[:to].should == @user.email
+        mailer_params[:user].should == @user
+      end
+      @user.save
+    end
+    
+    it "should not send an email to ask for activation when use_activation is not set" do
+      MA[:use_activation] = false
+      puts MA::UserMailer.inspect
+      MA::UserMailer.should_not_receive(:dispatch_and_deliver)
+      @user.save
+    end
 
     it "should send out a welcome email to confirm that the account is activated" do
       @user.save
@@ -295,10 +316,11 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     end
     
     it "should check that a user is active if the configuration calls for activation" do
+      MA[:use_activation] = true      
       hash = valid_user_hash
       user = MA[:user].new(hash)
       user.save
-      MA[:use_activation] = true
+      user.reload
       MA[:user].authenticate(user.email, user.password).should be_nil
       MA[:use_activation] = false
       MA[:user].authenticate(user.email, user.password).should == user
@@ -307,6 +329,21 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       user.reload
       MA[:user].authenticate(user.email, user.password).should == user
     end
+    
+    it "should not activate the user when use_activation is true" do
+      MA[:use_activation] = true
+      u = MA[:user].new(valid_user_hash)
+      u.save
+      u.should_not be_activated      
+    end
+    
+    it "should set the use to active if there is no activation required" do
+      MA[:use_activation] = false
+      u = MA[:user].new(valid_user_hash)
+      u.save
+      u.should be_activated   
+    end
+
   end
 
   describe "remember me" do

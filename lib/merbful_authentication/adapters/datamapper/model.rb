@@ -21,23 +21,6 @@ module MerbfulAuthentication
       
       module InstanceMethods
         
-        def send_activation_notification
-          deliver_email(:activation_notification, :subject => MA[:welcome_subject])
-        end
-
-        def send_signup_notification
-          deliver_email(:signup_notification, :subject => MA[:activation_subject])
-        end
-
-        def send_forgot_password
-          deliver_email(:forgot_password, :subject => (MA[:password_request_subject] || "Request to change your password"))
-        end
-
-        def deliver_email(action, params)
-          from = MA[:from_email]
-          MA::UserMailer.dispatch_and_deliver(action, params.merge(:from => from, :to => self.email), MA[:single_resource] => self)
-        end
-        
       end # InstanceMethods
 
       private 
