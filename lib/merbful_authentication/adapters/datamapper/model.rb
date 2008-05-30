@@ -10,12 +10,33 @@ module MerbfulAuthentication
         set_model_class_decs!(base)
         # base.send(:include, InstanceMethods)
         base.send(:include, Map)
+        base.send(:include, InstanceMethods )
         base.send(:include, Common)
+        
+        MA[:single_resource] ||= base.name.snake_case.to_sym
+        MA[:plural_resource] ||= MA[:single_resource].to_s.pluralize.to_sym
           
         MA[:user] = base
       end
       
       module InstanceMethods
+        
+        def send_activation_notification
+          deliver_email(:activation_notification, :subject => MA[:welcome_subject])
+        end
+
+        def send_signup_notification
+          deliver_email(:signup_notification, :subject => MA[:activation_subject])
+        end
+
+        def send_forgot_password
+          deliver_email(:forgot_password, :subject => (MA[:password_request_subject] || "Request to change your password"))
+        end
+
+        def deliver_email(action, params)
+          from = MA[:from_email]
+          MA::UserMailer.dispatch_and_deliver(action, params.merge(:from => from, :to => self.email), MA[:single_resource] => self)
+        end
         
       end # InstanceMethods
 
@@ -45,6 +66,7 @@ module MerbfulAuthentication
     
           before :save,   :encrypt_password
           before :create, :make_activation_code
+          after  :create, :send_signup_notification
           
           def login=(value)
             attribute_set(:login, value.downcase) unless value.nil?

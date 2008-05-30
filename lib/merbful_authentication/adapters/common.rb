@@ -34,6 +34,8 @@ module MerbfulAuthentication
           self.activated_at = Time.now.utc
           self.activation_code = nil
           save
+          # send mail for activation
+          send_activation_notification
         end
         
         # Returns true if the user has just been activated.

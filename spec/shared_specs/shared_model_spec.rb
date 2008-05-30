@@ -8,10 +8,19 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     MA[:user].clear_database_table
     @hash = valid_user_hash
     @user = MA[:user].new(@hash)
+    MA[:from_email] = "example@email.com"
   end
   
   it "should include MerbfulAuthentication::Adapter::Common mixin" do
     MA[:user].should include(MA::Adapter::Common)  
+  end
+  
+  it "should setup the name of the resource" do
+    MA[:single_resource].should == :user    
+  end
+  
+  it "should set the name of the collection" do
+    MA[:plural_resource].should == :users    
   end
   
   describe "Fields" do
@@ -254,7 +263,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
 
     it "should send out a welcome email to confirm that the account is activated" do
       @user.save
-      MA[:user_mailer].should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|
+      MA::UserMailer.should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|
         action.should == :activation_notification
         mail_args.keys.should include(:from)
         mail_args.keys.should include(:to)
@@ -267,13 +276,14 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     
     it "should send a please activate email" do
       user = MA[:user].new(valid_user_hash)
-      MA[:user_mailer].should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|
+      MA::UserMailer.should_receive(:dispatch_and_deliver) do |action, mail_args, mailer_params|
         action.should == :signup_notification
         [:from, :to, :subject].each{ |f| mail_args.keys.should include(f)}
         mail_args[:to].should == user.email
         mailer_params[:user].should == user
       end
       user.save
+      user.should_not  be_a_new_record
     end
   
     it "should not send a please activate email when updating" do

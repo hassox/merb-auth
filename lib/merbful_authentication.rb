@@ -2,6 +2,7 @@ if defined?(Merb::Plugins)
 
   require 'merb-slices'
   require 'digest/sha1'  
+  require 'merb-mailer'
   
   require File.join(File.dirname(__FILE__), "merbful_authentication", "initializer")
   
