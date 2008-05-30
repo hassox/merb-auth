@@ -294,6 +294,19 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       user.save    
     end
     
+    it "should check that a user is active if the configuration calls for activation" do
+      hash = valid_user_hash
+      user = MA[:user].new(hash)
+      user.save
+      MA[:use_activation] = true
+      MA[:user].authenticate(user.email, user.password).should be_nil
+      MA[:use_activation] = false
+      MA[:user].authenticate(user.email, user.password).should == user
+      MA[:use_activateion] = true
+      user.activate
+      user.reload
+      MA[:user].authenticate(user.email, user.password).should == user
+    end
   end
 
   describe "remember me" do
