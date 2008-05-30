@@ -34,7 +34,6 @@ module MerbfulAuthentication
     else
       require adapters[adapter.to_sym][:path] / "init"
     end
-    # MA[:user].send(:include, MerbfulAuthentication::Adapters::Common)
   end
   
 end

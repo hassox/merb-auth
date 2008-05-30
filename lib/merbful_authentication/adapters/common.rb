@@ -68,6 +68,32 @@ module MerbfulAuthentication
           self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
         end
         
+        def remember_token?
+          remember_token_expires_at && DateTime.now < DateTime.parse(remember_token_expires_at.to_s)
+        end
+
+        def remember_me_until(time)
+          self.remember_token_expires_at = time
+          self.remember_token            = encrypt("#{email}--#{remember_token_expires_at}")
+          save
+        end
+
+        def remember_me_for(time)
+          remember_me_until (DateTime.now + time)
+        end
+
+        # These create and unset the fields required for remembering users between browser closes
+        # Default of 2 weeks 
+        def remember_me
+          remember_me_for (Merb::Const::WEEK * 2)
+        end
+
+        def forget_me
+          self.remember_token_expires_at = nil
+          self.remember_token            = nil
+          self.save
+        end
+        
         
       end
       

@@ -65,7 +65,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       user.errors.on(:login).should_not be_nil
     end
     
-    it "should not fail nickname with between 3 and 40 chars" do
+    it "should not fail login with between 3 and 40 chars" do
       user = MA[:user].new
       [3,40].each do |num|
         user.login = "a" * num
@@ -200,7 +200,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       user = MA[:user].find_with_conditions(:login => hash[:login].downcase)
       user.password.should be_nil
       user.password_confirmation.should be_nil
-      user.login = "some_different_nickname_to_allow_saving"
+      user.login = "some_different_login_to_allow_saving"
       (user.save).should be_true
     end
     
@@ -280,10 +280,84 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       user = MA[:user].new(valid_user_hash)
       user.save
       MA[:user].should_not_receive(:signup_notification)
-      user.login = "not in the valid hash for nickname"
+      user.login = "not in the valid hash for login"
       user.save    
     end
     
+  end
+
+  describe "remember me" do
+    predicate_matchers[:remember_token] = :remember_token?
+
+    before do
+      MA[:user].clear_database_table
+      @user = MA[:user].new(valid_user_hash)
+    end
+
+    it "should have a remember_token_expires_at attribute" do
+      @user.attributes.keys.any?{|a| a.to_s == "remember_token_expires_at"}.should_not be_nil
+    end  
+
+    it "should respond to remember_token?" do
+      @user.should respond_to(:remember_token?)
+    end
+
+    it "should return true if remember_token_expires_at is set and is in the future" do
+      @user.remember_token_expires_at = DateTime.now + 3600
+      @user.should remember_token    
+    end
+
+    it "should set remember_token_expires_at to a specific date" do
+      time = DateTime.civil(2009,12,25)
+      @user.remember_me_until(time)
+      @user.remember_token_expires_at.should == time    
+    end
+
+    it "should set the remember_me token when remembering" do
+      time = DateTime.civil(2009,12,25)
+      @user.remember_me_until(time)
+      @user.remember_token.should_not be_nil
+      @user.save
+      MA[:user].find_with_conditions(:login => @user.login).remember_token.should_not be_nil
+    end
+
+    it "should remember me for" do
+      t = DateTime.now
+      DateTime.stub!(:now).and_return(t)
+      today = DateTime.now
+      remember_until = today + (2* Merb::Const::WEEK)
+      @user.remember_me_for( Merb::Const::WEEK * 2)
+      @user.remember_token_expires_at.should == (remember_until)
+    end
+
+    it "should remember_me for two weeks" do
+      t = DateTime.now
+      DateTime.stub!(:now).and_return(t)
+      @user.remember_me
+      @user.remember_token_expires_at.should == (DateTime.now + (2 * Merb::Const::WEEK ))
+    end
+
+    it "should forget me" do
+      @user.remember_me
+      @user.save
+      @user.forget_me
+      @user.remember_token.should be_nil
+      @user.remember_token_expires_at.should be_nil    
+    end
+
+    it "should persist the forget me to the database" do
+      @user.remember_me
+      @user.save
+
+      @user = MA[:user].find_with_conditions(:email => @user.email)
+      @user.remember_token.should_not be_nil
+
+      @user.forget_me
+
+      @user = MA[:user].find_with_conditions(:email => @user.email)
+      @user.remember_token.should be_nil
+      @user.remember_token_expires_at.should be_nil
+    end
   end
   
 end

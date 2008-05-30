@@ -24,15 +24,17 @@ module MerbfulAuthentication
         base.class_eval do
           attr_accessor :password, :password_confirmation
     
-          property :id,               Integer,  :serial   => true
-          property :login,            String,   :nullable => false, :length => 3..40, :unique => true
-          property :email,            String
-          property :created_at,       DateTime
-          property :updated_at,       DateTime
-          property :activated_at,     DateTime
-          property :activation_code,  String
-          property :crypted_password, String
-          property :salt,             String
+          property :id,                         Integer,  :serial   => true
+          property :login,                      String,   :nullable => false, :length => 3..40, :unique => true
+          property :email,                      String
+          property :created_at,                 DateTime
+          property :updated_at,                 DateTime
+          property :activated_at,               DateTime
+          property :activation_code,            String
+          property :crypted_password,           String
+          property :salt,                       String
+          property :remember_token_expires_at,  DateTime
+          property :remember_token,             String
     
           validates_present        :password, :if => proc{|m| m.password_required?}
           validates_is_confirmed   :password, :if => proc{|m| m.password_required?}
