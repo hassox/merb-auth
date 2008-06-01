@@ -30,7 +30,7 @@ module MerbfulAuthentication
     
           property :id,                         Integer,  :serial   => true
           property :login,                      String,   :nullable => false, :length => 3..40, :unique => true
-          property :email,                      String
+          property :email,                      String,   :nullable => false
           property :created_at,                 DateTime
           property :updated_at,                 DateTime
           property :activated_at,               DateTime

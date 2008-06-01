@@ -1,9 +1,25 @@
 require 'rubygems'
 require 'merb-core'
 require 'spec'
+require 'merb-slices'
+require 'merb-mailer'
 
-# Add the dependency in a before_app_loads hook
-Merb::BootLoader.before_app_loads { require(File.join(File.dirname(__FILE__), '..', 'lib', 'merbful_authentication')) }
+
+# class Merb::BootLoader::SlicesForSpecs < Merb::BootLoader
+#   
+#   before Merb::BootLoader::BeforeAppLoads
+#   
+#   def self.run
+#     Merb::Config.use do |c|
+#       c[:session_store] = "memory"
+#     end
+#     Merb::Slices.register_and_load(File.join(File.dirname(__FILE__), '..', 'lib', 'merbful_authentication.rb'))
+#   end
+#   
+# end
+
+Merb::Plugins.config[:merb_slices][:auto_register] = true
+Merb::Plugins.config[:merb_slices][:search_path]   = File.join(File.dirname(__FILE__), '..', 'lib', 'merbful_authentication.rb')
 
 # Using Merb.root below makes sure that the correct root is set for
 # - testing standalone, without being installed as a gem and no host application
@@ -12,12 +28,11 @@ Merb.start_environment(
   :testing => true, 
   :adapter => 'runner', 
   :environment => ENV['MERB_ENV'] || 'test',
-  :merb_root => Merb.root
+  :merb_root => Merb.root,
+  :session_store => 'memory'
 )
 
-Merb::Config.use do |c|
-  c[:session_store] = "memory"
-end
+
 
 class Merb::Mailer
   self.delivery_method = :test_send

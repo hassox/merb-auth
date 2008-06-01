@@ -30,8 +30,10 @@ module MerbfulAuthentication
         end
         
         def activate
+          self.reload unless new_record? # Make sure the model is up to speed before we try to save it
           set_activated_data!
-          save
+          self.save
+
           # send mail for activation
           send_activation_notification  if MA[:use_activation]
         end
@@ -124,6 +126,7 @@ module MerbfulAuthentication
           @activated = true
           self.activated_at = DateTime.now
           self.activation_code = nil
+          true
         end       
         
       end

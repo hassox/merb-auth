@@ -42,6 +42,13 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       user.errors.on(:login).should_not be_nil
     end
     
+    it "should have an email field" do
+      user = MA[:user].new
+      user.should respond_to(:email)
+      user.valid?
+      user.errors.on(:email).should_not be_nil      
+    end
+    
     it "should add on some random numbers on the end if the username is already taken" do 
       hash = valid_user_hash.except(:login)
       hash[:email] = "homer@simpsons.com"

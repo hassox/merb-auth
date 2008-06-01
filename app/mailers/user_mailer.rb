@@ -23,7 +23,6 @@ class MerbfulAuthentication::UserMailer < Merb::MailController
     "/merbful_authentication/user_mailer/#{action}.#{type}"
   end
   
-  
   def method_missing(*args)
     if @base_controller
       @base_controller.send(:method_missing, *args) 

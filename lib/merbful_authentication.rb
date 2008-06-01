@@ -1,20 +1,22 @@
 if defined?(Merb::Plugins)
 
-  require 'merb-slices'
-  require 'digest/sha1'  
+  require 'digest/sha1'
   require 'merb-mailer'
+  require 'merb_helpers'
   
   require File.join(File.dirname(__FILE__), "merbful_authentication", "initializer")
   
+  Dir[File.dirname(__FILE__) / "merbful_authentication" / "controller" / "**" / "*.rb"].each do |f|
+    require f
+  end
+  
   adapter_path = File.join( File.dirname(__FILE__), "merbful_authentication", "adapters")
+  
   MA = MerbfulAuthentication
   MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
   MA.register_adapter :activerecord, "#{adapter_path}/activerecord"
 
   require File.join(adapter_path,  "common")
-  
-
-  
   
   Merb::Plugins.add_rakefiles "merbful_authentication/merbtasks"
 
@@ -44,6 +46,12 @@ if defined?(Merb::Plugins)
     # Loads the model class into MerbfulAuthentication[:user] for use elsewhere.
     def self.loaded
       MA.load_adapter!
+      Merb::Controller.send(:include, MA::ControllerMixin)
+      Merb::Controller.class_eval do
+        alias_method :"current_#{MA[:single_user_name]}", :current_ma_user
+        alias_method :"current_#{MA[:single_user_name]}=", :"current_ma_user="
+      end
+      
     end
     
     # Initialization hook - runs before AfterAppLoads BootLoader
@@ -67,17 +75,14 @@ if defined?(Merb::Plugins)
     def self.setup_router(scope)
       plural_model_path = MA[:route_path_model] || MA[:plural_resource] 
       plural_model_path ||= (MA[:user_class_name] = "User").to_s.snake_case.singularize.pluralize
-      plural_model_path = plural_model_path.match(%r{^/?(.*?)/?$})[1]
+      plural_model_path = plural_model_path.to_s.match(%r{^/?(.*?)/?$})[1]
       single_model_name = plural_model_path.singularize
       
       plural_session_path = MA[:route_path_session] || "sessions"
-      plural_session_path = plural_session_path.match(%r{^/?(.*?)/?$})[1]
+      plural_session_path = plural_session_path.to_s.match(%r{^/?(.*?)/?$})[1]
       single_session_name = plural_session_path.singularize
       
       activation_name = (MA[:single_resource].to_s << "_activation").to_sym
-      
-      scope.match("/login").to(:controller => "MA::Sessions", :action => "create").name(:login)
-      scope.match("/logout").to(:controller => "MA::Sessions", :action => "destroy").name(:logout)
       
       MA[:routes] = {}
       MA[:routes][:new]       = :"new_#{single_model_name}"
@@ -86,32 +91,31 @@ if defined?(Merb::Plugins)
       MA[:routes][:delete]    = :"delete_#{single_model_name}"
       MA[:routes][:index]     = :"#{plural_model_path}"
       MA[:routes][:activate]  = :"#{single_model_name}_activation"
-
-      
+          
       # Setup the model path
-      scope.to(:controller => "MA::Users") do |c|
-        c.match("/#{single_model_name}") do |u|
+      scope.to(:controller => "Users") do |c|
+        c.match("/#{plural_model_path}") do |u|
           # setup the named routes          
           u.match("/new",             :method => :get ).to( :action => "new"     ).name(:"new_#{single_model_name}")
           u.match("/:id",             :method => :get ).to( :action => "show"    ).name(:"#{single_model_name}")
           u.match("/:id/edit",        :method => :get ).to( :action => "edit"    ).name(:"edit_#{single_model_name}")
           u.match("/:id/delete",      :method => :get ).to( :action => "delete"  ).name(:"delete_#{single_model_name}")
           u.match("/",                :method => :get ).to( :action => "index"   ).name(:"#{plural_model_path}")
-          u.match("/activate/:activation_code"        ).to( :action => "activate").name(:"#{single_model_name}_activation")
+          u.match("/activate/:activation_code", :method => :get).to( :action => "activate").name(:"#{single_model_name}_activation")
           
           # Make the anonymous routes
-          u.match(%r{^(/|/index)?(\.:format)?$},  :method => :get).to(    :action => "index")
-          u.match(%r{^/new$},                     :method => :get).to(    :action => "new")
-          u.match(%r{^/:id(\.:format)?$},         :method => :get).to(    :action => "show")
-          u.match(%r{^/:id/edit$},                :method => :get).to(    :action => "edit")
-          u.match(%r{^/:id/delete$},              :method => :get).to(    :action => "delete")
-          u.match(%r{^/:id(\.:format)?$},         :method => :post).to(    :action => "create")      
-          u.match(%r{^/:id(\.:format)?$},         :method => :put).to(    :action => "update")
-          u.match(%r{^/:id(\.:format)?$},         :method => :delete).to( :action => "destroy")
+          u.match(%r{(/|/index)?(\.:format)?$},  :method => :get    ).to( :action => "index")
+          u.match(%r{/new$},                     :method => :get    ).to( :action => "new")
+          u.match(%r{/:id(\.:format)?$},         :method => :get    ).to( :action => "show")
+          u.match(%r{/:id/edit$},                :method => :get    ).to( :action => "edit")
+          u.match(%r{/:id/delete$},              :method => :get    ).to( :action => "delete")
+          u.match(%r{/?(\.:format)?$},           :method => :post   ).to( :action => "create")      
+          u.match(%r{/:id(\.:format)?$},         :method => :put    ).to( :action => "update")
+          u.match(%r{/:id(\.:format)?$},         :method => :delete ).to( :action => "destroy")
         end
       end
       
-      scope.to(:contollre => "MA::Sessions") do |c|
+      scope.to(:contollre => "Sessions") do |c|
         c.match("/#{plural_session_path}") do |s|
           # setup the named routes          
           s.match("/login" ).to(:action => "create").name(:login)

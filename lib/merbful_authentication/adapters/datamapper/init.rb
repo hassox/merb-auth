@@ -1,5 +1,6 @@
 require 'dm-validations'
 require 'dm-timestamps'
+require 'dm-aggregates'
 
 path = File.dirname(__FILE__)
 
