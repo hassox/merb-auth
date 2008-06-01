@@ -64,7 +64,6 @@ describe MA::Users do
    it 'requires email on signup' do
      lambda do
        controller = create_user(:email => nil)
-       puts controller.assigns(:user).errors.inspect
        controller.assigns(:user).errors.on(:email).should_not be_nil
        controller.should respond_successfully
      end.should_not change(User, :count)
@@ -82,9 +81,12 @@ describe MA::Users do
      controller = create_user(:email => "aaron@example.com", :password => "test", :password_confirmation => "test")
      @user = controller.assigns(:user)
      User.authenticate('aaron@example.com', 'test').should be_nil
-     controller = get "/merbful_authentication/users/activate/1234" 
+     controller = get "/merbful_authentication/users/activate/#{@user.activation_code}" 
      controller.should redirect_to("/")
+     User.authenticate('aaron@example.com', 'test').should_not be_nil
    end
+   
+   
      
    def create_user(options = {})
      post "/merbful_authentication/users/", :user => valid_user_hash.merge(options)

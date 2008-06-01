@@ -247,6 +247,16 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     it "should respond to activate" do
       @user.should respond_to(:activate)    
     end
+    
+    it "should respond to activated? & active?" do
+      @user.save
+      @user.should_not be_active
+      @user.should_not be_activated
+      @user.activate
+      @user.reload
+      @user.should be_active
+      @user.should be_activated
+    end
 
     it "should activate a user when activate is called" do
       @user.should_not be_activated

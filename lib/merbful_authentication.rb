@@ -30,7 +30,8 @@ if defined?(Merb::Plugins)
   # Configuration options:
   # :layout - the layout to use; defaults to :merbful_authentication
   # :mirror - which path component types to use on copy operations; defaults to all
-  Merb::Slices::config[:merbful_authentication] = { :layout => :merbful_authentication }
+  Merb::Slices::config[:merbful_authentication] ||= {}
+  Merb::Slices::config[:merbful_authentication][:layout] ||= :merbful_authentication
   
   # All Slice code is expected to be namespaced inside a module
   module MerbfulAuthentication

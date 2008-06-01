@@ -48,6 +48,9 @@ module MerbfulAuthentication
          !! activation_code.nil?
         end
         
+        # Alias for <tt>activated?</tt>
+        def active?; activated?; end
+        
         def set_login
           return nil unless self.login.nil?
           return nil if self.email.nil?
@@ -104,13 +107,13 @@ module MerbfulAuthentication
         
         def send_activation_notification
           if MA[:use_activation]
-            deliver_email(:activation, :subject => (MA[:activation_subject] || "Please Activate Your Account" ))
+            deliver_email(:activation, :subject => (MA[:activation_subject] || "Welcome" ))
           end
         end
 
         def send_signup_notification
           if MA[:use_activation]
-            deliver_email(:signup, :subject => (MA[:welcome_subject] || "Welcome") )
+            deliver_email(:signup, :subject => (MA[:welcome_subject] || "Please Activate Your Account") )
           end
         end
 

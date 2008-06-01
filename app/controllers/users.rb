@@ -23,8 +23,9 @@ class MerbfulAuthentication::Users < MerbfulAuthentication::Application
   end
   
   def activate
-    self.current_ma_user = MA[:user].find_active_with_conditions(:activation_code => params[:activation_code])
-    if logged_in? && !current_ma_user.active?
+    self.current_ma_user = MA[:user].find_with_conditions(:activation_code => params[:activation_code])
+    if logged_in? && !current_ma_user.activated?
+      Merb.logger.info "Activated #{current_ma_user}"
       current_ma_user.activate
     end
     redirect_back_or_default('/')
