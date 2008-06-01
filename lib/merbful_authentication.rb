@@ -115,13 +115,9 @@ if defined?(Merb::Plugins)
         end
       end
       
-      scope.to(:contollre => "Sessions") do |c|
-        c.match("/#{plural_session_path}") do |s|
-          # setup the named routes          
-          s.match("/login" ).to(:action => "create").name(:login)
-          s.match("/logout").to(:action => "destroy").name(:logout)
-        end
-      end
+      
+      scope.match("/login" ).to(:controller => "sessions", :action => "create").name(:login)
+      scope.match("/logout").to(:controller => "sessions", :action => "destroy").name(:logout)
     end
     
   end

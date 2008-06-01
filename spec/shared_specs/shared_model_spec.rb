@@ -392,7 +392,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       t = DateTime.now
       DateTime.stub!(:now).and_return(t)
       today = DateTime.now
-      remember_until = today + (2* Merb::Const::WEEK)
+      remember_until = today + (2* Merb::Const::WEEK) / Merb::Const::DAY
       @user.remember_me_for( Merb::Const::WEEK * 2)
       @user.remember_token_expires_at.should == (remember_until)
     end
@@ -401,7 +401,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
       t = DateTime.now
       DateTime.stub!(:now).and_return(t)
       @user.remember_me
-      @user.remember_token_expires_at.should == (DateTime.now + (2 * Merb::Const::WEEK ))
+      @user.remember_token_expires_at.should == (DateTime.now + (2 * Merb::Const::WEEK ) / Merb::Const::DAY)
     end
 
     it "should forget me" do

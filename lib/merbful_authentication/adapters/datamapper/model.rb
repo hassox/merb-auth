@@ -51,10 +51,10 @@ module MerbfulAuthentication
           before :create, :make_activation_code
           after  :create, :send_signup_notification
           
+          # Sets the login to a downcased version
           def login=(value)
             attribute_set(:login, value.downcase) unless value.nil?
           end
-          
           
         end  
       end # self.set_model_class_decs!

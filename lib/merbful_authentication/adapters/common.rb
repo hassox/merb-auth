@@ -84,7 +84,9 @@ module MerbfulAuthentication
           save
         end
 
+        # Useses seconds for the time
         def remember_me_for(time)
+          time = time / Merb::Const::DAY
           remember_me_until (DateTime.now + time)
         end
 

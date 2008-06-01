@@ -103,7 +103,7 @@ module MerbfulAuthentication
         user = cookies[:auth_token] && MA[:user].find_with_conditions(:remember_token => cookies[:auth_token])
         if user && user.remember_token?
           user.remember_me
-          cookies[:auth_token] = { :value => user.remember_token, :expires => user.remember_token_expires_at }
+          cookies[:auth_token] = { :value => user.remember_token, :expires => Time.parse(user.remember_token_expires_at.to_s) }
           self.current_ma_user = user
         end
       end

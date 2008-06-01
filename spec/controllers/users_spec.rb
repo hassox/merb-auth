@@ -18,10 +18,6 @@ describe MA::Users do
     class User
       include MA::Adapter::DataMapper
     end
-    
-    # MA.loaded
-    # Merb::Router.prepare { |r| r.add_slice(:MerbfulAuthentication ) } if standalone?
-
   end
   
   before(:each) do
