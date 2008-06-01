@@ -3,3 +3,6 @@ log/*
 db/
 *.db
 .DStore
+pkg
+pkg/*
+:memory:
