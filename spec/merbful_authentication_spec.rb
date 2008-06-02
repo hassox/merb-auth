@@ -107,6 +107,37 @@ describe MerbfulAuthentication do
     
   end
 
+  describe "controller Plugin loading" do
+        
+    def add_test_plugin!
+      MA.plugins["Tester"] = File.join(File.dirname(__FILE__), "controllers", "plugins", "test_plugin.rb")
+    end
+    
+    before(:each) do
+      reload_ma!
+    end
+        
+    after(:all) do
+      reload_ma!
+    end
+    
+    it "should allow for registration" do
+      defined?(MA::Controller::Tester).should be_nil
+      reload_ma!("User"){  add_test_plugin!}
+      defined?(MA::Controller::Tester).should_not be_nil
+      MA::Users.should include(MA::Controller::Tester)
+    end
+    
+    it "should overwrite the new method" do
+      Object.class_eval("class User; include MerbfulAuthentication::Adapter::DataMapper; end")
+      controller = dispatch_to(MA::Users, :new)
+      controller.body.should_not == "NEW TEST"
+      reload_ma!("User"){ add_test_plugin!}
+      controller = dispatch_to(MA::Users, :new)
+      controller.body.should == "NEW TEST"      
+    end
+  end
+
 end
 
 describe "MerbfulAuthentication (module)" do

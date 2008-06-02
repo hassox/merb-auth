@@ -38,4 +38,11 @@ module MerbfulAuthentication
     end
   end
   
+  def self.load_plugins!
+    self.plugins.each do |label, file|
+      Merb.logger.info "Loading MerbfulAuthentication Plugin - #{label}"
+      load file
+    end
+  end
+  
 end

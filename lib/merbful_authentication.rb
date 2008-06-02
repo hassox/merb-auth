@@ -4,19 +4,18 @@ if defined?(Merb::Plugins)
   require 'merb-mailer'
   require 'merb_helpers'
   
-  require File.join(File.dirname(__FILE__), "merbful_authentication", "initializer")
+  load File.join(File.dirname(__FILE__), "merbful_authentication", "initializer.rb")
   
   Dir[File.dirname(__FILE__) / "merbful_authentication" / "controller" / "**" / "*.rb"].each do |f|
-    require f
+    load f
   end
   
   adapter_path = File.join( File.dirname(__FILE__), "merbful_authentication", "adapters")
+  load File.join(adapter_path,  "common.rb")
   
   MA = MerbfulAuthentication
   MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
   MA.register_adapter :activerecord, "#{adapter_path}/activerecord"
-
-  require File.join(adapter_path,  "common")
   
   Merb::Plugins.add_rakefiles "merbful_authentication/merbtasks"
 
@@ -35,6 +34,11 @@ if defined?(Merb::Plugins)
   
   # All Slice code is expected to be namespaced inside a module
   module MerbfulAuthentication
+
+
+    def self.plugins
+      @@plugins ||= {}
+    end
     
     # Slice metadata
     self.description = "MerbfulAuthentication is a Merb slice that provides authentication"
@@ -47,12 +51,19 @@ if defined?(Merb::Plugins)
     # Loads the model class into MerbfulAuthentication[:user] for use elsewhere.
     def self.loaded
       MA.load_adapter!
-      Merb::Controller.send(:include, MA::ControllerMixin)
+      
+      Merb::Controller.send(:include, MA::Controller::Helpers)
+      # sends the methoods to the controllers as an include so that other mixins can
+      # overwrite them
+      MA::Users.send(     :include, MA::Controller::UsersBase)
+      MA::Sessions.send(  :include, MA::Controller::SessionsBase)
+      
       Merb::Controller.class_eval do
         alias_method :"current_#{MA[:single_user_name]}", :current_ma_user
         alias_method :"current_#{MA[:single_user_name]}=", :"current_ma_user="
-      end
+      end      
       
+      MA.load_plugins!
     end
     
     # Initialization hook - runs before AfterAppLoads BootLoader
@@ -85,13 +96,13 @@ if defined?(Merb::Plugins)
       
       activation_name = (MA[:single_resource].to_s << "_activation").to_sym
       
-      MA[:routes] = {}
-      MA[:routes][:new]       = :"new_#{single_model_name}"
-      MA[:routes][:show]      = :"#{single_model_name}"
-      MA[:routes][:edit]      = :"edit_#{single_model_name}"
-      MA[:routes][:delete]    = :"delete_#{single_model_name}"
-      MA[:routes][:index]     = :"#{plural_model_path}"
-      MA[:routes][:activate]  = :"#{single_model_name}_activation"
+      MA[:routes] = {:user => {}}
+      MA[:routes][:user][:new]       = :"new_#{single_model_name}"
+      MA[:routes][:user][:show]      = :"#{single_model_name}"
+      MA[:routes][:user][:edit]      = :"edit_#{single_model_name}"
+      MA[:routes][:user][:delete]    = :"delete_#{single_model_name}"
+      MA[:routes][:user][:index]     = :"#{plural_model_path}"
+      MA[:routes][:user][:activate]  = :"#{single_model_name}_activation"
           
       # Setup the model path
       scope.to(:controller => "Users") do |c|

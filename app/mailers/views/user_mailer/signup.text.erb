@@ -4,4 +4,4 @@ Your account has been created.
 
 Visit this url to activate your account:
 
-  <%= url(MA[:routes][:activate], :activation_code => @ivar.activation_code) %>
+  <%= url(MA[:routes][:user][:activate], :activation_code => @ivar.activation_code) %>

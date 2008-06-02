@@ -7,9 +7,7 @@ namespace :slices do
     task :install => [:preflight, :setup_directories, :copy_assets, :migrate]
     
     desc "Test for any dependencies"
-    task :preflight do
-      # implement this to test for structural/code dependencies
-      # like certain directories or availability of other files
+    task :preflight do # see slicetasks.rb
     end
   
     desc "Setup directories"
@@ -25,6 +23,18 @@ namespace :slices do
         end
       end
     end
+    
+    desc "Copy stub files to host application"
+    task :stubs do
+      puts "Copying stubs for MerbfulAuthentication - resolves any collisions"
+      copied, preserved = MerbfulAuthentication.mirror_stubs!
+      puts "- no files to copy" if copied.empty? && preserved.empty?
+      copied.each { |f| puts "- copied #{f}" }
+      preserved.each { |f| puts "! preserved override as #{f}" }
+    end
+    
+    desc "Copy stub files and views to host application"
+    task :patch => [ "stubs", "freeze:views" ]
   
     desc "Copy public assets to host application"
     task :copy_assets do
@@ -36,8 +46,7 @@ namespace :slices do
     end
     
     desc "Migrate the database"
-    task :migrate do
-      # implement this to perform any database related setup steps
+    task :migrate do # see slicetasks.rb
     end
     
     desc "Freeze MerbfulAuthentication into your app (only merbful_authentication/app)" 

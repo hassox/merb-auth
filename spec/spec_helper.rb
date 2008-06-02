@@ -76,4 +76,22 @@ Spec::Runner.configure do |config|
 end
 
 
+# GLobal helpers for merbful_authentication
+def reload_ma!(create_class = nil)
+  Object.class_eval do
+    remove_const("User") if defined?(User)
+    remove_const("MA") if defined?(MA)
+    remove_const("MerbfulAuthentication")
+  end
+  load File.join(File.dirname(__FILE__), "..", "lib", "merbful_authentication.rb")
+  register_datamapper!
+  stub_orm_scope
+  yield if block_given?
+  MA.load_slice
+  MA[:user] = nil
+  MA.loaded
+  Object.class_eval("class #{create_class}; include MerbfulAuthentication::Adapter::DataMapper; end") unless create_class.nil?
+end
+
+
 
