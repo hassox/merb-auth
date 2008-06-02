@@ -12,7 +12,6 @@ describe MerbfulAuthentication do
     @adapter_path = File.dirname(__FILE__) / ".." / "lib" / "merbful_authentication" / "adapters"
     @ar_path = @adapter_path / "activerecord"
     @config = Merb::Slices::config[:merbful_authentication]
-    @config[:user_class_name] = "User"
     DataMapper.setup(:default, 'sqlite3:///:memory:')
   end
   

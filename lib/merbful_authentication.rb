@@ -86,7 +86,7 @@ if defined?(Merb::Plugins)
     #  routes at any level of your router setup.
     def self.setup_router(scope)
       plural_model_path = MA[:route_path_model] || MA[:plural_resource] 
-      plural_model_path ||= (MA[:user_class_name] = "User").to_s.snake_case.singularize.pluralize
+      plural_model_path ||= "User".snake_case.singularize.pluralize
       plural_model_path = plural_model_path.to_s.match(%r{^/?(.*?)/?$})[1]
       single_model_name = plural_model_path.singularize
       
@@ -97,23 +97,23 @@ if defined?(Merb::Plugins)
       activation_name = (MA[:single_resource].to_s << "_activation").to_sym
       
       MA[:routes] = {:user => {}}
-      MA[:routes][:user][:new]       = :"new_#{single_model_name}"
-      MA[:routes][:user][:show]      = :"#{single_model_name}"
-      MA[:routes][:user][:edit]      = :"edit_#{single_model_name}"
-      MA[:routes][:user][:delete]    = :"delete_#{single_model_name}"
-      MA[:routes][:user][:index]     = :"#{plural_model_path}"
-      MA[:routes][:user][:activate]  = :"#{single_model_name}_activation"
+      MA[:routes][:user][:new]       ||= :"new_#{single_model_name}"
+      MA[:routes][:user][:show]      ||= :"#{single_model_name}"
+      MA[:routes][:user][:edit]      ||= :"edit_#{single_model_name}"
+      MA[:routes][:user][:delete]    ||= :"delete_#{single_model_name}"
+      MA[:routes][:user][:index]     ||= :"#{plural_model_path}"
+      MA[:routes][:user][:activate]  ||= :"#{single_model_name}_activation"
           
       # Setup the model path
       scope.to(:controller => "Users") do |c|
         c.match("/#{plural_model_path}") do |u|
           # setup the named routes          
-          u.match("/new",             :method => :get ).to( :action => "new"     ).name(:"new_#{single_model_name}")
-          u.match("/:id",             :method => :get ).to( :action => "show"    ).name(:"#{single_model_name}")
-          u.match("/:id/edit",        :method => :get ).to( :action => "edit"    ).name(:"edit_#{single_model_name}")
-          u.match("/:id/delete",      :method => :get ).to( :action => "delete"  ).name(:"delete_#{single_model_name}")
-          u.match("/",                :method => :get ).to( :action => "index"   ).name(:"#{plural_model_path}")
-          u.match("/activate/:activation_code", :method => :get).to( :action => "activate").name(:"#{single_model_name}_activation")
+          u.match("/new",             :method => :get ).to( :action => "new"     ).name(MA[:routes][:user][:new])
+          u.match("/:id",             :method => :get ).to( :action => "show"    ).name(MA[:routes][:user][:show])
+          u.match("/:id/edit",        :method => :get ).to( :action => "edit"    ).name(MA[:routes][:user][:edit])
+          u.match("/:id/delete",      :method => :get ).to( :action => "delete"  ).name(MA[:routes][:user][:delete])
+          u.match("/",                :method => :get ).to( :action => "index"   ).name(MA[:routes][:user][:index])
+          u.match("/activate/:activation_code", :method => :get).to( :action => "activate").name(MA[:routes][:user][:activate])
           
           # Make the anonymous routes
           u.match(%r{(/|/index)?(\.:format)?$},  :method => :get    ).to( :action => "index")
