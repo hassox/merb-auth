@@ -14,7 +14,7 @@ module MerbfulAuthentication
         # Displays the new form for the user
         def new
           only_provides :html
-          @ivar = MA[:user].new(params[:user] || {})
+          @ivar = MA[:user].new(params[MA[:single_resource]] || {})
           set_ivar
           display @ivar
         end
@@ -22,7 +22,7 @@ module MerbfulAuthentication
         def create
           cookies.delete :auth_token
 
-          @ivar = MA[:user].new(params[:user])
+          @ivar = MA[:user].new(params[MA[:single_resource]])
           set_ivar
           if @ivar.save
             redirect_back_or_default('/')
