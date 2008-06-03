@@ -61,7 +61,7 @@ r.add_slice(:MerbfulAuthentication, "path/to/mount/at")
 rake slices:merbful_authentication:install
 
 
-=== Load the slice in your init.rb file
+=== Long Install INstructions
 
 # add the slice as a regular dependency
 

@@ -1,5 +1,5 @@
 <%= error_messages_for @ivar %>
-<% form_for @ivar, :action => url(:users) do %>
+<% form_for @ivar, :action => url(MA[:routes][:user][:index]) do %>
   <p>
     <%= text_control :email, :label => "Email" %>
   </p>
