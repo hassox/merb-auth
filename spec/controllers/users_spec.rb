@@ -14,6 +14,7 @@ describe MA::Users do
     MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
     MA.register_adapter :activerecord, "#{adapter_path}/activerecord"    
     MA.load_slice
+    MA.activate
 
     class User
       include MA::Adapter::DataMapper
@@ -29,13 +30,18 @@ describe MA::Users do
   end
   
   it "should provide a current_ma_user method" do
-    MA::Users.instance_methods.should include("current_ma_user") 
-    MA::Users.instance_methods.should include("current_user")
+    MA::Users.new({}).should respond_to(:current_ma_user)
+    MA::Users.new({}).should respond_to(:current_user)
+    
+    # MA::Users.instance_methods.should include("current_ma_user") 
+    # MA::Users.instance_methods.should include("current_user")
   end
   
   it "should provide a current_user method" do
-    MA::Users.instance_methods.should include("current_user")
-    MA::Users.instance_methods.should include("current_user=")
+    MA::Users.new({}).should respond_to(:current_ma_user=)
+    MA::Users.new({}).should respond_to(:current_user=)
+    # MA::Users.instance_methods.should include("current_user")
+    # MA::Users.instance_methods.should include("current_user=")
   end
   
   it 'allows signup' do

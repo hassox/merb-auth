@@ -111,17 +111,25 @@ If you don't have any configuration applied some simple defaults will be assumed
 by writing it to the config/slices.yml file
 
 ==== Routing options
-:route_path_model:    first choice for model route path.  defaults to "users" (used to make single_model_path and plural_model_path)
-:route_path_session:  first choice for the sessions route path.  Defaults to "sessions"
+{{{
+\:route_path_model:    first choice for model route path.  defaults to "users" (used to make single_model_path and 
+}}}
+
+plural_model_path)
+{{{
+\:route_path_session:  first choice for the sessions route path.  Defaults to "sessions"
+}}}
 
 ===== Named routes for the MA::Users resource
-:user:
-  :new:       # ||= :"new_#{single_model_name}"
-  :show:      # ||= :"#{single_model_name}"
-  :edit:      # ||= :"edit_#{single_model_name}"
-  :delete:    # ||= :"delete_#{single_model_name}"
-  :index:     # ||= :"#{plural_model_path}"
-  :activate:  # ||= :"#{single_model_name}_activation"
+{{{
+\:user:
+  \:new:       # ||= :"new_#{single_model_name}"
+  \:show:      # ||= :"#{single_model_name}"
+  \:edit:      # ||= :"edit_#{single_model_name}"
+  \:delete:    # ||= :"delete_#{single_model_name}"
+  \:index:     # ||= :"#{plural_model_path}"
+  \:activate:  # ||= :"#{single_model_name}_activation"
+}}}
   
 A named route called :login, and one called :logout is also included.
 
@@ -129,10 +137,14 @@ A named route called :login, and one called :logout is also included.
 === Including activation emails for account verification
 
 To include activation email to your uses use the
-:use_activation: true option
+{{{
+\:use_activation: true option
+}}}
 
 To not use it either leave it out, or set it false like this
-:use_activation: false
+{{{
+\:use_activation: false
+}}}
 
 If this option is turned off, it will just automatically complete the relevant fields
 to have an activated user.  This way, if you decide later that you'd like to include activation
@@ -140,8 +152,8 @@ then the previously signed up users are already fully active and ready to fit in
 
 There is also the subjects that you can setup for your emails
 
-:welcome_subject:       # ||= "Welcome"
-:activation_subject:    # ||= "Please Activate Your Account"
+\:welcome_subject:       # ||= "Welcome"
+\:activation_subject:    # ||= "Please Activate Your Account"
 
 ------------------------------------------------------------------------------
 

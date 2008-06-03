@@ -21,6 +21,12 @@ require 'merb-mailer'
 Merb::Plugins.config[:merb_slices][:auto_register] = true
 Merb::Plugins.config[:merb_slices][:search_path]   = File.join(File.dirname(__FILE__), '..', 'lib', 'merbful_authentication.rb')
 
+module Merb
+  def self.orm_generator_scope
+    :datamapper
+  end
+end
+
 # Using Merb.root below makes sure that the correct root is set for
 # - testing standalone, without being installed as a gem and no host application
 # - testing from within the host application; its root will be used
@@ -31,7 +37,6 @@ Merb.start_environment(
   :merb_root => Merb.root,
   :session_store => 'memory'
 )
-
 
 
 class Merb::Mailer
@@ -92,6 +97,7 @@ def reload_ma!(create_class = nil)
   MA.loaded
   Object.class_eval("class #{create_class}; include MerbfulAuthentication::Adapter::DataMapper; end") unless create_class.nil?
 end
+
 
 
 

@@ -47,8 +47,6 @@ if defined?(Merb::Plugins)
     
     # Stub classes loaded hook - runs before LoadClasses BootLoader
     # right after a slice's classes have been loaded internally
-    #
-    # Loads the model class into MerbfulAuthentication[:user] for use elsewhere.
     def self.loaded
       MA.load_adapter!
       
@@ -58,20 +56,20 @@ if defined?(Merb::Plugins)
       MA::Users.send(     :include, MA::Controller::UsersBase)
       MA::Sessions.send(  :include, MA::Controller::SessionsBase)
       
-      Merb::Controller.class_eval do
-        alias_method :"current_#{MA[:single_resource]}", :current_ma_user
-        alias_method :"current_#{MA[:single_resource]}=", :"current_ma_user="
-      end      
-      
       MA.load_plugins!
     end
     
     # Initialization hook - runs before AfterAppLoads BootLoader
-    def self.init
+    def self.init  
     end
     
     # Activation hook - runs after AfterAppLoads BootLoader
     def self.activate
+      # Make the aliases for current stuff
+       Merb::Controller.module_eval do
+        alias_method :"current_#{MA[:single_resource]}", :current_ma_user
+        alias_method :"current_#{MA[:single_resource]}=", :current_ma_user=
+      end
     end
     
     # Deactivation hook - triggered by Merb::Slices#deactivate
