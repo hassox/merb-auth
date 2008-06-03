@@ -43,7 +43,7 @@ module MerbfulAuthentication
         private
         # sets the instance variable for the developer to use eg. @user
         def set_ivar
-          instance_variable_set("@#{MA[:single_user_name]}", @ivar)
+          instance_variable_set("@#{MA[:single_resource]}", @ivar)
         end
         
       end # InstanceMethods

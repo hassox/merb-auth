@@ -59,8 +59,8 @@ if defined?(Merb::Plugins)
       MA::Sessions.send(  :include, MA::Controller::SessionsBase)
       
       Merb::Controller.class_eval do
-        alias_method :"current_#{MA[:single_user_name]}", :current_ma_user
-        alias_method :"current_#{MA[:single_user_name]}=", :"current_ma_user="
+        alias_method :"current_#{MA[:single_resource]}", :current_ma_user
+        alias_method :"current_#{MA[:single_resource]}=", :"current_ma_user="
       end      
       
       MA.load_plugins!
