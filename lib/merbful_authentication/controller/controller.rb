@@ -89,7 +89,7 @@ module MerbfulAuthentication
 
         # Called from #current_user.  First attempt to login by the user id stored in the session.
         def login_from_session
-          self.current_user = MA[:user].find_with_conditions(:id => session[:user]) if session[:user]
+          self.current_user = MA[:user].find_with_conditions(:id => session[MA[:single_resource]]) if session[MA[:single_resource]]
         end
 
         # Called from #current_user.  Now, attempt to login by basic authentication information.
