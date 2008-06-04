@@ -81,7 +81,7 @@ The easiest way is like this:
 
 r.add_slices
 
-If you'd like to specify MerbfulAuthentication
+If you'd like to specify MerbfulAuthentication for mounting or other routeing options given in slices
 
 r.add_slice(:MerbfulAuthentication)
 
@@ -89,11 +89,15 @@ By default this will mount the slice at /merbful_authentication.  So your login 
 
 /merbful_authentication/login
 
-If you'd like to specify a different mount point in your application (recommended) do it like this.
+If you'd like to specify a different mount point in your application do it like this.
 
 r.add_slice(:MerbfulAuthentication, 'authentcation') 
 
 Your login url will now be /authentication/login, your signup url will be at /authentication/users/new
+
+Alternatively you can just mount merbful_authenticaiton directly onto your application. (Recommended)
+
+r.slice(:MerbfulAuthentication)
 
 If you'd like to set more options, I suggest you look up the merb-slices documentation.
 
@@ -111,17 +115,17 @@ If you don't have any configuration applied some simple defaults will be assumed
 by writing it to the config/slices.yml file
 
 ==== Routing options
-{{{
+
 \:route_path_model:    first choice for model route path.  defaults to "users" (used to make single_model_path and 
-}}}
+
 
 plural_model_path)
-{{{
+
 \:route_path_session:  first choice for the sessions route path.  Defaults to "sessions"
-}}}
+
 
 ===== Named routes for the MA::Users resource
-{{{
+
 \:user:
   \:new:       # ||= :"new_#{single_model_name}"
   \:show:      # ||= :"#{single_model_name}"
@@ -129,7 +133,7 @@ plural_model_path)
   \:delete:    # ||= :"delete_#{single_model_name}"
   \:index:     # ||= :"#{plural_model_path}"
   \:activate:  # ||= :"#{single_model_name}_activation"
-}}}
+
   
 A named route called :login, and one called :logout is also included.
 
@@ -137,14 +141,14 @@ A named route called :login, and one called :logout is also included.
 === Including activation emails for account verification
 
 To include activation email to your uses use the
-{{{
+
 \:use_activation: true option
-}}}
+
 
 To not use it either leave it out, or set it false like this
-{{{
+
 \:use_activation: false
-}}}
+
 
 If this option is turned off, it will just automatically complete the relevant fields
 to have an activated user.  This way, if you decide later that you'd like to include activation
@@ -157,27 +161,28 @@ There is also the subjects that you can setup for your emails
 
 ------------------------------------------------------------------------------
 
-You can put your application-level overrides in:
+=== Override the Views
 
-host-app/slices/merbful_authentication/app - controllers, models, views ...
+You can override the views MerbfulAuthentication provides.  Lets face it.  They're pretty  basic.
 
-Templates are located in this order:
+To do this, you need to edit the files in the bootstrapped directories in your application.
 
-1. host-app/slices/merbful_authentication/app/views/*
-2. gems/merbful_authentication/app/views/*
-3. host-app/app/views/*
+Merb.root/slices/merbful_authentication/app/views/
 
-You can use the host application's layout by configuring the
-merbful_authentication slice in a before_app_loads block:
+==== Example
+
+To change the login form you'd head on over to 
+
+Merb.root/slices/merbful_authenticaiton/app/views/users/new.html.(haml|erb)
+
+And put in your own view there.  The same is available for any of the components of merbful authentication
+
+You can also add your own overrides to the controllers similarly.  
+
+=== Using Your own Layout
+
+To setup merbful authentication to use your own layout use a before_app_loads block.  
+
+==== Example
 
 Merb::Slices.config[:merbful_authentication] = { :layout => :application }
-
-By default :merbful_authentication is used. If you need to override
-stylesheets or javascripts, just specify your own files in your layout
-instead/in addition to the ones supplied (if any) in 
-host-app/public/slices/merbful_authentication.
-
-In any case don't edit those files directly as they may be clobbered any time
-rake merbful_authentication:install is run.
-
-------------------------------------------------------------------------------

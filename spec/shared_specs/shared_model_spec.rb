@@ -335,16 +335,22 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     it "should check that a user is active if the configuration calls for activation" do
       MA[:use_activation] = true      
       hash = valid_user_hash
+      hash2 = valid_user_hash
       user = MA[:user].new(hash)
       user.save
       user.reload
-      MA[:user].authenticate(user.email, user.password).should be_nil
+      MA[:user].authenticate(user.email, hash[:password]).should be_nil
       MA[:use_activation] = false
-      MA[:user].authenticate(user.email, user.password).should == user
+      u2 = MA[:user].new(hash2)
+      u2.save
+      u2.reload
+      MA[:user].authenticate(u2.email, hash2[:password]).should == u2
+      MA[:user].authenticate(user.email, hash[:passowrd]).should be_nil
       MA[:use_activateion] = true
       user.activate
       user.reload
-      MA[:user].authenticate(user.email, user.password).should == user
+      MA[:user].authenticate(user.email, hash[:password]).should == user
+      MA[:user].authenticate(u2.email, hash2[:password]).should == u2
     end
     
     it "should not activate the user when use_activation is true" do

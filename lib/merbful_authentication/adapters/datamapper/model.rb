@@ -8,7 +8,6 @@ module MerbfulAuthentication
         
         # Setup the properties for the model
         set_model_class_decs!(base)
-        # base.send(:include, InstanceMethods)
         base.send(:include, Map)
         base.send(:include, InstanceMethods )
         base.send(:include, Common)
