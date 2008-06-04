@@ -16,7 +16,7 @@ module MerbfulAuthentication
     
         # Store the given user in the session.
         def current_ma_user=(new_user)
-          session[:user] = (!new_user || !new_user.kind_of?(User)) ? nil : new_user.id
+          session[MA[:single_resource]] = (!new_user || !new_user.kind_of?(MA[:user])) ? nil : new_user.id
           @current_ma_user = new_user
         end
     
