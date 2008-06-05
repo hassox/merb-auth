@@ -3,7 +3,7 @@ module MerbfulAuthentication
     module Helpers
       protected
         # Returns true or false if the user is logged in.
-        # Preloads @current_user with the user model if they're logged in.
+        # Preloads @current_ma_user with the user model if they're logged in.
         def logged_in?
           !!current_ma_user
         end
@@ -30,7 +30,7 @@ module MerbfulAuthentication
         #
         #  # only allow nonbobs
         #  def authorized?
-        #    current_user.login != "bob"
+        #    current_ma_user.login != "bob"
         #  end
         def authorized?
           logged_in?
@@ -87,19 +87,19 @@ module MerbfulAuthentication
           redirect loc
         end
 
-        # Called from #current_user.  First attempt to login by the user id stored in the session.
+        # Called from #current_ma_user.  First attempt to login by the user id stored in the session.
         def login_from_session
-          self.current_user = MA[:user].find_with_conditions(:id => session[MA[:single_resource]]) if session[MA[:single_resource]]
+          self.current_ma_user = MA[:user].find_with_conditions(:id => session[MA[:single_resource]]) if session[MA[:single_resource]]
         end
 
-        # Called from #current_user.  Now, attempt to login by basic authentication information.
+        # Called from #current_ma_user.  Now, attempt to login by basic authentication information.
         def login_from_basic_auth
           basic_authentication.authenticate do |email, password|
             self.current_ma_user = MA[:user].authenticate(email, password)
           end
         end
 
-        # Called from #current_user.  Finaly, attempt to login by an expiring token in the cookie.
+        # Called from #current_ma_user.  Finaly, attempt to login by an expiring token in the cookie.
         def login_from_cookie     
           user = cookies[:auth_token] && MA[:user].find_with_conditions(:remember_token => cookies[:auth_token])
           if user && user.remember_token?

@@ -41,6 +41,7 @@ module MerbfulAuthentication
           validates_length_of       :login,    :within => 3..40
           validates_length_of       :email,    :within => 3..100
           validates_uniqueness_of   :login, :email, :case_sensitive => false
+          validates_uniqueness_of   :password_reset_key, :if => Proc.new{|m| !m.password_reset_key.nil?}
           
           
           before_save :encrypt_password
