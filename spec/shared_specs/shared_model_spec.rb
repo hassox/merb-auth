@@ -294,7 +294,6 @@ describe "A MerbAuth User Model", :shared => true do
     
     it "should not send an email to ask for activation when use_activation is not set" do
       MA[:use_activation] = false
-      puts MA::UserMailer.inspect
       MA::UserMailer.should_not_receive(:dispatch_and_deliver)
       @user.save
     end

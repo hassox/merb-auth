@@ -20,13 +20,14 @@ describe MA::Sessions, "Index action" do
     class User
       include MA::Adapter::DataMapper
     end
+
   end
   
   before(:each) do
     User.clear_database_table
-    @quentin = User.new(valid_user_hash.with(:email => "quentin@example.com", :password => "test", :password_confirmation => "test"))
-    @quentin.valid?
-    puts @quentin.errors.inspect
+    u = User.new
+    u.valid?
+    @quentin = User.create(valid_user_hash.with(:email => "quentin@example.com", :password => "test", :password_confirmation => "test"))
     @controller = MA::Sessions.new(fake_request)
     @quentin.activate
   end

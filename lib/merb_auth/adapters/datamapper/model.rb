@@ -41,7 +41,7 @@ module MerbAuth
           property :password_reset_key,         String, :writer => :protected
           
           validates_is_unique :password_reset_key, :if => Proc.new{|m| !m.password_reset_key.nil?}
-    
+          #     
           validates_present        :password, :if => proc{|m| m.password_required?}
           validates_is_confirmed   :password, :if => proc{|m| m.password_required?}
     
