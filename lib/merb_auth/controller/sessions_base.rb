@@ -1,4 +1,4 @@
-module MerbfulAuthentication
+module MerbAuth
   module Controller
     # Provides basic functionality for sessions.  eg Allows login and logout.
     module SessionsBase
@@ -38,4 +38,4 @@ module MerbfulAuthentication
       
     end # SessionsBase
   end # Controller
-end # MerbfulAuthentication
+end # MerbAuth

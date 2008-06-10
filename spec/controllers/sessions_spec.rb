@@ -9,10 +9,10 @@ describe MA::Sessions, "Index action" do
     
     MA[:use_activation] = true
     
-    DataMapper.setup(:default, 'sqlite3:///:memory:')
+    DataMapper.setup(:default, 'sqlite3::memory:')
     Merb.stub!(:orm_generator_scope).and_return("datamapper")
     
-    adapter_path = File.join( File.dirname(__FILE__), "..", "..", "lib", "merbful_authentication", "adapters")
+    adapter_path = File.join( File.dirname(__FILE__), "..", "..", "lib", "merb_auth", "adapters")
     MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
     MA.register_adapter :activerecord, "#{adapter_path}/activerecord"    
     MA.load_slice
@@ -24,81 +24,83 @@ describe MA::Sessions, "Index action" do
   
   before(:each) do
     User.clear_database_table
-    @quentin = User.create(valid_user_hash.with(:email => "quentin@example.com", :password => "test", :password_confirmation => "test"))
+    @quentin = User.new(valid_user_hash.with(:email => "quentin@example.com", :password => "test", :password_confirmation => "test"))
+    @quentin.valid?
+    puts @quentin.errors.inspect
     @controller = MA::Sessions.new(fake_request)
     @quentin.activate
   end
   
   it "should have a route to Sessions#new from '/login'" do
-    request_to("/merbful_authentication/login") do |params|
+    request_to("/merb_auth/login") do |params|
       params[:controller].should == "Sessions"
       params[:action].should == "create"
     end   
   end
   
   it "should route to Sessions#create from '/login' via post" do
-    request_to("/merbful_authentication/login", :post) do |params|
+    request_to("/merb_auth/login", :post) do |params|
       params[:controller].should  == "Sessions"
       params[:action].should      == "create"
     end      
   end
   
   it "should have a named route :login" do
-    @controller.url(:login).should == "/merbful_authentication/login"
+    @controller.url(:login).should == "/merb_auth/login"
   end
   
   it "should have route to Sessions#destroy from '/logout' via delete" do
-    request_to("/merbful_authentication/logout", :delete) do |params|
+    request_to("/merb_auth/logout", :delete) do |params|
       params[:controller].should == "Sessions"
       params[:action].should    == "destroy"
     end   
   end
   
   it "should route to Sessions#destroy from '/logout' via get" do
-    request_to("/merbful_authentication/logout") do |params|
+    request_to("/merb_auth/logout") do |params|
       params[:controller].should == "Sessions" 
       params[:action].should     == "destroy"
     end
   end
 
   it 'logins and redirects' do
-    controller = post "/merbful_authentication/login", :email => 'quentin@example.com', :password => 'test'
+    controller = post "/merb_auth/login", :email => 'quentin@example.com', :password => 'test'
     controller.session[:user].should_not be_nil
     controller.session[:user].should == @quentin.id
     controller.should redirect_to("/")
   end
    
   it 'fails login and does not redirect' do
-    controller = post "/merbful_authentication/login", :email => 'quentin@example.com', :password => 'bad password'
+    controller = post "/merb_auth/login", :email => 'quentin@example.com', :password => 'bad password'
     controller.session[:user].should be_nil
     controller.should be_successful
   end
 
   it 'logs out' do
-    controller = get("/merbful_authentication/logout"){|controller| controller.stub!(:current_user).and_return(@quentin) }
+    controller = get("/merb_auth/logout"){|controller| controller.stub!(:current_user).and_return(@quentin) }
     controller.session[:user].should be_nil
     controller.should redirect
   end
 
   it 'remembers me' do
-    controller = post "/merbful_authentication/login", :email => 'quentin@example.com', :password => 'test', :remember_me => "1"
+    controller = post "/merb_auth/login", :email => 'quentin@example.com', :password => 'test', :remember_me => "1"
     controller.cookies["auth_token"].should_not be_nil
   end
  
   it 'does not remember me' do
-    controller = post "/merbful_authentication/login", :email => 'quentin@example.com', :password => 'test', :remember_me => "0"
+    controller = post "/merb_auth/login", :email => 'quentin@example.com', :password => 'test', :remember_me => "0"
     controller.cookies["auth_token"].should be_nil
   end
   
   it 'deletes token on logout' do
-    controller = get("/merbful_authentication/logout") {|request| request.stub!(:current_user).and_return(@quentin) }
+    controller = get("/merb_auth/logout") {|request| request.stub!(:current_user).and_return(@quentin) }
     controller.cookies["auth_token"].should == nil
   end
   
   
   it 'logs in with cookie' do
     @quentin.remember_me
-    controller = get "/merbful_authentication/login" do |c|
+    controller = get "/merb_auth/login" do |c|
       c.request.env[Merb::Const::HTTP_COOKIE] = "auth_token=#{@quentin.remember_token}"
     end
     controller.should be_logged_in

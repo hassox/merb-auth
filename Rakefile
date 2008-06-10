@@ -5,7 +5,7 @@ require 'merb-core/version'
 require 'merb-core/test/tasks/spectasks'
 require 'merb-core/tasks/merb_rake_helper'
 
-NAME = "merbful_authentication"
+NAME = "merb_auth"
 AUTHOR = "Merb Core"
 EMAIL = "has.sox@gmail.com"
 HOMEPAGE = "http://merbivore.com/"
@@ -26,14 +26,14 @@ spec = Gem::Specification.new do |s|
   s.homepage = HOMEPAGE
   s.add_dependency('merb-slices', '>= 0.9.4')
   s.require_path = 'lib'
-  s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec,app,public}/**/*")
+  s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec,app,public,stubs}/**/*")
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.gem_spec = spec
 end
 
-desc "Install MerbfulAuthentication as a gem"
+desc "Install MerbAuth as a gem"
 task :install => [:package] do
   sh %{#{sudo} gem install pkg/#{NAME}-#{GEM_VERSION} --no-update-sources}
 end

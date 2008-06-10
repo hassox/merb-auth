@@ -1,7 +1,7 @@
-describe "A MerbfulAuthentication User Model", :shared => true do
+describe "A MerbAuth User Model", :shared => true do
   
   before(:all) do
-    raise "You need to set the MerbfulAuthentication[:user] class to use this spec" unless MA[:user].is_a?(Class)
+    raise "You need to set the MerbAuth[:user] class to use this spec" unless MA[:user].is_a?(Class)
   end
   
   before(:each) do
@@ -11,7 +11,7 @@ describe "A MerbfulAuthentication User Model", :shared => true do
     MA[:from_email] = "example@email.com"
   end
   
-  it "should include MerbfulAuthentication::Adapter::Common mixin" do
+  it "should include MerbAuth::Adapter::Common mixin" do
     MA[:user].should include(MA::Adapter::Common)  
   end
   

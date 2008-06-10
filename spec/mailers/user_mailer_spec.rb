@@ -5,10 +5,10 @@ describe MA::UserMailer do
   before(:all) do
     MA[:use_activation] = true
     
-    DataMapper.setup(:default, 'sqlite3:///:memory:')
+    DataMapper.setup(:default, 'sqlite3::memory:')
     Merb.stub!(:orm_generator_scope).and_return("datamapper")
     
-    adapter_path = File.join( File.dirname(__FILE__), "..", "..", "lib", "merbful_authentication", "adapters")
+    adapter_path = File.join( File.dirname(__FILE__), "..", "..", "lib", "merb_auth", "adapters")
     MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
     MA.register_adapter :activerecord, "#{adapter_path}/activerecord"    
     MA.loaded

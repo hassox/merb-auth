@@ -1,4 +1,4 @@
-class MerbfulAuthentication::Sessions < MerbfulAuthentication::Application
+class MerbAuth::Sessions < MerbAuth::Application
   
   skip_before :login_required
   

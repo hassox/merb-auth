@@ -1,9 +1,9 @@
 $SLICED_APP=true # we're running inside the host application context
 
 namespace :slices do
-  namespace :merbful_authentication do
+  namespace :merb_auth do
   
-    desc "Install MerbfulAuthentication"
+    desc "Install MerbAuth"
     task :install => [:preflight, :setup_directories, :copy_assets, :migrate]
     
     desc "Test for any dependencies"
@@ -13,9 +13,9 @@ namespace :slices do
     desc "Setup directories"
     task :setup_directories do
       puts "Creating directories for host application"
-      MerbfulAuthentication.mirrored_components.each do |type|
-        if File.directory?(MerbfulAuthentication.dir_for(type))
-          if !File.directory?(dst_path = MerbfulAuthentication.app_dir_for(type))
+      MerbAuth.mirrored_components.each do |type|
+        if File.directory?(MerbAuth.dir_for(type))
+          if !File.directory?(dst_path = MerbAuth.app_dir_for(type))
             relative_path = dst_path.relative_path_from(Merb.root)
             puts "- creating directory :#{type} #{File.basename(Merb.root) / relative_path}"
             mkdir_p(dst_path)
@@ -26,8 +26,8 @@ namespace :slices do
     
     desc "Copy stub files to host application"
     task :stubs do
-      puts "Copying stubs for MerbfulAuthentication - resolves any collisions"
-      copied, preserved = MerbfulAuthentication.mirror_stubs!
+      puts "Copying stubs for MerbAuth - resolves any collisions"
+      copied, preserved = MerbAuth.mirror_stubs!
       puts "- no files to copy" if copied.empty? && preserved.empty?
       copied.each { |f| puts "- copied #{f}" }
       preserved.each { |f| puts "! preserved override as #{f}" }
@@ -38,8 +38,8 @@ namespace :slices do
   
     desc "Copy public assets to host application"
     task :copy_assets do
-      puts "Copying assets for MerbfulAuthentication - resolves any collisions"
-      copied, preserved = MerbfulAuthentication.mirror_public!
+      puts "Copying assets for MerbAuth - resolves any collisions"
+      copied, preserved = MerbAuth.mirror_public!
       puts "- no files to copy" if copied.empty? && preserved.empty?
       copied.each { |f| puts "- copied #{f}" }
       preserved.each { |f| puts "! preserved override as #{f}" }
@@ -49,24 +49,24 @@ namespace :slices do
     task :migrate do # see slicetasks.rb
     end
     
-    desc "Freeze MerbfulAuthentication into your app (only merbful_authentication/app)" 
+    desc "Freeze MerbAuth into your app (only merb_auth/app)" 
     task :freeze => [ "freeze:app" ]
 
     namespace :freeze do
       
-      desc "Freezes MerbfulAuthentication by installing the gem into application/gems using merb-freezer"
+      desc "Freezes MerbAuth by installing the gem into application/gems using merb-freezer"
       task :gem do
         begin
-          Object.const_get(:Freezer).freeze(ENV["GEM"] || "merbful_authentication", ENV["UPDATE"], ENV["MODE"] || 'rubygems')
+          Object.const_get(:Freezer).freeze(ENV["GEM"] || "merb_auth", ENV["UPDATE"], ENV["MODE"] || 'rubygems')
         rescue NameError
           puts "! dependency 'merb-freezer' missing"
         end
       end
       
-      desc "Freezes MerbfulAuthentication by copying all files from merbful_authentication/app to your application"
+      desc "Freezes MerbAuth by copying all files from merb_auth/app to your application"
       task :app do
-        puts "Copying all merbful_authentication/app files to your application - resolves any collisions"
-        copied, preserved = MerbfulAuthentication.mirror_app!
+        puts "Copying all merb_auth/app files to your application - resolves any collisions"
+        copied, preserved = MerbAuth.mirror_app!
         puts "- no files to copy" if copied.empty? && preserved.empty?
         copied.each { |f| puts "- copied #{f}" }
         preserved.each { |f| puts "! preserved override as #{f}" }
@@ -75,7 +75,7 @@ namespace :slices do
       desc "Freeze all views into your application for easy modification" 
       task :views do
         puts "Copying all view templates to your application - resolves any collisions"
-        copied, preserved = MerbfulAuthentication.mirror_files_for :view
+        copied, preserved = MerbAuth.mirror_files_for :view
         puts "- no files to copy" if copied.empty? && preserved.empty?
         copied.each { |f| puts "- copied #{f}" }
         preserved.each { |f| puts "! preserved override as #{f}" }
@@ -84,19 +84,19 @@ namespace :slices do
       desc "Freeze all models into your application for easy modification" 
       task :models do
         puts "Copying all models to your application - resolves any collisions"
-        copied, preserved = MerbfulAuthentication.mirror_files_for :model
+        copied, preserved = MerbAuth.mirror_files_for :model
         puts "- no files to copy" if copied.empty? && preserved.empty?
         copied.each { |f| puts "- copied #{f}" }
         preserved.each { |f| puts "! preserved override as #{f}" }
       end
       
-      desc "Freezes MerbfulAuthentication as a gem and copies over merbful_authentication/app"
+      desc "Freezes MerbAuth as a gem and copies over merb_auth/app"
       task :app_with_gem => [:gem, :app]
       
-      desc "Freezes MerbfulAuthentication by unpacking all files into your application"
+      desc "Freezes MerbAuth by unpacking all files into your application"
       task :unpack do
-        puts "Unpacking MerbfulAuthentication files to your application - resolves any collisions"
-        copied, preserved = MerbfulAuthentication.unpack_slice!
+        puts "Unpacking MerbAuth files to your application - resolves any collisions"
+        copied, preserved = MerbAuth.unpack_slice!
         puts "- no files to copy" if copied.empty? && preserved.empty?
         copied.each { |f| puts "- copied #{f}" }
         preserved.each { |f| puts "! preserved override as #{f}" }
@@ -112,7 +112,7 @@ namespace :slices do
       slice_root = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
       
       task :explain do
-        puts "\nNote: By running MerbfulAuthentication specs inside the application context any\n" +
+        puts "\nNote: By running MerbAuth specs inside the application context any\n" +
              "overrides could break existing specs. This isn't always a problem,\n" +
              "especially in the case of views. Use these spec tasks to check how\n" +
              "well your application conforms to the original slice implementation."

@@ -13,13 +13,13 @@ require 'merb-mailer'
 #     Merb::Config.use do |c|
 #       c[:session_store] = "memory"
 #     end
-#     Merb::Slices.register_and_load(File.join(File.dirname(__FILE__), '..', 'lib', 'merbful_authentication.rb'))
+#     Merb::Slices.register_and_load(File.join(File.dirname(__FILE__), '..', 'lib', 'merb_auth.rb'))
 #   end
 #   
 # end
 
 Merb::Plugins.config[:merb_slices][:auto_register] = true
-Merb::Plugins.config[:merb_slices][:search_path]   = File.join(File.dirname(__FILE__), '..', 'lib', 'merbful_authentication.rb')
+Merb::Plugins.config[:merb_slices][:search_path]   = File.join(File.dirname(__FILE__), '..', 'lib', 'merb_auth.rb')
 
 module Merb
   def self.orm_generator_scope
@@ -78,24 +78,27 @@ Spec::Runner.configure do |config|
   config.include(Merb::Test::ControllerHelper)
   config.include(Merb::Test::SliceHelper)
   config.include(ValidModelHashes)
+  config.before(:each) do
+    Merb::Router.prepare { |r| r.add_slice(:MerbAuth) } if standalone?
+  end
 end
 
 
-# GLobal helpers for merbful_authentication
+# GLobal helpers for merb_auth
 def reload_ma!(create_class = nil)
   Object.class_eval do
     remove_const("User") if defined?(User)
     remove_const("MA") if defined?(MA)
-    remove_const("MerbfulAuthentication")
+    remove_const("MerbAuth")
   end
-  load File.join(File.dirname(__FILE__), "..", "lib", "merbful_authentication.rb")
+  load File.join(File.dirname(__FILE__), "..", "lib", "merb_auth.rb")
   register_datamapper!
   stub_orm_scope
   yield if block_given?
   MA.load_slice
   MA[:user] = nil
   MA.loaded
-  Object.class_eval("class #{create_class}; include MerbfulAuthentication::Adapter::DataMapper; end") unless create_class.nil?
+  Object.class_eval("class #{create_class}; include MerbAuth::Adapter::DataMapper; end") unless create_class.nil?
 end
 
 

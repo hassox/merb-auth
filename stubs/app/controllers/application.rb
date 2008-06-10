@@ -1,2 +1,2 @@
-class MerbfulAuthentication::Application < Merb::Controller
+class MerbAuth::Application < Merb::Controller
 end

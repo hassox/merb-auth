@@ -4,20 +4,20 @@ if defined?(Merb::Plugins)
   require 'merb-mailer'
   require 'merb_helpers'
   
-  load File.join(File.dirname(__FILE__), "merbful_authentication", "initializer.rb")
+  load File.join(File.dirname(__FILE__), "merb_auth", "initializer.rb")
   
-  Dir[File.dirname(__FILE__) / "merbful_authentication" / "controller" / "**" / "*.rb"].each do |f|
+  Dir[File.dirname(__FILE__) / "merb_auth" / "controller" / "**" / "*.rb"].each do |f|
     load f
   end
   
-  adapter_path = File.join( File.dirname(__FILE__), "merbful_authentication", "adapters")
+  adapter_path = File.join( File.dirname(__FILE__), "merb_auth", "adapters")
   load File.join(adapter_path,  "common.rb")
   
-  MA = MerbfulAuthentication
+  MA = MerbAuth
   MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
   MA.register_adapter :activerecord, "#{adapter_path}/activerecord"
   
-  Merb::Plugins.add_rakefiles "merbful_authentication/merbtasks"
+  Merb::Plugins.add_rakefiles "merb_auth/merbtasks"
 
   # Register the Slice for the current host application
   Merb::Slices::register(__FILE__)
@@ -27,13 +27,13 @@ if defined?(Merb::Plugins)
   # the main application layout or no layout at all if needed.
   # 
   # Configuration options:
-  # :layout - the layout to use; defaults to :merbful_authentication
+  # :layout - the layout to use; defaults to :merb_auth
   # :mirror - which path component types to use on copy operations; defaults to all
-  Merb::Slices::config[:merbful_authentication] ||= {}
-  Merb::Slices::config[:merbful_authentication][:layout] ||= :merbful_authentication
+  Merb::Slices::config[:merb_auth] ||= {}
+  Merb::Slices::config[:merb_auth][:layout] ||= :merb_auth
   
   # All Slice code is expected to be namespaced inside a module
-  module MerbfulAuthentication
+  module MerbAuth
 
 
     def self.plugins
@@ -41,7 +41,7 @@ if defined?(Merb::Plugins)
     end
     
     # Slice metadata
-    self.description = "MerbfulAuthentication is a Merb slice that provides authentication"
+    self.description = "MerbAuth is a Merb slice that provides authentication"
     self.version = "0.11.0"
     self.author = "Merb Core"
     
@@ -132,18 +132,18 @@ if defined?(Merb::Plugins)
     
   end
   
-  # Setup the slice layout for MerbfulAuthentication
+  # Setup the slice layout for MerbAuth
   #
-  # Use MerbfulAuthentication.push_path and MerbfulAuthentication.push_app_path
-  # to set paths to merbful_authentication-level and app-level paths. Example:
+  # Use MerbAuth.push_path and MerbAuth.push_app_path
+  # to set paths to merb_auth-level and app-level paths. Example:
   #
-  # MerbfulAuthentication.push_path(:application, MerbfulAuthentication.root)
-  # MerbfulAuthentication.push_app_path(:application, Merb.root / 'slices' / 'merbful_authentication')
+  # MerbAuth.push_path(:application, MerbAuth.root)
+  # MerbAuth.push_app_path(:application, Merb.root / 'slices' / 'merb_auth')
   # ...
   #
-  # Any component path that hasn't been set will default to MerbfulAuthentication.root
+  # Any component path that hasn't been set will default to MerbAuth.root
   #
   # Or just call setup_default_structure! to setup a basic Merb MVC structure.
-  MerbfulAuthentication.setup_default_structure!
+  MerbAuth.setup_default_structure!
 
 end

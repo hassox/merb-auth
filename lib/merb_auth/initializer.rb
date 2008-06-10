@@ -1,4 +1,4 @@
-module MerbfulAuthentication
+module MerbAuth
   
   # Clears the currently registered adapter list.  
   def self.clear_adapter_list!
@@ -24,10 +24,10 @@ module MerbfulAuthentication
   # @raise [RuntimeError] Raises an error if the adapter is not registered.
   def self.load_adapter!(adapter = nil)
     adapter ||= self.config[:adapter] || Merb.orm_generator_scope
-    raise "MerbfulAuthentication: No Adapter Specified" if adapter.nil? || adapter.blank?
+    raise "MerbAuth: No Adapter Specified" if adapter.nil? || adapter.blank?
     
     # Check that the adapter is registered
-    raise "MerbfulAuthentication: Adapter Not Registered - #{adapter}" unless adapters.keys.include?(adapter.to_sym)
+    raise "MerbAuth: Adapter Not Registered - #{adapter}" unless adapters.keys.include?(adapter.to_sym)
     
     if Merb.env?(:test)
       load adapters[adapter.to_sym][:path] / "init.rb"
@@ -38,7 +38,7 @@ module MerbfulAuthentication
   
   def self.load_plugins!
     self.plugins.each do |label, file|
-      Merb.logger.info "Loading MerbfulAuthentication Plugin - #{label}"
+      Merb.logger.info "Loading MerbAuth Plugin - #{label}"
       load file
     end
   end

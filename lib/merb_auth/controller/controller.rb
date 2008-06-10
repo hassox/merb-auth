@@ -1,4 +1,4 @@
-module MerbfulAuthentication
+module MerbAuth
   module Controller
     module Helpers
       protected
@@ -110,4 +110,4 @@ module MerbfulAuthentication
         end
     end # Helpers
   end# Controllers
-end # MerbfulAuthentication
+end # MerbAuth

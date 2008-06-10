@@ -1,2 +1,2 @@
-class MerbfulAuthentication::Users < MerbfulAuthentication::Application
+class MerbAuth::Users < MerbAuth::Application
 end
