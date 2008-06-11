@@ -30,7 +30,7 @@ And in your custom slice, get access to the user class with MA[:user]
 
 ===Useful Helpers
 
-The normal merb_auth helpers are available for your application, but also there is some consistent 
+The normal merb-auth helpers are available for your application, but also there is some consistent 
 helpers for other slice authors. Most notably is the controller helper
 
 :current_ma_user also aliased as :current_person, or :current_user or whatever your user class name is.
@@ -52,7 +52,7 @@ Instructions for installation:
 === Quick Install
 # config/init.rb
 dependency "merb-slices"
-dependency "merb_auth"
+dependency "merb-auth"
 
 # router
 r.add_slice(:MerbAuth, "path/to/mount/at")
@@ -65,7 +65,7 @@ rake slices:merb_auth:install
 
 # add the slice as a regular dependency
 
-dependency 'merb_auth'
+dependency 'merb-auth'
 
 # if needed, configure which slices to load and in which order
 
@@ -85,9 +85,9 @@ If you'd like to specify MerbAuth for mounting or other routeing options given i
 
 r.add_slice(:MerbAuth)
 
-By default this will mount the slice at /merb_auth.  So your login url will be at 
+By default this will mount the slice at /merb-auth.  So your login url will be at 
 
-/merb_auth/login
+/merb-auth/login
 
 If you'd like to specify a different mount point in your application do it like this.
 
@@ -95,7 +95,7 @@ r.add_slice(:MerbAuth, 'authentcation')
 
 Your login url will now be /authentication/login, your signup url will be at /authentication/users/new
 
-Alternatively you can just mount merb_authenticaiton directly onto your application. (Recommended)
+Alternatively you can just mount merb-auth directly onto your application. (Recommended)
 
 r.slice(:MerbAuth)
 
@@ -135,7 +135,7 @@ plural_model_path)
   \:activate:  # ||= :"#{single_model_name}_activation"
 
   
-A named route called :login, and one called :logout is also included.
+A named route called :login, :logout and :signup are also included.
 
 
 === Including activation emails for account verification
@@ -167,13 +167,13 @@ You can override the views MerbAuth provides.  Lets face it.  They're pretty  ba
 
 To do this, you need to edit the files in the bootstrapped directories in your application.
 
-Merb.root/slices/merb_auth/app/views/
+Merb.root/slices/merb-auth/app/views/
 
 ==== Example
 
 To change the login form you'd head on over to 
 
-Merb.root/slices/merb_authenticaiton/app/views/users/new.html.(haml|erb)
+Merb.root/slices/merb-auth/app/views/users/new.html.(haml|erb)
 
 And put in your own view there.  The same is available for any of the components of merbful authentication
 
@@ -186,3 +186,10 @@ To setup merbful authentication to use your own layout use a before_app_loads bl
 ==== Example
 
 Merb::Slices.config[:merb_auth] = { :layout => :application }
+
+=== Migrations
+
+There is a migration task for merb-auth to generate your migrations.  Make sure you have use_orm selected so that
+it knows which generator to use.  Then from your host application
+
+rake slices:merb_auth:generate_migration

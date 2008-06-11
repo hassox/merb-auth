@@ -49,7 +49,7 @@ namespace :slices do
     task :migrate do # see slicetasks.rb
     end
     
-    desc "Freeze MerbAuth into your app (only merb_auth/app)" 
+    desc "Freeze MerbAuth into your app (only merb-auth/app)" 
     task :freeze => [ "freeze:app" ]
 
     namespace :freeze do
@@ -57,15 +57,15 @@ namespace :slices do
       desc "Freezes MerbAuth by installing the gem into application/gems using merb-freezer"
       task :gem do
         begin
-          Object.const_get(:Freezer).freeze(ENV["GEM"] || "merb_auth", ENV["UPDATE"], ENV["MODE"] || 'rubygems')
+          Object.const_get(:Freezer).freeze(ENV["GEM"] || "merb-auth", ENV["UPDATE"], ENV["MODE"] || 'rubygems')
         rescue NameError
           puts "! dependency 'merb-freezer' missing"
         end
       end
       
-      desc "Freezes MerbAuth by copying all files from merb_auth/app to your application"
+      desc "Freezes MerbAuth by copying all files from merb-auth/app to your application"
       task :app do
-        puts "Copying all merb_auth/app files to your application - resolves any collisions"
+        puts "Copying all merb-auth/app files to your application - resolves any collisions"
         copied, preserved = MerbAuth.mirror_app!
         puts "- no files to copy" if copied.empty? && preserved.empty?
         copied.each { |f| puts "- copied #{f}" }
@@ -90,7 +90,7 @@ namespace :slices do
         preserved.each { |f| puts "! preserved override as #{f}" }
       end
       
-      desc "Freezes MerbAuth as a gem and copies over merb_auth/app"
+      desc "Freezes MerbAuth as a gem and copies over merb-auth/app"
       task :app_with_gem => [:gem, :app]
       
       desc "Freezes MerbAuth by unpacking all files into your application"

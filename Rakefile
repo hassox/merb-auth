@@ -5,12 +5,12 @@ require 'merb-core/version'
 require 'merb-core/test/tasks/spectasks'
 require 'merb-core/tasks/merb_rake_helper'
 
-NAME = "merb_auth"
+NAME = "merb-auth"
 AUTHOR = "Merb Core"
 EMAIL = "has.sox@gmail.com"
 HOMEPAGE = "http://merbivore.com/"
 SUMMARY = "Merb Slice that provides authentication"
-GEM_VERSION = "0.11.0"
+GEM_VERSION = "0.1.0"
 
 spec = Gem::Specification.new do |s|
   s.rubyforge_project = 'merb'
@@ -28,7 +28,7 @@ spec = Gem::Specification.new do |s|
   s.add_dependency('merb-mailer', '>= 0.9.4')
   s.add_dependency('merb_helpers', '>= 0.9.4')
   s.require_path = 'lib'
-  s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec,app,public,stubs}/**/*")
+  s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec,app,public,stubs,activerecord_generators,datamapper_generators}/**/*")
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|

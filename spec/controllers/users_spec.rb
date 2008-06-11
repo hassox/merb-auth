@@ -10,7 +10,7 @@ describe MA::Users do
     DataMapper.setup(:default, 'sqlite3::memory:')
     Merb.stub!(:orm_generator_scope).and_return("datamapper")
     
-    adapter_path = File.join( File.dirname(__FILE__), "..", "..", "lib", "merb_auth", "adapters")
+    adapter_path = File.join( File.dirname(__FILE__), "..", "..", "lib", "merb-auth", "adapters")
     MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
     MA.register_adapter :activerecord, "#{adapter_path}/activerecord"    
     MA.load_slice
@@ -73,7 +73,7 @@ describe MA::Users do
    end
    
    it "should have a route for user activation" do
-     request_to("/merb_auth/users/activate/1234") do |params|
+     request_to("/merb-auth/users/activate/1234") do |params|
        params[:controller].should == "Users"
        params[:action].should == "activate" 
        params[:activation_code].should == "1234"    
@@ -84,7 +84,7 @@ describe MA::Users do
      controller = create_user(:email => "aaron@example.com", :password => "test", :password_confirmation => "test")
      @user = controller.assigns(:user)
      User.authenticate('aaron@example.com', 'test').should be_nil
-     controller = get "/merb_auth/users/activate/#{@user.activation_code}" 
+     controller = get "/merb-auth/users/activate/#{@user.activation_code}" 
      controller.should redirect_to("/")
      User.authenticate('aaron@example.com', 'test').should_not be_nil
    end
@@ -92,6 +92,6 @@ describe MA::Users do
    
      
    def create_user(options = {})
-     post "/merb_auth/users/", :user => valid_user_hash.merge(options)
+     post "/merb-auth/users/", :user => valid_user_hash.merge(options)
    end
 end

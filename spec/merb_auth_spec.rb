@@ -3,12 +3,12 @@ require 'activerecord'
 require 'dm-core'
 
 # For note purposes
-# Merb::Slices.register_and_load(../../lib/merb_auth.rb)
+# Merb::Slices.register_and_load(../../lib/merb-auth.rb)
 
 describe MerbAuth do
   
   before(:all) do
-    @adapter_path = File.dirname(__FILE__) / ".." / "lib" / "merb_auth" / "adapters"
+    @adapter_path = File.dirname(__FILE__) / ".." / "lib" / "merb-auth" / "adapters"
     @ar_path = @adapter_path / "activerecord"
     @config = Merb::Slices::config[:merb_auth]
     DataMapper.setup(:default, 'sqlite3::memory:')
@@ -147,7 +147,7 @@ describe "MerbAuth (module)" do
   end
   
   it "should have an :identifier property" do
-    MerbAuth.identifier.should == "merb_auth"
+    MerbAuth.identifier.should == "merb-auth"
   end
   
   it "should have an :identifier_sym property" do
@@ -188,14 +188,14 @@ describe "MerbAuth (module)" do
   
   it "should have a app_dir_for method" do
     root_path = MerbAuth.app_dir_for(:root)
-    root_path.should == Merb.root / 'slices' / 'merb_auth'
+    root_path.should == Merb.root / 'slices' / 'merb-auth'
     app_path = MerbAuth.app_dir_for(:application)
     app_path.should == root_path / 'app'
     [:view, :model, :controller, :helper, :mailer, :part].each do |type|
       MerbAuth.app_dir_for(type).should == app_path / "#{type}s"
     end
     public_path = MerbAuth.app_dir_for(:public)
-    public_path.should == Merb.dir_for(:public) / 'slices' / 'merb_auth'
+    public_path.should == Merb.dir_for(:public) / 'slices' / 'merb-auth'
     [:stylesheet, :javascript, :image].each do |type|
       MerbAuth.app_dir_for(type).should == public_path / "#{type}s"
     end
@@ -203,7 +203,7 @@ describe "MerbAuth (module)" do
   
   it "should have a public_dir_for method" do
     public_path = MerbAuth.public_dir_for(:public)
-    public_path.should == '/slices' / 'merb_auth'
+    public_path.should == '/slices' / 'merb-auth'
     [:stylesheet, :javascript, :image].each do |type|
       MerbAuth.public_dir_for(type).should == public_path / "#{type}s"
     end

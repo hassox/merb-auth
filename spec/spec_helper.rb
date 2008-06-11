@@ -13,13 +13,13 @@ require 'merb-mailer'
 #     Merb::Config.use do |c|
 #       c[:session_store] = "memory"
 #     end
-#     Merb::Slices.register_and_load(File.join(File.dirname(__FILE__), '..', 'lib', 'merb_auth.rb'))
+#     Merb::Slices.register_and_load(File.join(File.dirname(__FILE__), '..', 'lib', 'merb-auth.rb'))
 #   end
 #   
 # end
 
 Merb::Plugins.config[:merb_slices][:auto_register] = true
-Merb::Plugins.config[:merb_slices][:search_path]   = File.join(File.dirname(__FILE__), '..', 'lib', 'merb_auth.rb')
+Merb::Plugins.config[:merb_slices][:search_path]   = File.join(File.dirname(__FILE__), '..', 'lib', 'merb-auth.rb')
 
 module Merb
   def self.orm_generator_scope
@@ -84,14 +84,14 @@ Spec::Runner.configure do |config|
 end
 
 
-# GLobal helpers for merb_auth
+# GLobal helpers for merb-auth
 def reload_ma!(create_class = nil)
   Object.class_eval do
     remove_const("User") if defined?(User)
     remove_const("MA") if defined?(MA)
     remove_const("MerbAuth")
   end
-  load File.join(File.dirname(__FILE__), "..", "lib", "merb_auth.rb")
+  load File.join(File.dirname(__FILE__), "..", "lib", "merb-auth.rb")
   register_datamapper!
   stub_orm_scope
   yield if block_given?

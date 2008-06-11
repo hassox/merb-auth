@@ -4,20 +4,20 @@ if defined?(Merb::Plugins)
   require 'merb-mailer'
   require 'merb_helpers'
   
-  load File.join(File.dirname(__FILE__), "merb_auth", "initializer.rb")
+  load File.join(File.dirname(__FILE__), "merb-auth", "initializer.rb")
   
-  Dir[File.dirname(__FILE__) / "merb_auth" / "controller" / "**" / "*.rb"].each do |f|
+  Dir[File.dirname(__FILE__) / "merb-auth" / "controller" / "**" / "*.rb"].each do |f|
     load f
   end
   
-  adapter_path = File.join( File.dirname(__FILE__), "merb_auth", "adapters")
+  adapter_path = File.join( File.dirname(__FILE__), "merb-auth", "adapters")
   load File.join(adapter_path,  "common.rb")
   
   MA = MerbAuth
   MA.register_adapter :datamapper, "#{adapter_path}/datamapper"
   MA.register_adapter :activerecord, "#{adapter_path}/activerecord"
   
-  Merb::Plugins.add_rakefiles "merb_auth/merbtasks"
+  Merb::Plugins.add_rakefiles "merb-auth/merbtasks", "merb-auth/slicetasks"
 
   # Register the Slice for the current host application
   Merb::Slices::register(__FILE__)
@@ -125,8 +125,8 @@ if defined?(Merb::Plugins)
         end
       end
       
-      
-      scope.match("/login" ).to(:controller => "sessions", :action => "create").name(:login)
+      scope.match("/signup").to(:controller => "Users",    :action => "new"    ).name(:signup)
+      scope.match("/login" ).to(:controller => "sessions", :action => "create" ).name(:login)
       scope.match("/logout").to(:controller => "sessions", :action => "destroy").name(:logout)
     end
     
@@ -138,7 +138,7 @@ if defined?(Merb::Plugins)
   # to set paths to merb_auth-level and app-level paths. Example:
   #
   # MerbAuth.push_path(:application, MerbAuth.root)
-  # MerbAuth.push_app_path(:application, Merb.root / 'slices' / 'merb_auth')
+  # MerbAuth.push_app_path(:application, Merb.root / 'slices' / 'merb-auth')
   # ...
   #
   # Any component path that hasn't been set will default to MerbAuth.root
