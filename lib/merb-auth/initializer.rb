@@ -41,6 +41,7 @@ module MerbAuth
       Merb.logger.info "Loading MerbAuth Plugin - #{label}"
       load file
     end
+    MA.setup_custom_routes!
   end
   
 end

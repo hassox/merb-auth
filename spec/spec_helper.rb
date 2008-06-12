@@ -94,13 +94,12 @@ def reload_ma!(create_class = nil)
   load File.join(File.dirname(__FILE__), "..", "lib", "merb-auth.rb")
   register_datamapper!
   stub_orm_scope
-  yield if block_given?
+
   MA.load_slice
+  yield if block_given?
   MA[:user] = nil
   MA.loaded
   Object.class_eval("class #{create_class}; include MerbAuth::Adapter::DataMapper; end") unless create_class.nil?
+  Merb::BootLoader::MaLoadPlugins.run
+  MA.activate
 end
-
-
-
-

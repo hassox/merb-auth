@@ -121,7 +121,7 @@ describe MerbAuth do
     
     it "should allow for registration" do
       defined?(MA::Controller::Tester).should be_nil
-      reload_ma!("User"){  add_test_plugin!}
+      reload_ma!("User"){  add_test_plugin! }
       defined?(MA::Controller::Tester).should_not be_nil
       MA::Users.should include(MA::Controller::Tester)
     end
@@ -161,7 +161,7 @@ describe "MerbAuth (module)" do
   
   it "should have metadata properties" do
     MerbAuth.description.should == "MerbAuth is a Merb slice that provides authentication"
-    MerbAuth.version.should == "0.11.0"
+    MerbAuth.version.should == "0.1.0"
     MerbAuth.author.should == "Merb Core"
   end
   

@@ -3,6 +3,7 @@ if defined?(Merb::Plugins)
   require 'digest/sha1'
   require 'merb-mailer'
   require 'merb_helpers'
+  require 'merb_has_flash'
   
   load File.join(File.dirname(__FILE__), "merb-auth", "initializer.rb")
   
@@ -22,6 +23,15 @@ if defined?(Merb::Plugins)
   # Register the Slice for the current host application
   Merb::Slices::register(__FILE__)
   
+  
+  class Merb::BootLoader::MaLoadPlugins < Merb::BootLoader
+    after Merb::BootLoader::LoadClasses
+    
+    def self.run
+      MA.load_plugins!
+    end    
+  end
+  
   # Slice configuration - set this in a before_app_loads callback.
   # By default a Slice uses its own layout, so you can swicht to 
   # the main application layout or no layout at all if needed.
@@ -40,9 +50,24 @@ if defined?(Merb::Plugins)
       @@plugins ||= {}
     end
     
+    def self.add_routes(&blk)
+      custom_routes << blk
+    end
+    
+    def self.custom_routes
+      @custom_routes ||= []
+    end
+    
+    def self.setup_custom_routes!
+      Merb.logger.info "Adding custom routes"
+      custom_routes.each do |r|
+        r.call(MA[:router_scope])
+      end
+    end
+    
     # Slice metadata
     self.description = "MerbAuth is a Merb slice that provides authentication"
-    self.version = "0.11.0"
+    self.version = "0.1.0"
     self.author = "Merb Core"
     
     # Stub classes loaded hook - runs before LoadClasses BootLoader
@@ -55,12 +80,11 @@ if defined?(Merb::Plugins)
       # overwrite them
       MA::Users.send(     :include, MA::Controller::UsersBase)
       MA::Sessions.send(  :include, MA::Controller::SessionsBase)
-      
-      MA.load_plugins!
     end
     
     # Initialization hook - runs before AfterAppLoads BootLoader
     def self.init  
+      
     end
     
     # Activation hook - runs after AfterAppLoads BootLoader
@@ -83,6 +107,10 @@ if defined?(Merb::Plugins)
     #  router behaviour is a valid namespace, so you can attach
     #  routes at any level of your router setup.
     def self.setup_router(scope)
+      MA[:router_scope] = scope # Hangs onto the scope for the plugins which are loaded after the routes are setup
+      
+      MA.setup_custom_routes!
+      
       plural_model_path = MA[:route_path_model] || MA[:plural_resource] 
       plural_model_path ||= "User".snake_case.singularize.pluralize
       plural_model_path = plural_model_path.to_s.match(%r{^/?(.*?)/?$})[1]
@@ -146,4 +174,8 @@ if defined?(Merb::Plugins)
   # Or just call setup_default_structure! to setup a basic Merb MVC structure.
   MerbAuth.setup_default_structure!
 
+end
+
+Dir[File.join(File.dirname(__FILE__), "..", "plugins/*/init.rb")].each do |f|
+  require f
 end

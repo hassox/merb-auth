@@ -71,7 +71,7 @@ module MerbAuth
         
         def make_activation_code
           if MA[:use_activation]
-            self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+            self.activation_code = self.class.make_key
           else
             set_activated_data!
           end
@@ -145,8 +145,12 @@ module MerbAuth
         
         # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
         def authenticate(email, password)
-          u = find_active_with_conditions(:email => email)
-          u && u.authenticated?(password) ? u : nil
+          @u = find_active_with_conditions(:email => email)
+          @u = @u && @u.authenticated?(password) ? @u : nil
+        end
+        
+        def make_key
+          Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
         end
         
       end

@@ -19,13 +19,9 @@ module MerbAuth
           def find_all_with_login_like(logn)
             all(:login.like => logn, :order => [:login.desc], :limit => 1)
           end
-        
+                  
           def find_active_with_conditions(conditions)
-            if MA[:use_activation]
-              first(conditions.merge(:activated_at.not => nil))
-            else
-              first(conditions)
-            end
+            first(conditions.merge(:activated_at.not => nil))
           end
         
           def clear_database_table
