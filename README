@@ -14,6 +14,7 @@ As an example.  In your normal applications model directory create your user mod
 
 class User
   include MerbAuth::Adapter::DataMapper
+  include MerbAuth::Adapter::DataMapper::DefaultModelSetup
 end
 
 This will give the User class the required behavior and provide access to the class through
@@ -24,9 +25,18 @@ So using the MA constant you can declare your class like this
 
 class Person
   include MA::Adapter::DataMapper
+  include MerbAuth::Adapter::DataMapper::DefaultModelSetup
 end
 
 And in your custom slice, get access to the user class with MA[:user]
+
+If you don't want to use the default setup for options.  i.e. you want to see the properties in your model, change the 
+validations or whatever, you can just enter them into your model.  To find out the required properties and validations that the
+default uses use the rake task to get a print out that you can paste into your model.
+
+rake slices:merb_auth:dm:setup # Datamapper defaults
+
+rake slices:merb_auth:ar:setup # ActiveRecord defaults
 
 ===Useful Helpers
 
@@ -113,6 +123,15 @@ rake slices:merb_auth:install
 
 If you don't have any configuration applied some simple defaults will be assumed.  You configure your installation
 by writing it to the config/slices.yml file
+
+==== Login Field
+
+By default merb-auth uses the "email" field to login.  If you want to use a different field, even one of your own,
+you can use the
+\:login_field: jid
+
+option.  This example will set the "jid" field to be the default field used for logging in.  One thing to bear in mind is
+that this needs to actually be a field in the database.
 
 ==== Routing options
 

@@ -98,8 +98,17 @@ def reload_ma!(create_class = nil)
   MA.load_slice
   yield if block_given?
   MA[:user] = nil
+  ::DataMapper::Resource.descendants.delete(User) if defined?(User)
   MA.loaded
-  Object.class_eval("class #{create_class}; include MerbAuth::Adapter::DataMapper; end") unless create_class.nil?
+  unless create_class.nil?
+    Object.class_eval <<-EOS
+      class #{create_class}
+        include DataMapper::Resource
+        include MerbAuth::Adapter::DataMapper
+        include MerbAuth::Adapter::DataMapper::DefaultModelSetup
+      end
+      EOS
+  end 
   Merb::BootLoader::MaLoadPlugins.run
   MA.activate
 end

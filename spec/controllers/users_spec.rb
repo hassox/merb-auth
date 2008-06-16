@@ -18,6 +18,7 @@ describe MA::Users do
 
     class User
       include MA::Adapter::DataMapper
+      include MerbAuth::Adapter::DataMapper::DefaultModelSetup
     end
   end
   

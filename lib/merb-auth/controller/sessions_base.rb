@@ -15,7 +15,7 @@ module MerbAuth
         end
 
         def create
-          self.current_ma_user = MA[:user].authenticate(params[:email], params[:password])
+          self.current_ma_user = MA[:user].authenticate(params[MA[:login_field]], params[:password])
           if logged_in?
             if params[:remember_me] == "1"
               self.current_ma_user.remember_me

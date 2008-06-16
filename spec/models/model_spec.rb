@@ -14,6 +14,7 @@ describe "MA User Model" do
     
     class User
       include MA::Adapter::DataMapper
+      include MA::Adapter::DataMapper::DefaultModelSetup
     end
   end
   

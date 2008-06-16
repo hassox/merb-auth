@@ -73,6 +73,9 @@ if defined?(Merb::Plugins)
     # Stub classes loaded hook - runs before LoadClasses BootLoader
     # right after a slice's classes have been loaded internally
     def self.loaded
+      # Setup the login field to use
+      MA[:login_field] = (MA[:login_field] || :email).to_sym
+      
       MA.load_adapter!
       
       Merb::Controller.send(:include, MA::Controller::Helpers)

@@ -39,6 +39,7 @@ describe "MA ActiveRecord User Model" do
     
     class User < ActiveRecord::Base
       include MerbAuth::Adapter::ActiveRecord
+      include MerbAuth::Adapter::ActiveRecord::DefaultModelSetup
     end
     
     MA.activate

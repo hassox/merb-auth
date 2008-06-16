@@ -143,9 +143,9 @@ module MerbAuth
           Digest::SHA1.hexdigest("--#{salt}--#{password}--")
         end
         
-        # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-        def authenticate(email, password)
-          @u = find_active_with_conditions(:email => email)
+        # Authenticates a user by their login field and unencrypted password.  Returns the user or nil.
+        def authenticate(field, password)
+          @u = find_active_with_conditions(MA[:login_field] => field)
           @u = @u && @u.authenticated?(password) ? @u : nil
         end
         

@@ -22,6 +22,7 @@ describe MerbAuth do
   after(:each) do
     MA.clear_adapter_list!
     MA[:user] = nil
+    ::DataMapper::Resource.descendants.delete(User) if defined?(User)
     Object.class_eval do
       remove_const("User") if defined?(User)
     end
@@ -95,12 +96,15 @@ describe MerbAuth do
     
     it "should allow DM to create it's table correctly" do
       stub_orm_scope 
+      MA[:user] = nil
       MA.load_adapter!
       class User
         include MA::Adapter::DataMapper
+        include MA::Adapter::DataMapper::DefaultModelSetup
       end
+      
       results = DataMapper.auto_migrate!
-      results.should include(MA[:user])
+      results.should include(User)
     end
     
   end
@@ -127,7 +131,12 @@ describe MerbAuth do
     end
     
     it "should overwrite the new method" do
-      Object.class_eval("class User; include MerbAuth::Adapter::DataMapper; end")
+      Object.class_eval <<-EOS
+        class User
+          include MerbAuth::Adapter::DataMapper
+          include MerbAuth::Adapter::DataMapper::DefaultModelSetup
+        end
+        EOS
       controller = dispatch_to(MA::Users, :new)
       controller.body.should_not == "NEW TEST"
       reload_ma!("User"){ add_test_plugin!}
