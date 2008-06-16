@@ -17,6 +17,7 @@ module MerbAuth
           return if @u.nil?
           return @u unless @u.has_forgotten_password?
           @u.clear_forgot_password!
+          puts @u.inspect
           @u
         end
       end

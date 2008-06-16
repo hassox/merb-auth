@@ -1,11 +1,14 @@
 module MerbAuth
-  class Passwords < Merb::Controller
-    
-    view_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "views"))
-    _template_roots << [view_path, :_template_location]
-    
+  class Passwords < Application
+  
+    controller_for_slice :MerbAuth
+      
     def _template_location(context, type = nil, controller = controller_name)
-      controller ? "passwords/#{context}.#{type}" : context
+      if controller.nil? || controller != "merb_auth/passwords"
+        "#{controller}/#{context}.#{type}"
+      else
+        "passwords/#{context}.#{type}"
+      end
     end
     
     before :login_required, :only => [:edit, :update]

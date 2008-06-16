@@ -1,5 +1,7 @@
-class MerbAuth::Application < Merb::Controller
+module MerbAuth
+  class Application < Merb::Controller
   
-  controller_for_slice
+    controller_for_slice
   
+  end
 end
