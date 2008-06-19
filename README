@@ -107,7 +107,7 @@ Your login url will now be /authentication/login, your signup url will be at /au
 
 Alternatively you can just mount merb-auth directly onto your application. (Recommended)
 
-r.slice(:MerbAuth)
+r.add_slice(:MerbAuth, :path => "", :default_routes => false)
 
 If you'd like to set more options, I suggest you look up the merb-slices documentation.
 
@@ -136,9 +136,6 @@ that this needs to actually be a field in the database.
 ==== Routing options
 
 \:route_path_model:    first choice for model route path.  defaults to "users" (used to make single_model_path and 
-
-
-plural_model_path)
 
 \:route_path_session:  first choice for the sessions route path.  Defaults to "sessions"
 
