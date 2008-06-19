@@ -89,6 +89,27 @@ describe MA::Users do
      controller.should redirect_to("/")
      User.authenticate('aaron@example.com', 'test').should_not be_nil
    end
+
+  it "should log the user in automatically on creation if :use_activation is false" do
+    MA[:use_activation] = false
+    dispatch_to(MA::Users, :create, :user => {:email => "aaron@example.com", :password => "test", :password_confirmation => "test"}) do |c|
+      u = mock("user")
+      User.should_receive(:new).and_return(u)
+      u.should_receive(:save).and_return(true)
+      c.should_receive(:current_ma_user=).with(u)
+    end
+  end
+
+  it "should not log the user in automatically on creation if :use_activation is true" do
+    MA[:use_activation] = true
+    dispatch_to(MA::Users, :create, :user => {:email => "aaron@example.com", :password => "test", :password_confirmation => "test"}) do |c|
+      u = mock("user")
+      User.should_receive(:new).and_return(u)
+      u.should_receive(:save).and_return(true)
+      c.should_not_receive(:current_ma_user=)
+    end
+  end
+
    
    
      

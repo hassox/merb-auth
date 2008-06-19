@@ -1,7 +1,7 @@
 module MerbAuth
   module Controller
     
-    # Provides basic functionality for the users controller.  Allows craetion of a new user and activation
+    # Provides basic functionality for the users controller.  Allows creation of a new user and activation
     module UsersBase
       
       def self.included(base)
@@ -25,7 +25,9 @@ module MerbAuth
           @ivar = MA[:user].new(params[MA[:single_resource]])
           set_ivar
           if @ivar.save
+            self.current_ma_user = @ivar unless MA[:use_activation]
             redirect_back_or_default('/')
+
           else
             render :new
           end
