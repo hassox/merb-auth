@@ -5,7 +5,7 @@ A slice for the Merb framework.
 
 MerbAuth is an authentication framework for the Merb Web Framework.  
 
-Currently DataMapper is available and ActiveRecord is planned.  Although it's easy to add your own.
+Currently DataMapper and ActiveRecord supportis available.  It should be pretty easy to add your own.
 
 MerbAuth provides your model with a mixin that gives your model all the required behavior
 and links it to the controllers.  
@@ -172,6 +172,7 @@ then the previously signed up users are already fully active and ready to fit in
 
 There is also the subjects that you can setup for your emails
 
+\:from_email
 \:welcome_subject:       # ||= "Welcome"
 \:activation_subject:    # ||= "Please Activate Your Account"
 
