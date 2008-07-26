@@ -1,9 +1,8 @@
 if defined?(Merb::Plugins)
 
-  require 'digest/sha1'
-  require 'merb-mailer'
-  require 'merb_helpers'
-  require 'merb_has_flash'
+  require "digest/sha1"
+  require "merb-mailer"
+  require "merb_helpers"
   
   load File.join(File.dirname(__FILE__), "merb-auth", "initializer.rb")
   
@@ -169,7 +168,7 @@ if defined?(Merb::Plugins)
   # to set paths to merb_auth-level and app-level paths. Example:
   #
   # MerbAuth.push_path(:application, MerbAuth.root)
-  # MerbAuth.push_app_path(:application, Merb.root / 'slices' / 'merb-auth')
+  # MerbAuth.push_app_path(:application, Merb.root / "slices" / "merb-auth")
   # ...
   #
   # Any component path that hasn't been set will default to MerbAuth.root

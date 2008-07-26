@@ -31,10 +31,9 @@ module MerbAuth
       @ivar = MA[:user].find_with_conditions(:email => email)
       raise NotFound if @ivar.nil?
       raise Unauthorized if logged_in? && @ivar != current_ma_user
-      flash[:notice] = "We've sent you a link to reset your password.  Keep an eye on your inbox."
       @ivar.forgot_password!
       set_ivar
-      redirect_back_or_default("/")
+      redirect_back_or_default("/", "We've sent you a link to reset your password.  Keep an eye on your inbox.")
     end
   
     # Reset is the link given in the email with the reset password code attached
@@ -59,13 +58,13 @@ module MerbAuth
       @ivar = current_ma_user
       set_ivar
       if params[MA[:single_resource]][:password].nil?
-        flash[:error] = "You must enter a password"
+        message[:notice] = "You must enter a password"
         return render(:edit)
       end
     
       if !@ivar.has_forgotten_password?
         if @ivar != MA[:user].authenticate(@ivar.email, params[:current_password])
-          flash[:error] = "Your current password is incorrect"
+          message[:notice] = "Your current password is incorrect"
           return render(:edit)
         end
       end
@@ -75,11 +74,9 @@ module MerbAuth
     
       if @ivar.save
         @ivar.clear_forgot_password!
-        flash[:notice] = "Password Changed"
-        redirect_back_or_default("/")
+        redirect_back_or_default("/", "Password Changed")
       else
-        flash[:error] = "Password Not Changed"
-        redirect url(:merb_auth_edit_password_form)
+        redirect url(:merb_auth_edit_password_form), "Password Not Changed"
       end     
     end
   
