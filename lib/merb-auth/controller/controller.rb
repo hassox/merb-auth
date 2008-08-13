@@ -81,10 +81,11 @@ module MerbAuth
     
         # Redirect to the URI stored by the most recent store_location call or
         # to the passed default.
-        def redirect_back_or_default(default,message = "")
-          loc = session[:return_to] || default
+        def redirect_back_or_default(default, notice = "")
+          url = session[:return_to] || default
           session[:return_to] = nil
-          redirect loc, message
+          message[:notice] = notice
+          redirect url, message
         end
 
         # Called from #current_ma_user.  First attempt to login by the user id stored in the session.
