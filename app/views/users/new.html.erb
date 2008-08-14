@@ -1,5 +1,5 @@
 <%= error_messages_for @ivar %>
-<% form_for @ivar, :action => url(MA[:routes][:user][:index]) do %>
+<%= form_for @ivar, :action => url(MA[:routes][:user][:index]) do %>
   <p>
     <%= text_control :email, :label => "Email" %>
   </p>
@@ -13,6 +13,6 @@
     <%= password_control :password_confirmation, :label => "Password Confirmation" %>
   </p>
   <p>
-    <%= submit_button "Sign up" %>
+    <%= submit "Sign up" %>
   </p>
-<% end %>
+<% end =%>

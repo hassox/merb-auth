@@ -25,7 +25,7 @@ describe MA::UserMailer do
   end
   
   before(:each) do
-    @u = MA[:user].new(:email => "homer@simpsons.com", :nickname => "homer", :activation_code => "12345")
+    @u = MA[:user].new(:email => "homer@simpsons.com", :login => "homer", :activation_code => "12345")
     @mailer_params = { :from      => "info@mysite.com",
                        :to        => @u.email,
                        :subject   => "Welcome to MySite.com" }
