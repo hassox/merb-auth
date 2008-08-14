@@ -4,7 +4,7 @@ module MerbAuth
     module SessionsBase
       
       def self.included(base)
-        base.send(:skip_before, :login_required)
+        # base.send(:skip_before, :login_required)
         base.send(:include, InstanceMethods)
         base.send(:show_action, :new, :create, :destroy)
       end
