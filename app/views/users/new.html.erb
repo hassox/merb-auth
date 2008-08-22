@@ -1,16 +1,16 @@
 <%= error_messages_for @ivar %>
 <%= form_for @ivar, :action => url(MA[:routes][:user][:index]) do %>
   <p>
-    <%= text_control :email, :label => "Email" %>
+    <%= text_field :email, :label => "Email" %>
   </p>
   <p>
-    <%= text_control :login, :label => "Nickname" %>
+    <%= text_field :login, :label => "Nickname" %>
   </p>
   <p>
-    <%= password_control :password, :label => "Password" %>
+    <%= password_field :password, :label => "Password" %>
   </p>
   <p>
-    <%= password_control :password_confirmation, :label => "Password Confirmation" %>
+    <%= password_field :password_confirmation, :label => "Password Confirmation" %>
   </p>
   <p>
     <%= submit "Sign up" %>

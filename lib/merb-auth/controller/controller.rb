@@ -84,8 +84,7 @@ module MerbAuth
         def redirect_back_or_default(default, notice = "")
           url = session[:return_to] || default
           session[:return_to] = nil
-          message[:notice] = notice
-          redirect url, message
+          redirect url, :notice => notice
         end
 
         # Called from #current_ma_user.  First attempt to login by the user id stored in the session.
