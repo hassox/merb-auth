@@ -23,7 +23,7 @@ module MerbAuth
   # @param [Symbol | String] adapter The name of the adapter to load.  This must be registered
   # @raise [RuntimeError] Raises an error if the adapter is not registered.
   def self.load_adapter!(adapter = nil)
-    adapter ||= self.config[:adapter] || Merb.orm_generator_scope
+    adapter ||= self.config[:adapter] || Merb.orm
     raise "MerbAuth: No Adapter Specified" if adapter.nil? || adapter.blank?
     
     # Check that the adapter is registered
