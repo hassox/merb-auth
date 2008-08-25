@@ -3,6 +3,7 @@ log/*
 db/
 *.db
 .DStore
+.DS_Store
 pkg
 pkg/*
 :memory:

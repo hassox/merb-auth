@@ -1,0 +1,18 @@
+<h3>Login</h3>
+
+<% if params[:exception] && params[:exception].message && !params[:exception].message.blank? -%>
+  <p class="error"><%= params[:exception].message -%></p>
+<% end -%>
+
+<form action="<%= url(:mauth_perform_login) %>" method="POST" accept-charset="utf-8">
+  <input type="hidden" name="_method" value="PUT" />
+  <div class="formRow">
+    <label><%= MPS[:login_field][:label]%> <input type="text" name="<%= MPS[:login_field][:method]%>" value="" id="<%= MPS[:login_field][:method]%>"></label>
+  </div> <!-- close: formRow -->
+  <div class="formRow">
+    <label><%= MPS[:password_field][:label]%><input type="password" name="<%= MPS[:password_field][:method]%>" value="" id="<%= MPS[:password_field][:method]%>"></label>
+  </div> <!-- close: formRow -->
+  <div class="formRow">
+    <input type="submit" name="Submit" value="Log In" id="Submit">
+  </div> <!-- close: formRow -->
+</form>

@@ -1,0 +1,146 @@
+h2. mauth-core
+
+Mauth Core is a very _unopinionated_ authentication framework for use with the
+Merb web framework.
+
+Mauth does not try to dictate what you should use as a user type model, or how
+it should authenticate.  Instead it focuses on the logic required to check
+that an object passes authentication, and store authenticated users in the
+session.  This is in fact the guiding principle of mauth.  The controller is
+not the place that an authenticated user of the system lives.  A controller
+is for directing traffic.  Instead, the session is used as the place for
+authentication, with a sprinkling of controller helpers.  For example, inside
+your controller:
+
+* session.authenticated?  
+  returns true if the session has been
+  authenticated.  False otherwise # session.authenticate(controller)
+  authenticates the session based on customizable user defined rules 
+
+* session.user                      
+  returns the currently authenticated user object 
+
+* session.user= 
+  manually sets the currently authenticated user object 
+
+* session.abandon!                  
+sets the session to unauthenticated, and clears all session data
+
+Mauth makes use of Merb's exception handling facilities which return correct
+HTTP status codes when a 200 OK would be inappropriate.  To fail a login, or 
+to force a login at any point in your controller code, simply raise an 
+Unauthenticated exception, with an optional message and the user will be 
+taken to the login page.
+
+To protect your controllers, add a simple @before@ filter to your controller.
+
+<code> before :ensure_authenticated </code>
+
+It is possible to use Mauth with any object type as a _user_ object, provided
+that object does not evaluate to false and it can be retrieved with @key@.  
+For this reason, mauth-core does not try to implement even a simple login 
+form for you, since it may not be to your liking.
+
+h3. How Does It Authenticate my arbitrary user?
+
+You set it up to authenticate it.  Here's an example:
+
+  Authentication.login_strategies.add(:password_login_from_form) do
+    User.authenticate(params[:login], params[:password])
+  end
+
+bq. This login strategy uses the @authenticate@ finder on the User class to 
+retrieve a user by @login@ and @password@.  Remember, you can put as much logic
+here as you require.
+
+The login strategy is executed in the context of the controller so all
+methods, and objects of the controller are there ready to use as part of the
+controller instance whenever @session.authenticate(self)@ is called
+(self being the controller).  To pass authentication, simply return a non-nil
+non-false object at the end of the block.  Any false or nil value will cause
+that strategy to fail.  Then the next one will be tried :)  wait... what?
+
+You can add as many strategies as you like and they will be tried one after
+another until either one is found that works (login), or none of them have
+passed (failed attempt).
+
+    Authentication.login_strategies.add(:password_login_basic_auth) do
+      basic_authentication.authenticate do |login, password|
+        User.authenticate(login, password)
+      end
+    end
+
+Now that we have two, they will be executed in the order that they're called
+when we call @session.authenticate(self)@.  The first one that
+returns a value that doesn't evaluate to false, will be considered the winner.
+
+h3. Customizing the order of the strategies
+
+By default, strategies are run in the order they are declared.  It's possible
+to customize the order that the login_strategies are called.
+
+@Authentication.login_strategies.order@ will return an array or
+the strategies labels (:password_login_from_form for example) in the order
+that they will be run.  You can customize this by setting the order array
+manually.
+
+@Authenticateion.login_strategies.order = [:second, :first, :fourth]@
+
+It's possible to leave some out, and re-order existing ones.  It will error
+out if you specify one that doesn't exist though.
+
+h3. Storing you user object into the session
+
+You need to tell mauth-core how to represent your user object in the session
+data store, and also how to reconstruct it from that data.  You don't
+want to store complex objects in the session if you can avoid it.
+
+Since there's no nice object to let you get a hold of the session yet in merb,
+we've made an object for you to let you get your hands on it and customize it
+to your liking.
+
+class Authentication::Manager
+
+To configure your user object to go in and out of the session, here's how you
+could do it.
+
+    class Authentication::Manager
+
+      # return the value you want stored in the session 
+      def store_user(user)
+        return nil unless user 
+        user.id
+      end
+
+      # session info is the data you stored in the session previously def
+      fetch_user(session_info)
+        User.get(session_info)
+      end
+    end
+
+
+h3. Additional checks / actions to perform after the user is found
+
+Sometimes you may need to perform additional operations on the user object
+before or after you grab it out of the database when authenticating it.  The
+Authentication::Manager implements Extlib::Hook so you can just setup hooks to
+deal with this.
+
+Here's an example of checking that a user object is active after it's been
+found: 
+
+  after :authenticate do |instance, *args|
+    raise Merb::Controller::Unauthenticated, "User Not Active" unless instance.active?
+  end
+
+bq. Notice that to fail the check we raised an Unauthenticated exception.  The
+session is available in that block as <code>session</code>
+
+Really that's all there is to it.  By default this plugin doesn't actually
+authenticate anything ;)  It's up to you to get your model going, and add an
+authentication strategy.  Just remember that to login, you just use
+@session.authenticate(self)@ inside a controller.  To logout use
+@session.abandon!@ and to force a login at any time use 
+@raise Unauthenticated, "You Aren't Cool Enough"@
+
+
