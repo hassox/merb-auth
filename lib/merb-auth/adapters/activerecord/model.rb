@@ -12,7 +12,7 @@ module MerbAuth
         base.send(:include, Common)
         
         
-        MA[:single_resource] ||= base.name.snake_case.to_sym
+        MA[:single_resource] ||= base.name.snake_case.gsub("::", "__").to_sym
         MA[:plural_resource] ||= MA[:single_resource].to_s.pluralize.to_sym
           
         MA[:user] = base
