@@ -17,10 +17,21 @@ end
 
 Merb.start :environment => "test", :adapter => "runner"
 
+module StrategyHelper
+  def clear_strategies!
+    Authentication.strategies.each do |s|
+      Object.class_eval{ remove_const(s.name) if defined?(s)}
+    end
+    Authentication.strategies.clear
+    Authentication.default_strategy_order.clear
+  end
+end
+
 Spec::Runner.configure do |config|
   config.include(Merb::Test::ViewHelper)
   config.include(Merb::Test::RouteHelper)
   config.include(Merb::Test::ControllerHelper)
+  config.include(StrategyHelper)
 end
 
 class Exceptions < Application
