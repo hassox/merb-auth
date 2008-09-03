@@ -21,23 +21,23 @@ describe Authentication::Session do
     end
     
     describe "store_user" do
-      it{@session._authentication.should respond_to(:store_user)}
+      it{@session.authentication.should respond_to(:store_user)}
       
       it "should raise a NotImplemented error by default" do
         pending "How to spec this when we need to overwrite it for the specs to work?"
         lambda do
-          @session._authentication.store_user("THE USER")
+          @session.authentication.store_user("THE USER")
         end.should raise_error(Authentication::NotImplemented)
       end
     end
     
     describe "fetch_user" do
-      it{@session._authentication.should respond_to(:fetch_user)}
+      it{@session.authentication.should respond_to(:fetch_user)}
       
       it "should raise a NotImplemented error by defualt" do
         pending "How to spec this when we need to overwrite it for the specs to work?"
         lambda do 
-          @session._authentication.fetch_user
+          @session.authentication.fetch_user
         end.should raise_error(Authentication::NotImplemented)
       end
     end
@@ -64,22 +64,22 @@ describe Authentication::Session do
   describe "user" do
     it "should call fetch_user with the session contents to load the user" do
       @session[:user] = 42
-      @session._authentication.should_receive(:fetch_user).with(42)
+      @session.authentication.should_receive(:fetch_user).with(42)
       @session.user
     end
     
     it "should set the @user instance variable" do
       @session[:user] = 42
-      @session._authentication.should_receive(:fetch_user).and_return("THE USER")
+      @session.authentication.should_receive(:fetch_user).and_return("THE USER")
       @session.user
-      @session._authentication.assigns(:user).should == "THE USER"
+      @session.authentication.assigns(:user).should == "THE USER"
     end
     
     it "should cache the user in an instance variable" do
       @session[:user] = 42
-      @session._authentication.should_receive(:fetch_user).once.and_return("THE USER")
+      @session.authentication.should_receive(:fetch_user).once.and_return("THE USER")
       @session.user
-      @session._authentication.assigns(:user).should == "THE USER"
+      @session.authentication.assigns(:user).should == "THE USER"
       @session.user
     end
     
@@ -93,28 +93,28 @@ describe Authentication::Session do
   describe "user=" do
     before(:each) do
       @user = mock("user")
-      @session._authentication.stub!(:fetch_user).and_return(@user)
+      @session.authentication.stub!(:fetch_user).and_return(@user)
     end
     
     it "should call store_user on the session to get the value to store in the session" do
-      @session._authentication.should_receive(:store_user).with(@user)
+      @session.authentication.should_receive(:store_user).with(@user)
       @session.user = @user
     end
     
     it "should set the instance variable to nil if the return of store_user is nil" do
-      @session._authentication.should_receive(:store_user).and_return(nil)
+      @session.authentication.should_receive(:store_user).and_return(nil)
       @session.user = @user
       @session.user.should be_nil
     end
     
     it "should set the instance varaible to nil if the return of store_user is false" do
-      @session._authentication.should_receive(:store_user).and_return(false)
+      @session.authentication.should_receive(:store_user).and_return(false)
       @session.user = @user
       @session.user.should be_nil
     end
     
     it "should set the instance variable to the value of user if store_user is not nil or false" do
-      @session._authentication.should_receive(:store_user).and_return(42)
+      @session.authentication.should_receive(:store_user).and_return(42)
       @session.user = @user
       @session.user.should == @user
       @session[:user].should == 42
@@ -125,8 +125,8 @@ describe Authentication::Session do
     
     before(:each) do
       @user = mock("user")
-      @session._authentication.stub!(:fetch_user).and_return(@user)
-      @session._authentication.stub!(:store_user).and_return(42)
+      @session.authentication.stub!(:fetch_user).and_return(@user)
+      @session.authentication.stub!(:store_user).and_return(42)
       @session[:user] = 42
       @session.user
     end
