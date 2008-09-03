@@ -52,6 +52,8 @@ class User
 end
 
 class Users < Application
+  before :ensure_authenticated
+  
   def index
     "You Made It!"
   end
