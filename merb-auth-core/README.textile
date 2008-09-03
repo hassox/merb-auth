@@ -154,4 +154,8 @@ authentication strategy.  Just remember that to login, you just use
 @session.abandon!@ and to force a login at any time use 
 @raise Unauthenticated, "You Aren't Cool Enough"@
 
+h3. Contributors 
 
+# Adam French - "http://adam.speaksoutofturn.com/":http://adam.speaksoutofturn.com/
+# Daniel Neighman - "http://merbunity.com":http://merbunity.com
+# Ben Burket - "http://benburkert.com/":http://benburkert.com/
