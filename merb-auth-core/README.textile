@@ -48,7 +48,7 @@ You declare a class that inherits from Authentication::Strategy and
 define an instance method @run!@
 
 <pre><code>
-  class PasswordStrategy < Authentication::Strategy
+  class PasswordStrategy &lt Authentication::Strategy
   
     def run!
       params = controller.params
@@ -74,7 +74,7 @@ another until either one is found that works (login), or none of them have
 passed (failed attempt).
 
 <pre><code>
-    class PasswordLoginBasicAuth) do
+    class PasswordLoginBasicAuth &lt Authentication::Strategy
       def run!
         if controller.basic_authentication.provided?
           controller.basic_authentication.authenticate do |login, password|
