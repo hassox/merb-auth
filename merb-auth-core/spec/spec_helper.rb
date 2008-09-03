@@ -6,7 +6,7 @@ require 'merb-core'
 require 'merb-core/test'
 require 'merb-core/dispatch/session/cookie'
 require 'spec' # Satisfies Autotest and anyone else not using the Rake tasks
-require 'mauth-core'
+require 'merb-auth-core'
 
 Merb::BootLoader.before_app_loads do 
   Merb::Config.use do |c|
@@ -53,18 +53,16 @@ class Dingbats < Application
   end
 end
 
-module Authentication
-  class Manager
-    def fetch_user(id = 24)
-      if id.nil?
-        nil
-      else
-        u = User.new(:id => id)
-      end
+class Authentication
+  def fetch_user(id = 24)
+    if id.nil?
+      nil
+    else
+      u = User.new(:id => id)
     end
-    
-    def store_user(user)
-      user.nil? ? nil : 24
-    end
+  end
+  
+  def store_user(user)
+    user.nil? ? nil : 24
   end
 end
