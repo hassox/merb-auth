@@ -1,13 +1,13 @@
-h2. mauth-core
+h2. merb-auth-core
 
-Mauth Core is a very _unopinionated_ authentication framework for use with the
+MerbAuth is a very _unopinionated_ authentication framework for use with the
 Merb web framework.
 
-Mauth does not try to dictate what you should use as a user type model, or how
+MerbAuth does not try to dictate what you should use as a user type model, or how
 it should authenticate.  Instead it focuses on the logic required to check
-that an object passes authentication, and store authenticated users in the
-session.  This is in fact the guiding principle of mauth.  The controller is
-not the place that an authenticated user of the system lives.  A controller
+that an object passes authentication, and store authenticated objects in the
+session.  This is in fact the guiding principle of MerbAuth.  The controller is
+not the place that an authenticated user of the system should live.  A controller
 is for directing traffic.  Instead, the session is used as the place for
 authentication, with a sprinkling of controller helpers.  For example, inside
 your controller:
@@ -26,7 +26,7 @@ your controller:
 * session.abandon!                  
 sets the session to unauthenticated, and clears all session data
 
-Mauth makes use of Merb's exception handling facilities which return correct
+MerbAuth makes use of Merb's exception handling facilities which return correct
 HTTP status codes when a 200 OK would be inappropriate.  To fail a login, or 
 to force a login at any point in your controller code, simply raise an 
 Unauthenticated exception, with an optional message and the user will be 
@@ -36,75 +36,86 @@ To protect your controllers, add a simple @before@ filter to your controller.
 
 <code> before :ensure_authenticated </code>
 
-It is possible to use Mauth with any object type as a _user_ object, provided
+It is possible to use MerbAuth with any object type as a _user_ object, provided
 that object does not evaluate to false and it can be retrieved with @key@.  
 For this reason, mauth-core does not try to implement even a simple login 
 form for you, since it may not be to your liking.
 
 h3. How Does It Authenticate my arbitrary user?
 
-You set it up to authenticate it.  Here's an example:
+This is very similar to the BootLoader process in Merbs initialization.  
+You declare a class that inherits from Authentication::Strategy and
+define an instance method @run!@
 
-  Authentication.login_strategies.add(:password_login_from_form) do
-    User.authenticate(params[:login], params[:password])
+<pre><code>
+  class PasswordStrategy < Authentication::Strategy
+  
+    def run!
+      params = controller.params
+      User.authenticate(params[:login], params[:password])
+    end
   end
+  
+</code></pre>
 
 bq. This login strategy uses the @authenticate@ finder on the User class to 
 retrieve a user by @login@ and @password@.  Remember, you can put as much logic
 here as you require.
 
-The login strategy is executed in the context of the controller so all
-methods, and objects of the controller are there ready to use as part of the
-controller instance whenever @session.authenticate(self)@ is called
-(self being the controller).  To pass authentication, simply return a non-nil
-non-false object at the end of the block.  Any false or nil value will cause
+The strategy provides access to the current controller giving you access
+to the params hash, request, session etc.
+
+To pass authentication, simply return a non-nil
+non-false object at the end of the @run!@ method.  Any false or nil value will cause
 that strategy to fail.  Then the next one will be tried :)  wait... what?
 
 You can add as many strategies as you like and they will be tried one after
 another until either one is found that works (login), or none of them have
 passed (failed attempt).
 
-    Authentication.login_strategies.add(:password_login_basic_auth) do
-      basic_authentication.authenticate do |login, password|
-        User.authenticate(login, password)
+<pre><code>
+    class PasswordLoginBasicAuth) do
+      def run!
+        if controller.basic_authentication.provided?
+          controller.basic_authentication.authenticate do |login, password|
+            user = User.authenticate(login, password)
+            controller.basic_authentication.request! unless user
+            user
+          end
+        end
       end
     end
+</code></pre>
 
-Now that we have two, they will be executed in the order that they're called
+Now that we have two, they will be executed in the order that they were declared
 when we call @session.authenticate(self)@.  The first one that
 returns a value that doesn't evaluate to false, will be considered the winner.
 
 h3. Customizing the order of the strategies
 
 By default, strategies are run in the order they are declared.  It's possible
-to customize the order that the login_strategies are called.
+to customize the order that the strategies are called.
 
-@Authentication.login_strategies.order@ will return an array or
-the strategies labels (:password_login_from_form for example) in the order
-that they will be run.  You can customize this by setting the order array
+@Authentication.default_strategy_order@ will return an array or
+the strategy classes in the order that they will be run.  
+You can customize this by setting the default_strategy_order array
 manually.
 
-@Authenticateion.login_strategies.order = [:second, :first, :fourth]@
+@Authenticateion.default_strategy_order.order = [Second, First, Fourth]@
 
 It's possible to leave some out, and re-order existing ones.  It will error
 out if you specify one that doesn't exist though.
 
 h3. Storing you user object into the session
 
-You need to tell mauth-core how to represent your user object in the session
+You need to tell MerbAuth how to represent your user object in the session
 data store, and also how to reconstruct it from that data.  You don't
 want to store complex objects in the session if you can avoid it.
-
-Since there's no nice object to let you get a hold of the session yet in merb,
-we've made an object for you to let you get your hands on it and customize it
-to your liking.
-
-class Authentication::Manager
 
 To configure your user object to go in and out of the session, here's how you
 could do it.
 
-    class Authentication::Manager
+    class Authentication
 
       # return the value you want stored in the session 
       def store_user(user)
@@ -112,8 +123,8 @@ could do it.
         user.id
       end
 
-      # session info is the data you stored in the session previously def
-      fetch_user(session_info)
+      # session info is the data you stored in the session previously 
+      def fetch_user(session_info)
         User.get(session_info)
       end
     end
@@ -123,14 +134,14 @@ h3. Additional checks / actions to perform after the user is found
 
 Sometimes you may need to perform additional operations on the user object
 before or after you grab it out of the database when authenticating it.  The
-Authentication::Manager implements Extlib::Hook so you can just setup hooks to
+Authentication class implements Extlib::Hook so you can just setup hooks to
 deal with this.
 
 Here's an example of checking that a user object is active after it's been
 found: 
 
   after :authenticate do |instance, *args|
-    raise Merb::Controller::Unauthenticated, "User Not Active" unless instance.active?
+    raise Merb::Controller::Unauthenticated, "User Not Active" unless instance.user.active?
   end
 
 bq. Notice that to fail the check we raised an Unauthenticated exception.  The
