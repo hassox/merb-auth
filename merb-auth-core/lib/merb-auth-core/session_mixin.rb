@@ -11,28 +11,28 @@ class Authentication
   
     module InstanceMethods
     
-      def _authentication
-        @_authentication ||= Authentication.new(self)
+      def authentication
+        @authentication ||= Authentication.new(self)
       end
     
       def authenticated?
-        _authentication.authenticated?
+        authentication.authenticated?
       end
     
       def authenticate!(controller)
-        _authentication.authenticate!(controller)
+        authentication.authenticate!(controller)
       end
     
       def user
-        _authentication.user
+        authentication.user
       end
     
       def user=(the_user)
-        _authentication.user = the_user
+        authentication.user = the_user
       end
     
       def abandon!
-        _authentication.abandon!
+        authentication.abandon!
       end
     
     end # InstanceMethods
