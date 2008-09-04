@@ -51,8 +51,9 @@ define an instance method @run!@
   class PasswordStrategy &lt Authentication::Strategy
   
     def run!
-      params = controller.params
-      User.authenticate(params[:login], params[:password])
+      if params[:login] && params[:password]
+        User.authenticate(params[:login], params[:password])
+      end
     end
   end
   
@@ -78,8 +79,11 @@ passed (failed attempt).
       def run!
         if controller.basic_authentication.provided?
           controller.basic_authentication.authenticate do |login, password|
-            user = User.authenticate(login, password)
-            controller.basic_authentication.request! unless user
+            user = User.authenticate(login, password) 
+            unless user
+              controller.basic_authentication.request!
+              throw(:halt, "Login Required")
+            end
             user
           end
         end
