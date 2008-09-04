@@ -135,7 +135,7 @@ of #run!
     end
     
     private
-    def oauth_only
+    def machine_only
       ensure_authentiated Authenticated::Oauth, Authenticated::BasicAuth
     end
   end
