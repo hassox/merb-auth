@@ -92,7 +92,7 @@ passed (failed attempt).
 </code></pre>
 
 Now that we have two, they will be executed in the order that they were declared
-when we call @session.authenticate(self)@.  The first one that
+when we call @session.authenticate!(self)@.  The first one that
 returns a value that doesn't evaluate to false, will be considered the winner.
 
 h3. Customizing the order of the strategies
@@ -154,6 +154,7 @@ want to store complex objects in the session if you can avoid it.
 To configure your user object to go in and out of the session, here's how you
 could do it.
 
+<pre><code>
     class Authentication
 
       # return the value you want stored in the session 
@@ -167,6 +168,7 @@ could do it.
         User.get(session_info)
       end
     end
+</code></pre>
 
 
 h3. Additional checks / actions to perform after the user is found
