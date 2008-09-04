@@ -106,6 +106,41 @@ manually.
 It's possible to leave some out, and re-order existing ones.  It will error
 out if you specify one that doesn't exist though.
 
+h3. Specifying selected strategies per action
+
+It's possible to configure each call to @ensure_authenticated@ with a custom list
+of strategies to run.  These will be run in order and should have an instance method
+of #run!
+
+<pre><code>
+  class ApiMethods < Application
+    before :ensure_authenticated, :with => [
+                                            Authenticated::BasicAuth, 
+                                            Authenticated::OpenID, 
+                                            Authenticated::OAuth
+                                           ]
+    before :machine_only, :only => [:create]
+    
+    def index
+      display @stuff
+    end
+
+    def create
+      stuff = Stuff.create(params[:stuff])
+      display stuff
+    end
+    
+    private
+    def oauth_only
+      ensure_authentiated Authenticated::Oauth, Authenticated::BasicAuth
+    end
+  end
+</code></pre>
+
+You can see in this example that you can specify a list of strategies to use.
+These will be executed in the order of the array passed in, with the default order
+ignored completely.    
+
 h3. Storing you user object into the session
 
 You need to tell MerbAuth how to represent your user object in the session

@@ -19,8 +19,8 @@ class Authentication
         authentication.authenticated?
       end
     
-      def authenticate!(controller)
-        authentication.authenticate!(controller)
+      def authenticate!(controller, *rest)
+        authentication.authenticate!(controller, *rest)
       end
     
       def user

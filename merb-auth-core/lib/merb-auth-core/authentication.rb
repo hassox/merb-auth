@@ -47,7 +47,7 @@ class Authentication
     opts = rest.last.kind_of?(Hash) ? rest.pop : {}
     rest = rest.flatten
     strategies = rest.empty? ? Authentication.default_strategy_order : rest
-    
+    puts strategies.inspect
     msg = opts[:message] || error_message
     user = nil    
     # This one should find the first one that matches.  It should not run antother

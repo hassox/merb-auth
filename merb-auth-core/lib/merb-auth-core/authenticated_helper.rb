@@ -4,8 +4,8 @@ module Merb
   module AuthenticatedHelper  
     protected
     # Check to see if a user is logged in
-    def ensure_authenticated
-      session.authenticate!(self) unless session.user
+    def ensure_authenticated(*strategies)
+      session.authenticate!(self, *strategies) unless session.user
       session.user
     end 
   end

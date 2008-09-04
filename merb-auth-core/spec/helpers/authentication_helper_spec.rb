@@ -35,4 +35,19 @@ describe "Merb::AuthenticationHelper" do
     @controller.send(:ensure_authenticated)
   end
   
+  it "should accept and execute the provided strategies" do
+    # This allows using a before filter with specific arguments
+    # before :ensure_authenticated, :with => [Authenticaiton::OAuth, Authentication::BasicAuth]
+    M1 = mock("m1")
+    M2 = mock("m2")
+    M1.stub!(:new).and_return(M1)
+    M2.stub!(:new).and_return(M2)
+    M1.should_receive(:run!).ordered.and_return(false)
+    M2.should_receive(:run!).ordered.and_return("WINNA")
+    controller = ControllerMock.new(fake_request)
+    controller.setup_session
+    controller.session.should_receive(:user).and_return(nil, "WINNA")
+    controller.send(:ensure_authenticated, [M1, M2])
+  end
+  
 end
