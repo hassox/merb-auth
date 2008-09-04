@@ -32,13 +32,14 @@ class Authentication
         index == order.size ? order << self : order.insert(index + 1, self)
       end
     
-      def run!
-        raise NotImplemented
-      end
     end # End class << self
     
     def initialize(controller)
       @controller = controller
+    end
+    
+    def params
+      controller.params
     end
     
     # This is the method that is called as the test for authentication

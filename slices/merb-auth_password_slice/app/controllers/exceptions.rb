@@ -11,12 +11,14 @@ class Exceptions < Application
   
   def unauthenticated
     provides :xml, :js, :json, :yaml
+    
+    
     session.abandon!
     case content_type
     when :html
       render
     else
-      basic_authentication.request
+      basic_authentication.request!
       ""
     end
   end

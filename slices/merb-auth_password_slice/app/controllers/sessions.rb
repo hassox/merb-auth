@@ -1,4 +1,4 @@
-class MauthPasswordSlice::Sessions < MauthPasswordSlice::Application
+class MerbAuthPasswordSlice::Sessions < MerbAuthPasswordSlice::Application
   skip_before :ensure_authenticated
 
   # redirect from an after filter for max flexibility
@@ -10,7 +10,7 @@ class MauthPasswordSlice::Sessions < MauthPasswordSlice::Application
   
   def update
     session.abandon!
-    session.authenticate(self)
+    session.authenticate!(self)
     "Add an after filter to do stuff after login"
   end
 

@@ -1,6 +1,6 @@
 namespace :mauth_core do
-  # desc "Do something for mauth-core"
+  # desc "Do something for merb-auth-core"
   # task :default do
-  #   puts "mauth-core doesn't do anything"
+  #   puts "merb-auth-core doesn't do anything"
   # end
 end

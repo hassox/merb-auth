@@ -1,5 +1,5 @@
 TODO:
 Fix LICENSE with your name
 Fix Rakefile with your name and contact info
-Add your code to lib/mauth-core.rb
-Add your Merb rake tasks to lib/mauth-core/merbtasks.rb
+Add your code to lib/merb-auth-core.rb
+Add your Merb rake tasks to lib/merb-auth-core/merbtasks.rb

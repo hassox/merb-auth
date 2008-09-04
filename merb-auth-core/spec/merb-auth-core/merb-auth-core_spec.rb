@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe "mauth-core" do
+describe "merb-auth-core" do
   it "should ensure_authentication" do
     dispatch_to(Users, :index) do |controller|
       controller.should_receive(:ensure_authenticated)

@@ -1,6 +1,6 @@
 TODO:
 
-- Fix MauthPasswordSlice.description and MauthPasswordSlice.version
+- Fix MerbAuthPasswordSlice.description and MerbAuthPasswordSlice.version
 - Fix LICENSE with your name
 - Fix Rakefile with your name and contact info
 - Add your code to lib/mauth_password_slice.rb
@@ -8,7 +8,7 @@ TODO:
 
 Remove anything that you don't need:
 
-- app/controllers/main.rb MauthPasswordSlice::Main controller
+- app/controllers/main.rb MerbAuthPasswordSlice::Main controller
 - app/views/layout/mauth_password_slice.html.erb
 - spec/controllers/main_spec.rb controller specs
 - public/* any public files

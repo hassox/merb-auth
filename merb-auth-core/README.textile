@@ -38,7 +38,7 @@ To protect your controllers, add a simple @before@ filter to your controller.
 
 It is possible to use MerbAuth with any object type as a _user_ object, provided
 that object does not evaluate to false and it can be retrieved with @key@.  
-For this reason, mauth-core does not try to implement even a simple login 
+For this reason, merb-auth-core does not try to implement even a simple login 
 form for you, since it may not be to your liking.
 
 h3. How Does It Authenticate my arbitrary user?

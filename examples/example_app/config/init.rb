@@ -104,7 +104,7 @@ use_template_engine :erb
 
 require 'dm-validations'
 dependency "merb-slices"
-dependency 'mauth_password_slice'
+dependency 'merb-auth_password_slice'
 
 Merb.push_path(:lib, File.join(File.dirname(__FILE__), "..", "lib"))
 
@@ -115,7 +115,7 @@ end
 Merb::BootLoader.after_app_loads do
   DataMapper.auto_migrate!
   User.create(:login => "admin", :password => "password", :password_confirmation => "password", :email => "admin@example.com")
-  MPS[:user_class] = User
+  MaPS[:user_class] = User
 end
 
 

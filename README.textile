@@ -1,4 +1,4 @@
-h1. Mauth - Merb Authentication
+h1. MerbAuth - Merb Authentication
 
 h2. An extensible architecture for authentication
 
