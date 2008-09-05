@@ -100,7 +100,7 @@ h3. Customizing the order of the strategies
 By default, strategies are run in the order they are declared.  It's possible
 to customize the order that the strategies are called.
 
-@Authentication.default_strategy_order@ will return an array or
+@Authentication.default_strategy_order@ will return an array of
 the strategy classes in the order that they will be run.  
 You can customize this by setting the default_strategy_order array
 manually.
@@ -181,7 +181,7 @@ deal with this.
 Here's an example of checking that a user object is active after it's been
 found: 
 
-  after :authenticate do |instance, *args|
+  after :authenticate! do |instance, *args|
     raise Merb::Controller::Unauthenticated, "User Not Active" unless instance.user.active?
   end
 

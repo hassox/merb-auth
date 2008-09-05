@@ -42,9 +42,24 @@ class Authentication
       controller.params
     end
     
+    def cookies
+      controller.cookies
+    end
+    
     # This is the method that is called as the test for authentication
     def run!
       raise NotImplemented
+    end
+    
+    # Overwrite this method to scope a strategy to a particular user type
+    # you can use this with inheritance for example to try the same strategy
+    # on different user types
+    # For example.  If Authentication.default_user_class is Customer
+    # and you have a PasswordStrategy, you can subclass the PasswordStrategy
+    # and change this method to return Staff.  So if Customer fails, it 
+    # will try to authenticate as Staff.
+    def user_class
+      Authentication.default_user_class
     end
       
   end # Strategy

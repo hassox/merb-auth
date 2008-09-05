@@ -81,4 +81,68 @@ describe "Authentication::Strategy" do
       Sone.new("controller").run!
     end.should_not raise_error(Authentication::NotImplemented)
   end
+  
+  describe "convinience methods" do
+    
+    before(:each) do
+      class Sone < Authentication::Strategy; def run!; end; end 
+      @controller = mock("controller")
+      @strategy = Sone.new(@controller)
+    end
+    
+    it "should provide a params helper that defers to the controller" do
+      @controller.should_receive(:params).and_return("PARAMS")
+      @strategy.params.should == "PARAMS"
+    end
+    
+    it "should provide a cookies helper" do
+      @controller.should_receive(:cookies).and_return("COOKIES")
+      @strategy.cookies.should == "COOKIES"
+    end
+    
+  end
+  
+  describe "#user_class" do
+    
+    # This allows you to scope a particular strategy to a particular user class object
+    # By inheriting you can add multiple user types to the authentication process
+    
+    before(:each) do
+      class Sone < Authentication::Strategy; def run!; end; end
+      class Stwo < Sone; end
+      
+      class Mone < Authentication::Strategy
+        def user_class; String; end
+        def run!; end
+      end
+      class Mtwo < Mone; end
+      
+      @controller = mock("controller", :null_object => true)
+    end
+    
+    it "should implement a user_class helper" do
+      s = Sone.new(@controller)
+      s.user_class.should == User
+    end
+    
+    it "should defer to the Authentication.default_user_class if not over written" do
+      Authentication.should_receive(:default_user_class).and_return(User)
+      s = Sone.new(@controller)
+      s.user_class
+    end
+    
+    it "should inherit the user class from it's parent by default" do
+      Authentication.should_receive(:default_user_class).and_return(User)
+      s = Stwo.new(@controller)
+      s.user_class.should == User
+    end
+    
+    it "should inherit the user_class form it's parent when the parent defines a new one" do
+      Authentication.should_not_receive(:default_user_class)
+      m = Mtwo.new(@controller)
+      m.user_class.should == String
+    end
+    
+  end
+  
 end

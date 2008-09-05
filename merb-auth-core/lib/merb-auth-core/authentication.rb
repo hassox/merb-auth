@@ -7,6 +7,11 @@ class Authentication
   class MissingStrategy < Exception; end
   class NotImplemented < Exception; end
   
+  # Overwrite this method if your main user class is called something else
+  def self.default_user_class
+    User
+  end
+  
   def initialize(session)
     @session = session
   end

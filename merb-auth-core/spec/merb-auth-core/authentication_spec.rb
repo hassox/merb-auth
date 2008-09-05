@@ -147,6 +147,7 @@ describe Authentication::Session do
     it "Should be hookable" do
       Authentication.should include(Extlib::Hook)
     end
+    
   end
   
   describe "#authenticate" do
@@ -237,6 +238,12 @@ describe Authentication::Session do
       @auth.authenticate!(@controller, m2, m1)
     end
     
+  end
+  
+  describe "default_user_class" do
+    it "should have User as the default user class if requested" do
+      Authentication.default_user_class.should == User
+    end  
   end
 
 end
