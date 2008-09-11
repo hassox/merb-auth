@@ -1,0 +1,32 @@
+merb-auth-strategies
+==========
+
+A collection of strategies for use in the merb-auth framework.  
+
+To setup these strategies you should just use the constant to activate them in the order you'd like to use them.
+
+For example, in your init.rb file, to use basic_auth then form based authentication you'd have something like:
+
+Authentication::Strategies::Password::BasicAuth
+Authentication::Strategies::Password::Form
+
+This will activate the strategies in the order you used the constants.  You can mix and match
+them with your own strategies too.
+
+<pre><code>
+  class MyStrategy < Authentication::Strategy
+    def run!
+      do_stuff
+    end
+  end
+  
+  Authentication::Strategies::Password::Form
+  
+  class AnotherStrategy < AuthenticationStrategy
+    def run!
+      do_other_stuff
+    end
+  end
+  
+</code></pre>
+
