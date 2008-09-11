@@ -52,7 +52,7 @@ define an instance method @run!@
   
     def run!
       if params[:login] && params[:password]
-        User.authenticate(params[:login], params[:password])
+        user_class.authenticate(params[:login], params[:password])
       end
     end
   end
@@ -79,7 +79,7 @@ passed (failed attempt).
       def run!
         if controller.basic_authentication.provided?
           controller.basic_authentication.authenticate do |login, password|
-            user = User.authenticate(login, password) 
+            user = user_class_.authenticate(login, password) 
             unless user
               controller.basic_authentication.request!
               throw(:halt, "Login Required")
@@ -94,6 +94,16 @@ passed (failed attempt).
 Now that we have two, they will be executed in the order that they were declared
 when we call @session.authenticate!(self)@.  The first one that
 returns a value that doesn't evaluate to false, will be considered the winner.
+
+h3. Customizing the user_class
+
+Notice the @user_class@ method in the above strategy examples.  This is a convenience method on a strategy
+to provide you with the user_class to use for this strategy.  You can overwrite
+this method on a per strategy basis to use different user model types.
+
+By default the strategy#user_class method will defer to Authentication#default_user_class
+so you can overwrite this method to set the default user class for your application if required.
+The default value is @User@
 
 h3. Customizing the order of the strategies
 

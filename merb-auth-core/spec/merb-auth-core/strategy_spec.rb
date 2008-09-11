@@ -125,6 +125,14 @@ describe "Authentication::Strategy" do
       s.user_class.should == User
     end
     
+    it "should make it into the strategies collection when subclassed from a subclass" do
+      Authentication.strategies.should include(Mtwo)
+    end
+    
+    it "should make it in the default_strategy_order when subclassed from a subclass" do
+      Authentication.default_strategy_order.should include(Mtwo)
+    end
+    
     it "should defer to the Authentication.default_user_class if not over written" do
       Authentication.should_receive(:default_user_class).and_return(User)
       s = Sone.new(@controller)

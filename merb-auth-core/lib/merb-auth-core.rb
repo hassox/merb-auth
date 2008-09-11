@@ -7,7 +7,9 @@ if defined?(Merb::Plugins)
     require 'merb-auth-core/strategy'
     require 'merb-auth-core/session_mixin'
     require 'merb-auth-core/authentication'
+    require 'merb-auth-core/errors'
     require 'merb-auth-core/authenticated_helper'
+   
     Merb::Controller.send(:include, Merb::AuthenticatedHelper)
   end
   
