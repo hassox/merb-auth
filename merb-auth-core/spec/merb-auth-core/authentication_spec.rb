@@ -1,13 +1,10 @@
 require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 
-describe Authentication::Session do
-
-  before(:all) do
-    Merb::CookieSession.send(:include, Authentication::Session)
-  end
+describe "Authentication Session" do
     
   before(:each) do
-    @session = Merb::CookieSession.new( "", "sekrit")    
+    @session_class = Merb::CookieSession
+    @session = @session_class.generate
   end
 
   describe "module methods" do
@@ -47,7 +44,6 @@ describe Authentication::Session do
     
     before(:each) do
       @controller = Users.new(fake_request)
-      @controller.setup_session
       @auth = Authentication.new(@controller.session)
     end
     
@@ -132,7 +128,7 @@ describe Authentication::Session do
     end
     
     it "should delete the session" do
-      @session.should_receive(:delete)
+      @session.should_receive(:clear)
       @session.abandon!
     end
     
@@ -176,7 +172,6 @@ describe Authentication::Session do
       end
       
       @controller = Users.new(fake_request)
-      @controller.setup_session
       @auth = Authentication.new(@controller.session)
       Authentication.stub!(:new).and_return(@auth)
     end

@@ -1,4 +1,4 @@
-class Authentication
+module Merb
   module Session
   
     def self.included(base)
@@ -38,4 +38,4 @@ class Authentication
     end # InstanceMethods
   
   end # Session
-end
+end # Merb

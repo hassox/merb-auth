@@ -21,7 +21,6 @@ describe "Merb::AuthenticationHelper" do
   
   it "should raise an Unauthenticated error" do
     @controller = ControllerMock.new(Merb::Request.new({}))
-    @controller.setup_session
     lambda do
       @controller.send(:ensure_authenticated)
     end.should raise_error(Merb::Controller::Unauthenticated)
@@ -29,7 +28,6 @@ describe "Merb::AuthenticationHelper" do
   
   it "should run the authentication when testing if it is authenticated" do
     @controller = ControllerMock.new(fake_request)
-    @controller.setup_session
     @controller.session.should_receive(:user).and_return(nil, "WINNA")
     @controller.session.authentication.should_receive(:authenticate!).with(@controller).and_return("WINNA")
     @controller.send(:ensure_authenticated)
@@ -45,7 +43,6 @@ describe "Merb::AuthenticationHelper" do
     M1.should_receive(:run!).ordered.and_return(false)
     M2.should_receive(:run!).ordered.and_return("WINNA")
     controller = ControllerMock.new(fake_request)
-    controller.setup_session
     controller.session.should_receive(:user).and_return(nil, "WINNA")
     controller.send(:ensure_authenticated, [M1, M2])
   end

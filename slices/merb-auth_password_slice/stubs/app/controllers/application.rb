@@ -1,2 +1,2 @@
-class MauthPasswordSlice::Application < Merb::Controller
+class MerbAuthPasswordSlice::Application < Merb::Controller
 end

@@ -1,2 +1,2 @@
-class MauthPasswordSlice::Main < MauthPasswordSlice::Application
+class MerbAuthPasswordSlice::Main < MerbAuthPasswordSlice::Application
 end

@@ -29,7 +29,7 @@ module Merb
       
       # Whether the specs are being run from a host application or standalone
       def standalone?
-        Merb.root == ::MauthPasswordSlice.root
+        Merb.root == ::MerbAuthPasswordSlice.root
       end
       
     end

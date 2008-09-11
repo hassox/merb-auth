@@ -68,7 +68,7 @@ class Authentication
   # 
   def abandon!
     @user = nil
-    session.delete
+    session.clear
   end
   
   def error_message
