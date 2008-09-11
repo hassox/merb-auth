@@ -40,6 +40,8 @@ describe "Merb::AuthenticationHelper" do
     M2 = mock("m2")
     M1.stub!(:new).and_return(M1)
     M2.stub!(:new).and_return(M2)
+    M1.should_receive(:is_abstract?).and_return(false)
+    M2.should_receive(:is_abstract?).and_return(false)
     M1.should_receive(:run!).ordered.and_return(false)
     M2.should_receive(:run!).ordered.and_return("WINNA")
     controller = ControllerMock.new(fake_request)
