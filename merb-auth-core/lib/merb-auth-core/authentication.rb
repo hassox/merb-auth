@@ -57,7 +57,7 @@ class Authentication
     user = nil    
     # This one should find the first one that matches.  It should not run antother
     strategies.detect do |s|
-      user = s.new(controller).run!
+      user = s.new(controller).run! unless s.is_abstract?
     end
     raise Merb::Controller::Unauthenticated, msg unless user
     session.user = user
@@ -71,6 +71,8 @@ class Authentication
     session.clear
   end
   
+  # A simple error message mechanism to provide general information.  For more specific information
+  # see Authenticaiton#errors
   def error_message
     @error_message || "Could not log in"
   end

@@ -117,7 +117,22 @@ describe "Authentication::Strategy" do
       end
       class Mtwo < Mone; end
       
+      class Pone < Authentication::Strategy
+        is_abstract!
+        def user_class; Hash; end
+        def special_method; true end
+      end
+      class Ptwo < Pone; end;
+      
       @controller = mock("controller", :null_object => true)
+    end
+    
+    it "should allow being set to an abstract strategy" do
+      Pone.is_abstract?.should be_true
+    end
+    
+    it "should not set the child class of an abstract class to be abstract" do
+      Ptwo.is_abstract?.should be_false
     end
     
     it "should implement a user_class helper" do

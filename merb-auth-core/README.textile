@@ -79,7 +79,7 @@ passed (failed attempt).
       def run!
         if controller.basic_authentication.provided?
           controller.basic_authentication.authenticate do |login, password|
-            user = user_class_.authenticate(login, password) 
+            user = user_class.authenticate(login, password) 
             unless user
               controller.basic_authentication.request!
               throw(:halt, "Login Required")
@@ -104,6 +104,22 @@ this method on a per strategy basis to use different user model types.
 By default the strategy#user_class method will defer to Authentication#default_user_class
 so you can overwrite this method to set the default user class for your application if required.
 The default value is @User@
+
+h3. Strategies and Inheritance
+
+Strategies may be inherited multiple times to make the job of combining similar aspects easier.  
+You can inherit as many levels as you like and at any point you may mark a strategy as _abstract_
+
+An abstract strategy just means that it will not be run when it comes time to authenticate.  
+Instead it's good to put common logic in and then inherit from.
+
+To mark a class as abstract, use the @is_abstract!@ class method.
+
+<pre><code>
+  class AbstractStrategy < Authentication::Strategy
+    is_abstract!
+  end
+</code></pre>
 
 h3. Customizing the order of the strategies
 

@@ -170,7 +170,15 @@ describe "Authentication Session" do
           "WINNA"
         end
       end
+      class Sfour < Authentication::Strategy
+        is_abstract!
+        
+        def run!
+          "BAD"
+        end
+      end
       
+      Sfour.should_not_receive(:run!)
       @controller = Users.new(fake_request)
       @auth = Authentication.new(@controller.session)
       Authentication.stub!(:new).and_return(@auth)
@@ -226,6 +234,8 @@ describe "Authentication Session" do
     it "should execute the strategies as passed into the authenticate! method" do
       m1 = mock("strategy 1", :null_object => true)
       m2 = mock("strategy 2", :null_object => true)
+      m1.stub!(:is_abstract?).and_return(false)
+      m2.stub!(:is_abstract?).and_return(false)
       m1.should_receive(:new).and_return(m1)
       m2.should_receive(:new).and_return(m2)
       m2.should_receive(:run!).ordered

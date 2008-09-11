@@ -32,6 +32,13 @@ class Authentication
         index == order.size ? order << self : order.insert(index + 1, self)
       end
     
+      def is_abstract?
+        !!@_abstract
+      end
+      
+      def is_abstract!
+        @_abstract = true
+      end
     end # End class << self
     
     def initialize(controller)
