@@ -12,7 +12,6 @@ class Exceptions < Application
   def unauthenticated
     provides :xml, :js, :json, :yaml
     
-    
     session.abandon!
     case content_type
     when :html

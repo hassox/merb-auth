@@ -4,8 +4,8 @@ class Authentication
       class Form < Base
         
         def run!
-          if params[login_field] && params[password_field]
-            user_class.authenticate(params[login_field], params[password_field])
+          if params[login_param] && params[password_param]
+            user_class.authenticate(params[login_param], params[password_param])
           end
         end # run!
         

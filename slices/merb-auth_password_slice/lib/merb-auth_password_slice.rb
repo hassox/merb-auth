@@ -33,6 +33,9 @@ if defined?(Merb::Plugins)
     
     # Initialization hook - runs before AfterAppLoads BootLoader
     def self.init
+      require 'merb-auth-strategies'
+      Authentication::Strategies::Password::Form
+      Authentication::Strategies::Password::BasicAuth
     end
     
     # Activation hook - runs after AfterAppLoads BootLoader
@@ -42,7 +45,6 @@ if defined?(Merb::Plugins)
       MaPS[:password_field]              ||= {:label => "Password",  :method => :password}
       
       # Load the default strategies
-      require 'merb-auth_password_slice/default_strategies'
     end
     
     # Deactivation hook - triggered by Merb::Slices.deactivate(MerbAuthPasswordSlice)
