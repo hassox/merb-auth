@@ -20,7 +20,7 @@ module MerbAuth
             if params[:remember_me] == "1"
               self.current_ma_user.remember_me
               expires = Time.parse(self.current_ma_user.remember_token_expires_at.to_s)
-              cookies[:auth_token] = { :value => self.current_ma_user.remember_token , :expires => expires }
+              cookies.set_cookie('auth_token', self.current_ma_user.remember_token, {:expires => expires })
             end
             redirect_back_or_default('/')
           else
@@ -31,7 +31,7 @@ module MerbAuth
         def destroy
           self.current_ma_user.forget_me if logged_in?
           cookies.delete :auth_token
-          session.delete
+          session.clear!
           redirect_back_or_default('/')
         end
       end # InstanceMethods
