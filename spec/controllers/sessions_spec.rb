@@ -96,7 +96,7 @@ describe MA::Sessions, "Index action" do
   
   it 'deletes token on logout' do
     controller = get("/merb-auth/logout") {|request| request.stub!(:current_user).and_return(@quentin) }
-    controller.cookies["auth_token"].should == ""
+    controller.cookies["auth_token"].should be_blank
   end
   
   
