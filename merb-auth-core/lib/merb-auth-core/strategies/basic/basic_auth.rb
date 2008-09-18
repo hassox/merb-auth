@@ -1,9 +1,11 @@
 require 'merb-auth-core/strategies/abstract_password'
-# Required Methods:
-# <User>.authenticate(login_field, password_field)
+# This strategy is used with basic authentication in Merb.
 #
-# Required fields:
-# none
+# == Requirements
+#
+# == Methods
+#   <User>.authenticate(login_field, password_field)
+#
 class Authentication
   module Strategies
     module Basic

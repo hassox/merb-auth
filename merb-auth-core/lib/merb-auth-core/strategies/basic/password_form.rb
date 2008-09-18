@@ -1,13 +1,15 @@
 require 'merb-auth-core/strategies/abstract_password'
 # This strategy uses a login  and password parameter.
-# Set these parameter names via the #password_param and #login_param methods on
-# this strategy
 #
-# Required Methods:
+# Overwrite the :password_param, and :login_param
+# to return the name of the field (on the form) that you're using the 
+# login with.  These can be strings or symbols
+#
+# == Required
+#
+# === Methods
 # <User>.authenticate(login_param, password_param)
 #
-# Required fields:
-# none
 class Authentication
   module Strategies
     module Basic

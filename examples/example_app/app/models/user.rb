@@ -7,6 +7,7 @@ class User
   property :crypted_password, String, :length => 150
   property :salt,             String, :length => 150
   property :active,           Boolean, :default => false
+  property :identity_url,     String
   
   validates_present   :login, :email
   validates_is_unique :login, :email

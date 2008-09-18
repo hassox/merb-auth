@@ -2,8 +2,7 @@ class Application < Merb::Controller; end
 
 class Exceptions < Application
   
-  
-  # This stuff allows us to provide a default view
+  # # This stuff allows us to provide a default view
   the_view_path = File.expand_path(File.dirname(__FILE__) / ".." / "views")
   self._template_roots ||= []
   self._template_roots << [the_view_path, :_template_location]

@@ -26,7 +26,9 @@ Merb::Router.prepare do |r|
   
   r.match("/").to(:controller => "welcome", :action => "index")
   r.match("/login", :method => :get).to(:controller => "exceptions", :action => "unauthenticated")
-  r.slice(:MerbAuthPasswordSlice, :path => "", :default_routes => false)
+  r.slice(:MerbAuthPasswordSlice, :path => "", :default_routes => false) do |s|
+    s.match("/openid").to(:controller => "sessions", :action => "update").name(:openid)
+  end
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
