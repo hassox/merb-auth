@@ -55,7 +55,6 @@ class Authentication
         
         # Overwrite the on_success! method with the required behavior for successful logins
         def on_success!(response, sreg_response)
-          puts "THE IDENTITY URL IS #{response.identity_url}"
           if user = find_user_by_identity_url(response.identity_url)
             user
           else

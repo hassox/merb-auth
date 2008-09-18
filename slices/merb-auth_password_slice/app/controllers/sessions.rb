@@ -1,10 +1,12 @@
 class MerbAuthPasswordSlice::Sessions < MerbAuthPasswordSlice::Application
+  
+  before nil, :only => [:update, :destroy] { session.abandon! }
   before :ensure_authenticated
 
   # redirect from an after filter for max flexibility
   # We can then put it into a slice and ppl can easily 
   # customize the action
-  after :redirect_after_login,  :only => :update, :if => lambda{ !(300..499).include?(status)}
+  after :redirect_after_login,  :only => :update, :if => lambda{ !(300..399).include?(status)}
   after :redirect_after_logout, :only => :destroy
   
   def update
@@ -12,7 +14,6 @@ class MerbAuthPasswordSlice::Sessions < MerbAuthPasswordSlice::Application
   end
 
   def destroy
-    session.abandon!
     "Add an after filter to do stuff after logout"
   end
   
