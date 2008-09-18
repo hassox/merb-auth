@@ -33,16 +33,12 @@ if defined?(Merb::Plugins)
     
     # Initialization hook - runs before AfterAppLoads BootLoader
     def self.init
-      require 'merb-auth-core/strategies/password_form'
-      require 'merb-auth-core/strategies/basic_auth'
+      require 'merb-auth-core/strategies/basic/password_form'
+      require 'merb-auth-core/strategies/basic/basic_auth'
     end
     
     # Activation hook - runs after AfterAppLoads BootLoader
     def self.activate
-      raise "Please set the :user_class option for MerbAuthPasswordSlice" unless MaPS[:user_class]
-      MaPS[:login_field]                 ||= {:label => "Login",     :method => :login}
-      MaPS[:password_field]              ||= {:label => "Password",  :method => :password}
-      
       # Load the default strategies
     end
     
