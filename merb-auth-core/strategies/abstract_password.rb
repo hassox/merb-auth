@@ -17,11 +17,7 @@ class Authentication
         def login_param
           :login
         end
-      end # Base
-      
-      autoload :Form,       "merb-auth-strategies/password/form_strategy"
-      autoload :BasicAuth,  "merb-auth-strategies/password/basic_auth_strategy"
-      
+      end # Base      
     end # Password
   end # Strategies
 end # Authentication

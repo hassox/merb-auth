@@ -188,8 +188,8 @@ The built in ones are basic but should be enough to get you going for most thing
 To specify them, simply require them.  For example,in lib/auth-strategies.rb
 
 <pre><code>
-require 'merb-auth-core/strategies/password_form'
-require 'merb-auth-core/strategies/openid'
+require 'merb-auth-core/strategies/basic/password_form'
+require 'merb-auth-core/strategies/basic/openid'
 
 class MyApiLogin < ::Authentication::Strategy
   def run!
@@ -200,8 +200,8 @@ end
 
 So far there are:
 
-* password_form
-* basic_auth
+* basic/password_form
+* basic/basic_auth
 
 
 h3. Storing you user object into the session
