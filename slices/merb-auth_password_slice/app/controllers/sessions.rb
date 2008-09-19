@@ -1,6 +1,6 @@
 class MerbAuthPasswordSlice::Sessions < MerbAuthPasswordSlice::Application
   
-  before nil, :only => [:update, :destroy] { session.abandon! }
+  before(nil, :only => [:update, :destroy]) { session.abandon! }
   before :ensure_authenticated
 
   # redirect from an after filter for max flexibility
