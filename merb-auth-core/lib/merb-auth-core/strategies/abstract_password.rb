@@ -9,13 +9,21 @@ class Authentication
         is_abstract!
         
         # Overwrite this method to customize the field
-        def password_param
+        def self.password_param
           :password
         end
         
         # Overwrite this method to customize the field
-        def login_param
+        def self.login_param
           :login
+        end
+        
+        def password_param
+          Base.password_param
+        end
+        
+        def login_param
+          Base.login_param
         end
       end # Base      
     end # Password

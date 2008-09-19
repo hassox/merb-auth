@@ -60,7 +60,7 @@ class Authentication
           else
             controller.session[:'openid.url'] = response.identity_url
             required_reg_fields.each do |f|
-              controller.session[:'openid.#{f}'] = sreg_response.data[f] if sreg_response.data[f]
+              controller.session[:"openid.#{f}"] = sreg_response.data[f] if sreg_response.data[f]
             end if sreg_response
             throw(:halt, controller.redirect(controller.url(:signup)))
           end
