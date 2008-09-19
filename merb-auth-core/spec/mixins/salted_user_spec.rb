@@ -2,6 +2,7 @@ require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 require 'dm-core'
 require 'dm-validations'
 require File.join(File.expand_path(File.dirname(__FILE__)), "..", ".." ,"lib", "merb-auth-core", "mixins", "salted_user")
+
 describe "A Salted User" do
   
   before(:all) do
@@ -99,8 +100,5 @@ describe "A Salted User" do
       (@user.save).should be_true
     end
     
-  end
-
-  
-  
+  end  
 end
