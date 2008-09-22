@@ -1,4 +1,4 @@
-require 'merb-auth-core/strategies/abstract_password'
+require 'merb-auth-more/strategies/abstract_password'
 # This strategy is used with basic authentication in Merb.
 #
 # == Requirements

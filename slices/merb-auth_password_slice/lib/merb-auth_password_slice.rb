@@ -33,9 +33,9 @@ if defined?(Merb::Plugins)
     
     # Initialization hook - runs before AfterAppLoads BootLoader
     def self.init
-      require 'merb-auth-core/strategies/basic/password_form'
-      require 'merb-auth-core/strategies/basic/basic_auth'
-      require 'merb-auth-core/strategies/basic/openid'
+      require 'merb-auth-more/strategies/basic/password_form'
+      require 'merb-auth-more/strategies/basic/basic_auth'
+      require 'merb-auth-more/strategies/basic/openid'
     end
     
     # Activation hook - runs after AfterAppLoads BootLoader

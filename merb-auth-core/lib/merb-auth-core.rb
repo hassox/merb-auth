@@ -9,7 +9,6 @@ if defined?(Merb::Plugins)
     require 'merb-auth-core/authentication'
     require 'merb-auth-core/errors'
     require 'merb-auth-core/authenticated_helper'
-    require 'merb-auth-core/strategies/abstract_password'
    
     Merb::Controller.send(:include, Merb::AuthenticatedHelper)
   end
