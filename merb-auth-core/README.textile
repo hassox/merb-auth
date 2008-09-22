@@ -173,35 +173,15 @@ ignored completely.
 
 h3. Where should Strategies be defined?
 
-So far the thinking is that strategies should be setup in a file for this purpose.
+So far the thinking is that strategies should be setup in a directory for this purpose.
 
-lib/auth-strategies.rb 
+lib/strategies/ 
 
 This is a good place to put everything together so you can see what you're doing at a glance.
 
 h3. What Strategies are there?
 
-Strategies are really simple to implement, but we've made some basic ones available.  
-
-The built in ones are basic but should be enough to get you going for most things.  
-
-To specify them, simply require them.  For example,in lib/auth-strategies.rb
-
-<pre><code>
-require 'merb-auth-core/strategies/basic/password_form'
-require 'merb-auth-core/strategies/basic/openid'
-
-class MyApiLogin < ::Authentication::Strategy
-  def run!
-    # check for api login
-  end
-end
-</code></pre>
-
-So far there are:
-
-* basic/password_form
-* basic/basic_auth
+See merb-auth-more
 
 
 h3. Storing you user object into the session
