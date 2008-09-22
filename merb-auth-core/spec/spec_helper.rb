@@ -16,7 +16,10 @@ Merb.start  :environment    => "test",
 module StrategyHelper
   def clear_strategies!
     Authentication.strategies.each do |s|
-      Object.class_eval{ remove_const(s.name) if defined?(s)}
+      begin
+        Object.class_eval{ remove_const(s.name) if defined?(s)}
+      rescue
+      end
     end
     Authentication.strategies.clear
     Authentication.default_strategy_order.clear
