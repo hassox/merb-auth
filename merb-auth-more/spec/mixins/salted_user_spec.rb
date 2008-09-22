@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 require 'dm-core'
 require 'dm-validations'
-require File.join(File.expand_path(File.dirname(__FILE__)), "..", ".." ,"lib", "merb-auth-core", "mixins", "salted_user")
+require File.join(File.expand_path(File.dirname(__FILE__)), "..", ".." ,"lib", "merb-auth-more", "mixins", "salted_user")
 
 describe "A Salted User" do
   

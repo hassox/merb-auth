@@ -23,9 +23,12 @@ class Authentication
           include Authentication::Mixins::SaltedUser::InstanceMethods
           extend  Authentication::Mixins::SaltedUser::ClassMethods
           
+          path = File.expand_path(File.dirname(__FILE__)) / "salted_user"
           if defined?(DataMapper) && DataMapper::Resource > self
+            require path / "dm_salted_user"
             extend(Authentication::Mixins::SaltedUser::DMClassMethods)
           elsif defined?(ActiveRecord) && ancestors.include?(ActiveRecord::Base)
+            require path / "ar_salted_user"
             extend(Authentication::Mixins::SaltedUser::ARClassMethods)
           end
           
@@ -38,46 +41,7 @@ class Authentication
         def encrypt(password, salt)
           Digest::SHA1.hexdigest("--#{salt}--#{password}--")
         end
-      end
-      
-      module DMClassMethods
-        def self.extended(base)
-          base.class_eval do
-            
-            property :crypted_password,           String
-            property :salt,                       String
-            
-            validates_present        :password, :if => proc{|m| m.password_required?}
-            validates_is_confirmed   :password, :if => proc{|m| m.password_required?}
-            
-            before :save,   :encrypt_password
-          end # base.class_eval
-        end # self.extended
-        
-        def authenticate(login, password)
-          @u = first(Authentication::Strategies::Basic::Base.login_param => login)
-          @u && @u.authenticated?(password) ? @u : nil
-        end
-      end # DMClassMethods
-      
-      module ARClassMethods
-        
-        def self.extended(base)
-          base.class_eval do
-            
-            validates_presence_of     :password,                   :if => :password_required?
-            validates_presence_of     :password_confirmation,      :if => :password_required?
-            validates_confirmation_of :password,                   :if => :password_required?
-            
-            before_save :encrypt_password
-          end # base.class_eval 
-        end # self.extended
-        
-        def authenticate(login, password)
-          @u = find(:first, Authentication::Strategies::Basic::Base.login_param => login)
-          @u && @u.authenticated?(password) ? @u : nil
-        end
-      end # ARClassMethods
+      end    
       
       module InstanceMethods
         def authenticated?(password)
