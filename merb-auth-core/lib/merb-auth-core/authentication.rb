@@ -48,7 +48,7 @@ class Authentication
   # @return [User, NilClass] the verified user, or nil if verification failed
   # @see User::encrypt
   # 
-  def authenticate!(controller, *rest)
+  def authenticate!(request, *rest)
     opts = rest.last.kind_of?(Hash) ? rest.pop : {}
     rest = rest.flatten
     strategies = rest.empty? ? Authentication.default_strategy_order : rest
@@ -57,7 +57,7 @@ class Authentication
     user = nil    
     # This one should find the first one that matches.  It should not run antother
     strategies.detect do |s|
-      user = s.new(controller).run! unless s.is_abstract?
+      user = s.new(request).run! unless s.is_abstract?
     end
     raise Merb::Controller::Unauthenticated, msg unless user
     session.user = user

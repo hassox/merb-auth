@@ -86,17 +86,17 @@ describe "Authentication::Strategy" do
     
     before(:each) do
       class Sone < Authentication::Strategy; def run!; end; end 
-      @controller = mock("controller")
-      @strategy = Sone.new(@controller)
+      @request = mock("controller")
+      @strategy = Sone.new(@request)
     end
     
     it "should provide a params helper that defers to the controller" do
-      @controller.should_receive(:params).and_return("PARAMS")
+      @request.should_receive(:params).and_return("PARAMS")
       @strategy.params.should == "PARAMS"
     end
     
     it "should provide a cookies helper" do
-      @controller.should_receive(:cookies).and_return("COOKIES")
+      @request.should_receive(:cookies).and_return("COOKIES")
       @strategy.cookies.should == "COOKIES"
     end
     
@@ -124,7 +124,7 @@ describe "Authentication::Strategy" do
       end
       class Ptwo < Pone; end;
       
-      @controller = mock("controller", :null_object => true)
+      @request = mock("request", :null_object => true)
     end
     
     it "should allow being set to an abstract strategy" do
@@ -136,7 +136,7 @@ describe "Authentication::Strategy" do
     end
     
     it "should implement a user_class helper" do
-      s = Sone.new(@controller)
+      s = Sone.new(@request)
       s.user_class.should == User
     end
     
@@ -150,19 +150,19 @@ describe "Authentication::Strategy" do
     
     it "should defer to the Authentication.default_user_class if not over written" do
       Authentication.should_receive(:default_user_class).and_return(User)
-      s = Sone.new(@controller)
+      s = Sone.new(@request)
       s.user_class
     end
     
     it "should inherit the user class from it's parent by default" do
       Authentication.should_receive(:default_user_class).and_return(User)
-      s = Stwo.new(@controller)
+      s = Stwo.new(@request)
       s.user_class.should == User
     end
     
     it "should inherit the user_class form it's parent when the parent defines a new one" do
       Authentication.should_not_receive(:default_user_class)
-      m = Mtwo.new(@controller)
+      m = Mtwo.new(@request)
       m.user_class.should == String
     end
     

@@ -19,8 +19,8 @@ class Authentication
           if params[login_param] && params[password_param]
             user = user_class.authenticate(params[login_param], params[password_param])
             if !user
-              controller.session.authentication.errors.clear!
-              controller.session.authentication.errors.add(:login, 'Username or password were incorrect')
+              request.session.authentication.errors.clear!
+              request.session.authentication.errors.add(:login, 'Username or password were incorrect')
             end
             user
           end

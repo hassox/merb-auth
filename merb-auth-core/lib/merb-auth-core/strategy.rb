@@ -10,7 +10,7 @@ class Authentication
   end
   
   class Strategy
-    attr_accessor :controller
+    attr_accessor :request
     
     class << self
       def inherited(klass)
@@ -41,16 +41,16 @@ class Authentication
       end
     end # End class << self
     
-    def initialize(controller)
-      @controller = controller
+    def initialize(request)
+      @request = request
     end
     
     def params
-      controller.params
+      request.params
     end
     
     def cookies
-      controller.cookies
+      request.cookies
     end
     
     # This is the method that is called as the test for authentication

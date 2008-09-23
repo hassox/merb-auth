@@ -26,10 +26,12 @@ class Authentication
       class OpenID < Base
         def run!
           if params[:'openid.mode']
-            response = consumer.complete(controller.request.send(:query_params), "#{controller.request.protocol}#{controller.request.host}" + controller.request.path)
+            response = consumer.complete(request.send(:query_params), "#{request.protocol}://#{request.host}" + request.path)
             if response.status.to_s == 'success'
               sreg_response = ::OpenID::SReg::Response.from_success_response(response)
-              on_success!(response, sreg_response)
+              result = on_success!(response, sreg_response)
+              Merb.logger.info "\n\n#{result.inspect}\n\n"
+              result
             elsif response.status.to_s == 'failure'
               on_failure!(response)
             elsif response.status.to_s == 'setup_needed'
@@ -43,10 +45,10 @@ class Authentication
               openid_reg = ::OpenID::SReg::Request.new
               openid_reg.request_fields(required_reg_fields)
               openid_request.add_extension(openid_reg)
-              throw(:halt, controller.redirect(openid_request.redirect_url("#{controller.request.protocol}#{controller.request.host}", controller.absolute_url(:openid))))
+              throw(:halt, lambda{ redirect(openid_request.redirect_url("#{request.protocol}://#{request.host}", absolute_url(:openid)) )})
             rescue ::OpenID::OpenIDError => e
-              controller.session.authentication.errors.clear!
-              controller.session.authentication.errors.add(:openid, 'The OpenID verification failed')
+              request.session.authentication.errors.clear!
+              request.session.authentication.errors.add(:openid, 'The OpenID verification failed')
               nil
             end
           end
@@ -58,30 +60,30 @@ class Authentication
           if user = find_user_by_identity_url(response.identity_url)
             user
           else
-            controller.session[:'openid.url'] = response.identity_url
+            request.session[:'openid.url'] = response.identity_url
             required_reg_fields.each do |f|
-              controller.session[:"openid.#{f}"] = sreg_response.data[f] if sreg_response.data[f]
+              session[:"openid.#{f}"] = sreg_response.data[f] if sreg_response.data[f]
             end if sreg_response
-            throw(:halt, controller.redirect(controller.url(:signup)))
+            throw(:halt, request.redirect(request.generate_url(:signup)))
           end
         end
         
         # Overwrite the on_failure! method with the required behavior for failed logins
         def on_failure!(response)
-          controller.session.authentication.errors.clear!
-          controller.session.authentication.errors.add(:openid, 'OpenID verification failed, maybe the provider is down? Or the session timed out')
+          session.authentication.errors.clear!
+          session.authentication.errors.add(:openid, 'OpenID verification failed, maybe the provider is down? Or the session timed out')
           nil
         end
         
         def on_setup_needed!(response)
-          controller.session.authentication.errors.clear!
-          controller.session.authentication.errors.add(:openid, 'OpenID does not seem to be configured correctly')
+          request.session.authentication.errors.clear!
+          request.session.authentication.errors.add(:openid, 'OpenID does not seem to be configured correctly')
           nil
         end
         
         def on_cancel!(response)
-          controller.session.authentication.errors.clear!
-          controller.session.authentication.errors.add(:openid, 'OpenID rejected our request')
+          request.session.authentication.errors.clear!
+          request.session.authentication.errors.add(:openid, 'OpenID rejected our request')
           nil
         end
         
@@ -101,7 +103,7 @@ class Authentication
         
         private 
         def consumer
-          @consumer ||= ::OpenID::Consumer.new(controller.session, openid_store)
+          @consumer ||= ::OpenID::Consumer.new(request.session, openid_store)
         end
               
       end # OpenID

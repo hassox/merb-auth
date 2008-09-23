@@ -43,8 +43,8 @@ describe "Authentication Session" do
   describe "error_message" do
     
     before(:each) do
-      @controller = Users.new(fake_request)
-      @auth = Authentication.new(@controller.session)
+      @request = fake_request
+      @auth = Authentication.new(@request.session)
     end
     
     it "should be 'Could not log in' by default" do
@@ -179,32 +179,32 @@ describe "Authentication Session" do
       end
       
       Sfour.should_not_receive(:run!)
-      @controller = Users.new(fake_request)
-      @auth = Authentication.new(@controller.session)
+      @request = Users.new(fake_request)
+      @auth = Authentication.new(@request.session)
       Authentication.stub!(:new).and_return(@auth)
     end
     
     it "should execute the strategies in the default order" do
       s1 = mock("s1")
       s2 = mock("s2")
-      Sone.should_receive(:new).with(@controller).and_return(s1)
-      Stwo.should_receive(:new).with(@controller).and_return(s2)
+      Sone.should_receive(:new).with(@request).and_return(s1)
+      Stwo.should_receive(:new).with(@request).and_return(s2)
       s1.should_receive(:run!).ordered.and_return(nil)
       s2.should_receive(:run!).ordered.and_return("WIN")
-      @auth.authenticate!(@controller)
+      @auth.authenticate!(@request)
     end
     
     it "should run the strategeis until if finds a non nil non false" do
       s1 = mock("s1")
       s2 = mock("s2")
       s3 = mock("s3")
-      Sone.should_receive(:new).with(@controller).and_return(s1)
-      Stwo.should_receive(:new).with(@controller).and_return(s2)
-      Sthree.should_receive(:new).with(@controller).and_return(s3)
+      Sone.should_receive(:new).with(@request).and_return(s1)
+      Stwo.should_receive(:new).with(@request).and_return(s2)
+      Sthree.should_receive(:new).with(@request).and_return(s3)
       s1.should_receive(:run!).ordered.and_return(nil)
       s2.should_receive(:run!).ordered.and_return(false)
       s3.should_receive(:run!).ordered.and_return("WIN")
-      @auth.authenticate!(@controller)
+      @auth.authenticate!(@request)
     end
     
     it "should raise an Unauthenticated exception if no 'user' is found" do
@@ -212,13 +212,13 @@ describe "Authentication Session" do
       Sthree.stub!(:new).and_return(s3)
       s3.should_receive(:run!).and_return(nil)
       lambda do
-        @auth.authenticate!(@controller)
+        @auth.authenticate!(@request)
       end.should raise_error(Merb::Controller::Unauthenticated)
     end
     
     it "should store the user into the session if one is found" do
       @auth.should_receive(:user=).with("WINNA")
-      @auth.authenticate!(@controller)
+      @auth.authenticate!(@request)
     end
     
     it "should use the Authentiation#error_message as the error message" do
@@ -227,7 +227,7 @@ describe "Authentication Session" do
       s3.stub!(:run!).and_return(false)
       Sthree.stub!(:new).and_return(s3)
       lambda do
-        @auth.authenticate!(@controller)
+        @auth.authenticate!(@request)
       end.should raise_error(Merb::Controller::Unauthenticated, "BAD BAD BAD")
     end
     
@@ -240,7 +240,7 @@ describe "Authentication Session" do
       m2.should_receive(:new).and_return(m2)
       m2.should_receive(:run!).ordered
       m1.should_receive(:run!).ordered.and_return("WINNA")
-      @auth.authenticate!(@controller, m2, m1)
+      @auth.authenticate!(@request, m2, m1)
     end
     
   end
