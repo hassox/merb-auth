@@ -64,7 +64,7 @@ class Authentication
             required_reg_fields.each do |f|
               session[:"openid.#{f}"] = sreg_response.data[f] if sreg_response.data[f]
             end if sreg_response
-            throw(:halt, request.redirect(request.generate_url(:signup)))
+            throw(:halt, lambda{ request.redirect(request.generate_url(:signup))} )
           end
         end
         
