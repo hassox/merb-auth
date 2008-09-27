@@ -6,7 +6,7 @@ require 'merb-core/version'
 require 'merb-core/tasks/merb_rake_helper'
 
 NAME = "merb-auth-more"
-GEM_VERSION = "0.1.1"
+GEM_VERSION = "0.2."
 AUTHOR = "Daniel Neighman"
 EMAIL = "has.sox@gmail.com"
 HOMEPAGE = "http://merbivore.com/"
