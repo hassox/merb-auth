@@ -3,6 +3,11 @@ log/*
 db/
 *.db
 .DStore
+.DS_Store
 pkg
 pkg/*
 :memory:
+examples/example_app/config/open_id
+merb-auth-core/coverage
+examples/example_app/tmp
+
