@@ -101,7 +101,7 @@ Notice the @user_class@ method in the above strategy examples.  This is a conven
 to provide you with the user_class to use for this strategy.  You can overwrite
 this method on a per strategy basis to use different user model types.
 
-By default the strategy#user_class method will defer to Authentication#default_user_class
+By default the strategy#user_class method will defer to Authentication#user_class
 so you can overwrite this method to set the default user class for your application if required.
 The default value is @User@
 
@@ -113,11 +113,11 @@ You can inherit as many levels as you like and at any point you may mark a strat
 An abstract strategy just means that it will not be run when it comes time to authenticate.  
 Instead it's good to put common logic in and then inherit from.
 
-To mark a class as abstract, use the @is_abstract!@ class method.
+To mark a class as abstract, use the @abstract!@ class method.
 
 <pre><code>
   class AbstractStrategy < Authentication::Strategy
-    is_abstract!
+    abstract!
   end
 </code></pre>
 

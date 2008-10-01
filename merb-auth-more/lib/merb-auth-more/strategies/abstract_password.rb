@@ -6,7 +6,7 @@ class Authentication
     module Basic
       
       class Base < Authentication::Strategy
-        is_abstract!
+        abstract!
         
         # Overwrite this method to customize the field
         def self.password_param

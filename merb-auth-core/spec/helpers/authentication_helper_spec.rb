@@ -8,9 +8,10 @@ describe "Merb::AuthenticationHelper" do
   
   before(:each) do
     @controller = ControllerMock.new(fake_request)
-    @session = mock("session")
+    @request = @controller.request
+    @session = @controller.session
     @controller.stub!(:session).and_return(@session)
-    @session.stub!(:authenticated?).and_return(true)
+    @session.stub!(:user).and_return("WINNA")
   end
   
   it "should not raise and Unauthenticated error" do
@@ -29,7 +30,7 @@ describe "Merb::AuthenticationHelper" do
   it "should run the authentication when testing if it is authenticated" do
     @controller = ControllerMock.new(fake_request)
     @controller.session.should_receive(:user).and_return(nil, "WINNA")
-    @controller.session.authentication.should_receive(:authenticate!).with(@controller).and_return("WINNA")
+    @controller.session.authentication.should_receive(:authenticate!).and_return("WINNA")
     @controller.send(:ensure_authenticated)
   end
   
@@ -40,8 +41,8 @@ describe "Merb::AuthenticationHelper" do
     M2 = mock("m2")
     M1.stub!(:new).and_return(M1)
     M2.stub!(:new).and_return(M2)
-    M1.should_receive(:is_abstract?).and_return(false)
-    M2.should_receive(:is_abstract?).and_return(false)
+    M1.should_receive(:abstract?).and_return(false)
+    M2.should_receive(:abstract?).and_return(false)
     M1.should_receive(:run!).ordered.and_return(false)
     M2.should_receive(:run!).ordered.and_return("WINNA")
     controller = ControllerMock.new(fake_request)

@@ -2,11 +2,14 @@ require 'rubygems'
 require 'rake/gempackagetask'
 require 'rubygems/specification'
 require 'date'
+require "spec/rake/spectask"
 require 'merb-core/version'
 require 'merb-core/tasks/merb_rake_helper'
+require 'rake/testtask'
+
 
 GEM_NAME = "merb-auth-more"
-GEM_VERSION = "0.2.0"
+GEM_VERSION = "0.9.8"
 AUTHOR = "Daniel Neighman"
 EMAIL = "has.sox@gmail.com"
 HOMEPAGE = "http://merbivore.com/"
@@ -51,3 +54,11 @@ task :gemspec do
   end
 end
 
+desc "Run all specs"
+Spec::Rake::SpecTask.new("specs") do |t|
+  t.spec_opts = ["--format", "specdoc", "--colour"]
+  t.spec_files = Dir["spec/**/*_spec.rb"].sort
+  t.rcov = true
+  t.rcov_opts << '--sort' << 'coverage' << '--sort-reverse'
+  t.rcov_opts << '--only-uncovered'
+end

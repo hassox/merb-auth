@@ -118,7 +118,7 @@ describe "Authentication::Strategy" do
       class Mtwo < Mone; end
       
       class Pone < Authentication::Strategy
-        is_abstract!
+        abstract!
         def user_class; Hash; end
         def special_method; true end
       end
@@ -128,11 +128,11 @@ describe "Authentication::Strategy" do
     end
     
     it "should allow being set to an abstract strategy" do
-      Pone.is_abstract?.should be_true
+      Pone.abstract?.should be_true
     end
     
     it "should not set the child class of an abstract class to be abstract" do
-      Ptwo.is_abstract?.should be_false
+      Ptwo.abstract?.should be_false
     end
     
     it "should implement a user_class helper" do
@@ -148,20 +148,20 @@ describe "Authentication::Strategy" do
       Authentication.default_strategy_order.should include(Mtwo)
     end
     
-    it "should defer to the Authentication.default_user_class if not over written" do
-      Authentication.should_receive(:default_user_class).and_return(User)
+    it "should defer to the Authentication.user_class if not over written" do
+      Authentication.should_receive(:user_class).and_return(User)
       s = Sone.new(@request)
       s.user_class
     end
     
     it "should inherit the user class from it's parent by default" do
-      Authentication.should_receive(:default_user_class).and_return(User)
+      Authentication.should_receive(:user_class).and_return(User)
       s = Stwo.new(@request)
       s.user_class.should == User
     end
     
     it "should inherit the user_class form it's parent when the parent defines a new one" do
-      Authentication.should_not_receive(:default_user_class)
+      Authentication.should_not_receive(:user_class)
       m = Mtwo.new(@request)
       m.user_class.should == String
     end

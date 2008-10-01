@@ -171,7 +171,7 @@ describe "Authentication Session" do
         end
       end
       class Sfour < Authentication::Strategy
-        is_abstract!
+        abstract!
         
         def run!
           "BAD"
@@ -234,8 +234,8 @@ describe "Authentication Session" do
     it "should execute the strategies as passed into the authenticate! method" do
       m1 = mock("strategy 1", :null_object => true)
       m2 = mock("strategy 2", :null_object => true)
-      m1.stub!(:is_abstract?).and_return(false)
-      m2.stub!(:is_abstract?).and_return(false)
+      m1.stub!(:abstract?).and_return(false)
+      m2.stub!(:abstract?).and_return(false)
       m1.should_receive(:new).and_return(m1)
       m2.should_receive(:new).and_return(m2)
       m2.should_receive(:run!).ordered
@@ -245,9 +245,9 @@ describe "Authentication Session" do
     
   end
   
-  describe "default_user_class" do
+  describe "user_class" do
     it "should have User as the default user class if requested" do
-      Authentication.default_user_class.should == User
+      Authentication.user_class.should == User
     end  
   end
 

@@ -9,7 +9,7 @@ require 'rake/testtask'
 
 
 GEM_NAME = "merb-auth-core"
-GEM_VERSION = "0.1.1"
+GEM_VERSION = "0.9.8"
 AUTHOR = "Adam French, Daniel Neighman"
 EMAIL = "has.sox@gmail.com"
 HOMEPAGE = "http://merbivore.com/"

@@ -7,8 +7,17 @@ class Authentication
   class MissingStrategy < Exception; end
   class NotImplemented < Exception; end
   
-  # Overwrite this method if your main user class is called something else
-  def self.default_user_class
+  # This method returns the default user class to use throughout the
+  # merb-auth authentication framework.  Authentication.user_class can
+  # be used by other plugins, and by default by strategies.
+  #
+  # By Default it is set to User class.  If you need a different class
+  # The intention is that you overwrite this method
+  #
+  # @return <User Class Object>
+  #
+  # @api overwritable
+  def self.user_class
     User
   end
   
@@ -16,38 +25,47 @@ class Authentication
     @session = session
   end
   
-  ##
-  # @return [TrueClass, FalseClass]
+  # Returns true if there is an authenticated user attached to this session
+  #
+  # @return <TrueClass|FalseClass>
   # 
   def authenticated?
     !!user
   end
   
-  ##
-  # returns the active user for this session, or nil if there's no user claiming this session
-  # @returns [User, NilClass]
+  # This method will retrieve the user object stored in the session or nil if there
+  # is no user logged in.
+  # 
+  # @return <User class>|NilClass
   def user
     return nil if !session[:user]
     @user ||= fetch_user(session[:user])
   end
   
-  ## 
-  # allows for manually setting the user
-  # @returns [User, NilClass]
+  # This method will store the user provided into the session
+  # and set the user as the currently logged in user
+  # @return <User Class>|NilClass
   def user=(user)
     session[:user] = nil && return if user.nil?
     session[:user] = store_user(user)
     @user = session[:user] ? user : session[:user]  
   end
   
-  ##
-  # retrieve the claimed identity and verify the claim
+  # The workhorse of the framework.  The authentiate! method is where
+  # the work is done.  authenticate! will try each strategy in order
+  # either passed in, or in the default_strategy_order.  
+  #
+  # If a strategy returns some kind of user object, this will be stored
+  # in the session, otherwise a Merb::Controller::Unauthenticated exception is raised
+  #
+  # @params Merb::Request, [List,Of,Strategies, optional_options_hash]
+  #
+  # Pass in a list of strategy objects to have this list take precedence over the normal defaults
   # 
-  # Uses the strategies setup on Authentication executed in the context of the controller to see if it can find
-  # a user object
-  # @return [User, NilClass] the verified user, or nil if verification failed
-  # @see User::encrypt
-  # 
+  # Use an options hash to provide an error message to be passed into the exception.
+  #
+  # @return user object of the verified user.  An exception is raised if no user is found
+  #
   def authenticate!(request, *rest)
     opts = rest.last.kind_of?(Hash) ? rest.pop : {}
     rest = rest.flatten
@@ -57,33 +75,44 @@ class Authentication
     user = nil    
     # This one should find the first one that matches.  It should not run antother
     strategies.detect do |s|
-      user = s.new(request).run! unless s.is_abstract?
+      user = s.new(request).run! unless s.abstract?
     end
     raise Merb::Controller::Unauthenticated, msg unless user
     session.user = user
   end
   
-  ##
-  # abandon the session, log out the user, and empty everything out
-  # 
+  # "Logs Out" a user from the session.  Also clears out all session data
   def abandon!
     @user = nil
     session.clear
   end
   
   # A simple error message mechanism to provide general information.  For more specific information
-  # see Authenticaiton#errors
+  #
+  # This message is the default message passed to the Merb::Controller::Unauthenticated exception
+  # during authentication.  
+  #
+  # This is a very simple mechanism for error messages.  For more detailed control see Authenticaiton#errors
+  #
+  # @api overwritable
   def error_message
     @error_message || "Could not log in"
   end
   
-  # Overwrite this method to store your user object in the session.  The return value of the method will be stored
+  # Tells the framework how to store your user object into the session so that it can be re-created 
+  # on the next login.  
+  # You must overwrite this method for use in your projects.  Slices and plugins may set this.
+  #
+  # @api overwritable
   def store_user(user)
     raise NotImplemented
   end
   
-  # Overwrite this method to fetch your user from the session.  The return value of this will be stored as the user object
-  # return nil to stop login
+  # Tells the framework how to reconstitute a user from the data stored by store_user.
+  #
+  # You must overwrite this method for user in your projects.  Slices and plugins may set this.
+  #
+  # @api overwritable
   def fetch_user(session_contents = session[:user])
     raise NotImplemented
   end
