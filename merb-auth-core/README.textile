@@ -4,3 +4,6 @@ MerbAuth is a very _unopinionated_ authentication framework for use with the
 Merb web framework.
 
 MerbAuth is not in the "merb-plugins":http://github.com/wycats/merb-plugins/tree/master as merb_auth
+
+Please use that repository for the code and submit all patches / bugs / requests in the normal merb way (Lighthouse etc)
+
