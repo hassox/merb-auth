@@ -271,9 +271,10 @@ session is available in that block as <code>session</code>
 Really that's all there is to it.  By default this plugin doesn't actually
 authenticate anything ;)  It's up to you to get your model going, and add an
 authentication strategy.  Just remember that to login, you just use
-@session.authenticate(self)@ inside a controller.  To logout use
+@session.authenticate(request)@ inside a controller.  To logout use
 @session.abandon!@ and to force a login at any time use 
 @raise Unauthenticated, "You Aren't Cool Enough"@
+Be aware that strategies may throw :halt for use as a before filter...  
 
 h3. Contributors 
 

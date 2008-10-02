@@ -12,3 +12,5 @@ merb-auth-core/coverage
 examples/example_app/tmp
 merb-auth-core/log
 merb-auth-more/log
+merb-auth-more/coverage
+
