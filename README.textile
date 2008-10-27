@@ -1,3 +1,5 @@
 h1. MerbAuth - Merb Authentication
 
-Has moved to "http://github.com/wycats/merb-plugins/tree/master/merb_auth":http://github.com/wycats/merb-plugins/tree/master/merb_auth
+Has moved to "http://github.com/wycats/merb/tree/master/merb-auth":http://github.com/wycats/merb/tree/master/merb-auth
+
+The old slice version of merb-auth is now in my merbful_authentication repository.  This is not maintained.
